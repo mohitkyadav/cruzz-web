@@ -1,5 +1,5 @@
-# algos
-[![Build Status](https://travis-ci.org/iiitv/algos-web.svg?branch=master)](https://travis-ci.org/iiitv/algos-web)
+# cruzz-web
+[![Build Status](https://travis-ci.org/moghitkyadav/cruzz-web.svg?branch=master)](https://travis-ci.com/mohitkyadav/cruzz-web)
 
 ## Guidelines
 * Add tests relevant to a component or service
