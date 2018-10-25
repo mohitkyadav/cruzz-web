@@ -1,0 +1,8 @@
+nav {
+  max-height: 60px;
+  background: linear-gradient(to right, rgba(14, 202, 167, 0.36) 0%, rgba(1, 107, 252, 0.33) 100%) !important;
+}
+
+.uk-navbar-left {
+  align-content: center;
+}

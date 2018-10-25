@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-import './header.css';
+import '../../static/css/common.css';
 
 class Header extends Component {
   render() {
     return (
       <div>
-        <nav className="uk-navbar-container" uk-navbar="true" uk-sticky="show-on-up: true;animation: uk-animation-slide-top;">
+        <nav className="uk-navbar-container uk-box-shadow-large" uk-navbar="true" uk-sticky="show-on-up: true;animation: uk-animation-slide-top;">
           <div className="uk-navbar-left">
             <ul className="uk-navbar-nav">
               <li><Link to="/">Home</Link></li>
