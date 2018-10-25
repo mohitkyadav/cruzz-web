@@ -1,6 +1,6 @@
 nav {
-  max-height: 60px;
-  background: linear-gradient(to right, rgba(21, 2, 2, 0.8) 0%, rgba(18, 3, 3, 0.67) 100%) !important;
+  /* max-height: 60px; */
+  background: linear-gradient(to right, rgba(45, 35, 35, 0.8) 0%, rgba(18, 3, 3, 0.67) 100%) !important;
 }
 
 .uk-navbar-left {
@@ -13,4 +13,8 @@ nav {
 
 .ov-color-black {
   color: black !important;
+}
+
+.ov-nav-link:hover {
+  background: rgb(45, 97, 194);
 }
