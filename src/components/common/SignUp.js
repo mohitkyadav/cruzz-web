@@ -25,38 +25,46 @@ class SignUp extends Component {
 
   render() {
     return (
-      <div className="hk">
-          <div className="uk-container-medium uk-align-center uk-height-small">
-            <div className="uk-card uk-card-default uk-width-1-2 uk-align-center uk-box-shadow-large">
-              <form className="uk-align-center" onSubmit={this.signUp.bind(this)}>
+      <div>
+          <div className="uk-container uk-align-center uk-padding">
+            <div className="uk-card uk-width-1-2@m uk-align-center uk-card-default uk-box-shadow-hover-large">
+
+              <div className="uk-card-header">
+                <h2 class="uk-card-title uk-margin-remove-bottom">Sign Up</h2>
+              </div>
+              <div className="uk-card-body uk-padding-remove-bottom">
+                <form className="uk-align-center" onSubmit={this.signUp.bind(this)}>
+                  <div className="uk-margin">
+                    <div className="uk-inline uk-width-1-1">
+                    <span className=" uk-form-icon" uk-icon="icon: mail"></span>
+                      <input className="uk-input" type="email" placeholder="Email" ref="email" />
+                    </div>
+                  </div>
                 <div className="uk-margin">
-                  <div className="uk-inline">
-                  <span className=" uk-form-icon" uk-icon="icon: mail"></span>
-                    <input className="uk-input" type="email" placeholder="Email" ref="email" />
+                  <div className="uk-inline uk-width-1-1">
+                    <span className=" uk-form-icon" uk-icon="icon: user"></span>
+                      <input className="uk-input" type="text" placeholder="Username" ref="username" />
+                  </div>
+
+                <div className="uk-margin uk-margin-auto">
+                  <div className="uk-inline uk-width-1-1">
+                    <span className="uk-form-icon" uk-icon="icon: lock"></span>
+                      <input className="uk-input" type="password" placeholder="Password" ref="password" />
                   </div>
                 </div>
-              <div className="uk-margin">
-                <div className="uk-inline">
-                  <span className=" uk-form-icon" uk-icon="icon: user"></span>
-                    <input className="uk-input" type="text" placeholder="Username" ref="username" />
+                <div className="uk-inline uk-width-1-1">
+                    <span className="uk-form-icon" uk-icon="icon: lock"></span>
+                      <input className="uk-input" type="password" placeholder="Confirm Password" ref="confirmPassword" />
+                  </div>
                 </div>
-
-              <div className="uk-margin uk-margin-auto">
-                <div className="uk-inline">
-                  <span className="uk-form-icon" uk-icon="icon: lock"></span>
-                    <input className="uk-input" type="password" placeholder="Password" ref="password" />
-                </div>
-              </div>
-              <div className="uk-inline">
-                  <span className="uk-form-icon" uk-icon="icon: lock"></span>
-                    <input className="uk-input" type="password" placeholder="Confirm Password" ref="confirmPassword" />
-                </div>
-              </div>
-              <p className="uk-margin">
-                <button className="uk-button uk-button-primary uk-align-center uk-width-1-3" type="submit">Sign-up</button>
-              </p>
-            </form>
-            <p className="uk-margin uk-margin-small-top">Already have an account, Click <Link to="/login">here</Link> to sign in.</p>
+                <p className="uk-margin">
+                  <button className="uk-button uk-button-primary uk-align-center uk-width-1-3" type="submit">Sign-up</button>
+                </p>
+              </form>
+            </div>
+            <div className="uk-card-footer">
+              <p className="uk-margin uk-margin-small-top">Already have an account, Click <Link to="/login">here</Link> to sign in.</p>
+            </div>
           </div>
         </div>
       </div>

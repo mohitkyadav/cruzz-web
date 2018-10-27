@@ -9,7 +9,8 @@ export const signUp = user => dispatch => {
     'https://cruzz.herokuapp.com/api/authentication/users/registration',
     user
   ).then(res => {
-    // Save / Set token to local storage
+      // Save / Set token to local storage
+      console.log(res.data);
       const { token, username } = res.data.user;
 			localStorage.setItem('jwtToken', token);
 			localStorage.setItem('username', username);
@@ -19,4 +20,11 @@ export const signUp = user => dispatch => {
           dispatch({ type: SET_CURRENT_USER, payload: response.data.profile })
       }).catch(err => console.log(err.response));
   }).catch(err => console.log(err.response));
+};
+
+export const setCurrentUser = decoded => {
+	return {
+		type: SET_CURRENT_USER,
+		payload: decoded
+	};
 };
