@@ -1,9 +1,24 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
+
+import { signIn } from '../../actions/authActions';
 
 import '../../static/css/common.css';
 
 class SignIn extends Component {
+  signIn(event) {
+    event.preventDefault();
+    if(this.refs.username.value && this.refs.password.value) {
+      const user = {
+        user: {
+          "username": this.refs.username.value,
+          "password": this.refs.password.value,
+        }
+      }
+      this.props.signIn(user, this.props.history);
+    }
+  }
   render() {
     return (
       <div>
@@ -19,25 +34,22 @@ class SignIn extends Component {
             </div>
             <div className="uk-card-body uk-padding-remove-bottom">
               <div className="uk-align-center uk-padding-small">
-                <form className="uk-align-center">
+                <form className="uk-align-center" onSubmit={this.signIn.bind(this)}>
                   <div className="uk-margin">
                     <div className="uk-inline uk-width-1-1">
                       <span className=" uk-form-icon" uk-icon="icon: user"></span>
-                        <input className="uk-input" type="text" placeholder="Username"/>
+                        <input className="uk-input" type="text" placeholder="Username" ref="username"/>
                     </div>
 
                   <div className="uk-margin uk-margin-auto">
                     <div className="uk-inline uk-width-1-1">
                       <span className="uk-form-icon" uk-icon="icon: lock"></span>
-                        <input className="uk-input" type="password" placeholder="Password"/>
+                        <input className="uk-input" type="password" placeholder="Password" ref="password"/>
                     </div>
-                  </div>
-                  <div className="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-                    <label className="uk-text-small uk-align-center"><input className="uk-checkbox" type="checkbox" /> Remember me</label>
                   </div>
                   </div>
                   <p className="uk-margin">
-                    <button className="uk-button uk-button-primary uk-align-center uk-width-1-3">Sign-in</button>
+                    <button className="uk-button uk-button-primary uk-align-center uk-width-1-3" type="submit">Sign-in</button>
                   </p>
                 </form>
               </div>
@@ -54,4 +66,8 @@ class SignIn extends Component {
   }
 }
 
-export default SignIn;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps, { signIn })(SignIn);

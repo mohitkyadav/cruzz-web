@@ -6,8 +6,10 @@ import {
 } from '../actions/types';
 
 import { isEmpty } from '../utils/validate';
+import { LOADING } from './../actions/types';
 
 const initialState = {
+  loading: false,
 	authenticated: false,
 	user: {},
   userProfile: {},
@@ -17,12 +19,17 @@ const initialState = {
 export default function(state = initialState, action) {
 	switch (action.type) {
     case SET_CURRENT_USER:
-      console.log(action.payload);
 			return {
 				...state,
 				authenticated: !isEmpty(action.payload),
-				user: action.payload
+        user: action.payload,
+        loading: false
       };
+    case LOADING:
+      return {
+        ...state,
+        loading: true
+      }
 		default:
 			return state;
 	}

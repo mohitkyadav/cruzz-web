@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Route } from "react-router";
 import { BrowserRouter, Switch } from "react-router-dom";
 import { Provider } from 'react-redux';
-import jwt_decode from 'jwt-decode';
+// import jwt_decode from 'jwt-decode';
 
 import store from './store';
 
@@ -19,10 +19,8 @@ import setAuthToken from './utils/setAuthToken';
 if (localStorage.jwtToken) {
 	// Set auth token header auth
 	setAuthToken(localStorage.jwtToken);
-	// Decode token and get user info
-	const decoded = jwt_decode(localStorage.jwtToken);
 	// Set current user
-	store.dispatch(setCurrentUser(decoded));
+	store.dispatch(setCurrentUser(localStorage.username));
 }
 
 ReactDOM.render(
