@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 import '../../static/css/common.css';
 
@@ -33,8 +34,11 @@ class Header extends Component {
               <li><Link className="ov-color-white ov-nav-link" to="#" uk-icon="icon: bell; ratio: 1.2" uk-tooltip="title: Notifications; pos: bottom-center"></Link></li>
               <li><Link className="ov-color-white ov-nav-link" to="#" uk-icon="icon: user; ratio: 1.2" uk-tooltip="title: Profile; pos: bottom-center"></Link></li>
               <li><Link className="ov-color-white ov-nav-link" to="#" uk-icon="icon: cog; ratio: 1.2" uk-tooltip="title: Settings; pos: bottom-center"></Link></li>
-              <li><Link className="ov-color-white ov-nav-link" to="/login" uk-icon="icon: sign-in; ratio: 1.2" uk-tooltip="title: Sign in; pos: bottom-center"></Link></li>
-              <li><Link className="ov-color-white ov-nav-link" to="#" uk-icon="icon: sign-out; ratio: 1.2" uk-tooltip="title: Sign out; pos: bottom-center"></Link></li>
+              {
+                this.props.auth.authenticated ?
+                <li><Link className="ov-color-white ov-nav-link" to="#" uk-icon="icon: sign-out; ratio: 1.2" uk-tooltip="title: Sign out; pos: bottom-center"></Link></li> :
+                <li><Link className="ov-color-white ov-nav-link" to="/login" uk-icon="icon: sign-in; ratio: 1.2" uk-tooltip="title: Sign in; pos: bottom-center"></Link></li>
+              }
             </ul>
           </div>
         </nav>
@@ -43,4 +47,8 @@ class Header extends Component {
   }
 }
 
-export default Header;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps)(Header);
