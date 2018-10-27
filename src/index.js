@@ -5,7 +5,8 @@ import { BrowserRouter, Switch } from "react-router-dom";
 
 import App from './components/App';
 import Header from './components/common/Header';
-import Login from './components/common/Login';
+import SignIn from './components/common/SignIn';
+import SignUp from './components/common/SignUp';
 import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
@@ -14,8 +15,9 @@ ReactDOM.render(
       <Header/>
       <Switch>
         <Route exact path="/" component={App}></Route>
+        <Route exact path="/login" component={SignIn}></Route>
+        <Route exact path="/signup" component={SignUp}></Route>
       </Switch>
-      <Login/>
     </div>
   </BrowserRouter>,
   document.getElementById('root')
