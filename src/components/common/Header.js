@@ -14,10 +14,10 @@ class Header extends Component {
   }
 
   render() {
-    let authenticated;
+    let spinner;
 
     if (!this.props.auth.loading) {
-      authenticated = (
+      spinner = (
         <ul className="uk-navbar-nav">
           <li>
             <img src={logoNoSpin} width="100px" className="loading" alt="logo" />
@@ -25,7 +25,7 @@ class Header extends Component {
         </ul>
       );
     } else {
-      authenticated = (
+      spinner = (
         <ul className="uk-navbar-nav">
           <li>
             <img src={logo} width="100px" className="loading" alt="logo" />
@@ -57,15 +57,21 @@ class Header extends Component {
             </div>
           </div>
           <div className="uk-navbar-center">
-            {authenticated}
+            {spinner}
           </div>
           <div className="uk-navbar-right">
             <ul className="uk-navbar-nav">
-              <li><Link className="ov-color-white ov-nav-link" to="#" uk-icon="icon: bell; ratio: 1.2" uk-tooltip="title: Notifications; pos: bottom-center"></Link></li>
               {
-                this.props.auth.authenticated ?
-                <li><Link className="ov-color-white ov-nav-link" to="#" uk-icon="icon: user; ratio: 1.2" uk-tooltip={ `title: ${this.props.auth.user.username}; pos: bottom-center `}></Link></li> :
-                <li><Link className="ov-color-white ov-nav-link" to="#" uk-icon="icon: user; ratio: 1.2" uk-tooltip="title: Profile; pos: bottom-center"></Link></li>
+                this.props.auth.authenticated ? (
+                <li><Link className="ov-color-white ov-nav-link" to="/profile" uk-icon="icon: user; ratio: 1.2" uk-tooltip={ `title: ${this.props.auth.user.username}; pos: bottom-center `}></Link></li>
+                ):
+                null
+              }
+              {
+                this.props.auth.authenticated ? (
+                  <li><Link className="ov-color-white ov-nav-link" to="#" uk-icon="icon: bell; ratio: 1.2" uk-tooltip="title: Notifications; pos: bottom-center"></Link></li>
+                ):
+                null
               }
               {
                 this.props.auth.authenticated ?

@@ -11,6 +11,8 @@ import App from './components/App';
 import Header from './components/common/Header';
 import SignIn from './components/common/SignIn';
 import SignUp from './components/common/SignUp';
+import ProfilePage from "./components/profile/ProfilePage";
+
 import registerServiceWorker from './registerServiceWorker';
 
 import { setCurrentUser } from './actions/authActions';
@@ -32,6 +34,7 @@ ReactDOM.render(
           <Route exact path="/" component={App}></Route>
           <Route exact path="/login" component={SignIn}></Route>
           <Route exact path="/signup" component={SignUp}></Route>
+          <Route exact path="/profile" component={ProfilePage}></Route>
         </Switch>
       </div>
     </BrowserRouter>
