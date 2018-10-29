@@ -21,10 +21,10 @@ class SignIn extends Component {
   }
   render() {
     return (
-      <div>
+      <div data-uk-scrollspy="cls: uk-animation-slide-bottom-small; target: > div; delay: 100; repeat: true">
         <div className="uk-container uk-padding">
 
-          <div class="uk-card uk-width-1-2@m uk-align-center uk-card-default uk-box-shadow-hover-large">
+          <div class="uk-card uk-width-1-2@m uk-align-center uk-card-default uk-box-shadow-hover-large" data-uk-scrollspy="cls: uk-animation-slide-bottom-medium; target: > div; delay: 40; repeat: true">
             <div class="uk-card-header">
                 <div class="uk-grid-small uk-flex-middle" uk-grid>
                     <div class="uk-width-expand">

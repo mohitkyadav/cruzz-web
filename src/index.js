@@ -28,7 +28,7 @@ ReactDOM.render(
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <div class="full-container">
         <Header/>
-        <Switch>
+        <Switch data-uk-scrollspy="cls: uk-animation-fade; target: > div; delay: 300; repeat: true">
           <Route exact path="/" component={App}></Route>
           <Route exact path="/login" component={SignIn}></Route>
           <Route exact path="/signup" component={SignUp}></Route>
