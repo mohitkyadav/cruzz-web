@@ -3,6 +3,9 @@ import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 import '../../static/css/common.css';
+import logo from '../../static/img/index.svg';
+import logoNoSpin from '../../static/img/index-no-spin.svg';
+
 import { signOut } from './../../actions/authActions';
 
 class Header extends Component {
@@ -13,10 +16,26 @@ class Header extends Component {
   render() {
     let authenticated;
 
-    if (this.props.auth.loading) {
-      authenticated = null;
+    if (!this.props.auth.loading) {
+      authenticated = (
+        <ul className="uk-navbar-nav">
+          <li>
+            <img src={logoNoSpin} width="100px" className="loading" alt="logo" />
+          </li>
+        </ul>
+      );
     } else {
       authenticated = (
+        <ul className="uk-navbar-nav">
+          <li>
+            <img src={logo} width="100px" className="loading" alt="logo" />
+          </li>
+        </ul>
+      );
+    }
+
+    return (
+      <div>
         <nav className="uk-navbar-container uk-box-shadow-large" uk-navbar="true" uk-sticky="show-on-up: true; animation: uk-animation-slide-top;">
           <div className="uk-navbar-left">
             <ul className="uk-navbar-nav">
@@ -37,7 +56,9 @@ class Header extends Component {
               </div>
             </div>
           </div>
-
+          <div className="uk-navbar-center">
+            {authenticated}
+          </div>
           <div className="uk-navbar-right">
             <ul className="uk-navbar-nav">
               <li><Link className="ov-color-white ov-nav-link" to="#" uk-icon="icon: bell; ratio: 1.2" uk-tooltip="title: Notifications; pos: bottom-center"></Link></li>
@@ -46,7 +67,6 @@ class Header extends Component {
                 <li><Link className="ov-color-white ov-nav-link" to="#" uk-icon="icon: user; ratio: 1.2" uk-tooltip={ `title: ${this.props.auth.user.username}; pos: bottom-center `}></Link></li> :
                 <li><Link className="ov-color-white ov-nav-link" to="#" uk-icon="icon: user; ratio: 1.2" uk-tooltip="title: Profile; pos: bottom-center"></Link></li>
               }
-              <li><Link className="ov-color-white ov-nav-link" to="#" uk-icon="icon: cog; ratio: 1.2" uk-tooltip="title: Settings; pos: bottom-center"></Link></li>
               {
                 this.props.auth.authenticated ?
                 <li><Link className="ov-color-white ov-nav-link" onClick={this.signOut.bind(this)} to="#" uk-icon="icon: sign-out; ratio: 1.2" uk-tooltip="title: Sign out; pos: bottom-center"></Link></li> :
@@ -55,12 +75,6 @@ class Header extends Component {
             </ul>
           </div>
         </nav>
-      )
-    }
-
-    return (
-      <div>
-        {authenticated}
       </div>
     );
   }
