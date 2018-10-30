@@ -4,8 +4,10 @@ nav {
 
 }
 
-.uk-navbar-left {
+.ov-nav-section {
   align-content: center;
+  height: 60px;
+  overflow: hidden;
 }
 
 .ov-color-white {

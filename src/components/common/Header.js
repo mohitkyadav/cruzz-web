@@ -37,7 +37,7 @@ class Header extends Component {
     return (
       <div>
         <nav className="uk-navbar-container uk-box-shadow-large" uk-navbar="true" uk-sticky="show-on-up: true; animation: uk-animation-slide-top;">
-          <div className="uk-navbar-left">
+          <div className="uk-navbar-left ov-nav-section">
             <ul className="uk-navbar-nav">
               <li><Link className="ov-color-white ov-nav-link" to="/"><span uk-icon="icon: home; ratio: 1.15"></span></Link></li>
             </ul>
@@ -56,10 +56,10 @@ class Header extends Component {
               </div>
             </div>
           </div>
-          <div className="uk-navbar-center">
+          <div className="uk-navbar-center ov-nav-section">
             {spinner}
           </div>
-          <div className="uk-navbar-right">
+          <div className="uk-navbar-right ov-nav-section">
             <ul className="uk-navbar-nav">
               {
                 this.props.auth.authenticated ? (
