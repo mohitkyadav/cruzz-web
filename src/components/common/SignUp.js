@@ -25,7 +25,7 @@ class SignUp extends Component {
 
   render() {
     return (
-      <div data-uk-scrollspy="cls: uk-animation-slide-bottom-small; target: > div, > div > div > div > .uk-margin; delay: 100; repeat: true">
+      <div data-uk-scrollspy="cls: uk-animation-slide-bottom-small; target: > div, > div > div > div > .uk-margin; delay: 100;">
           <div className="uk-container uk-align-center uk-padding uk-margin-remove-bottom">
             <div className="uk-card uk-width-1-2@m uk-align-center uk-card-default uk-box-shadow-hover-small uk-box-shadow-medium" data-uk-scrollspy="cls: uk-animation-slide-bottom-medium; target: > div; delay: 40; repeat: true">
 

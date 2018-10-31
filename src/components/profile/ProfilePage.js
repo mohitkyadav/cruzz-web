@@ -12,7 +12,7 @@ class ProfilePage extends Component {
 
     return (
       <div>
-        <div className="uk-container uk-padding-small" data-uk-scrollspy="cls: uk-animation-slide-bottom-medium; target: > div; delay: 40; repeat: true">
+        <div className="uk-container uk-padding-small" data-uk-scrollspy="cls: uk-animation-slide-bottom-medium; target: > div; delay: 40;">
 
           <div className="uk-margin-medium-bottom">
             <div className="uk-height-medium uk-background-cover uk-light uk-flex" data-uk-parallax="bgy: -200" style={{ backgroundImage: `url(${coverPhoto})`}}>
