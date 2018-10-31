@@ -20,4 +20,5 @@ nav {
 
 .ov-nav-link:hover {
   background: rgb(45, 97, 194);
+  height: 60px;
 }
