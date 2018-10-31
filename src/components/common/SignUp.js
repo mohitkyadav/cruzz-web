@@ -58,7 +58,7 @@ class SignUp extends Component {
                   </div>
                 </div>
                 <p className="uk-margin">
-                  <button className="uk-button uk-button-primary uk-align-center uk-width-1-3" type="submit">Sign-up</button>
+                  <button className="uk-button uk-button-primary uk-align-center uk-width-1-3@m uk-width-1-1" type="submit">Sign-up</button>
                 </p>
               </form>
             </div>

@@ -12,6 +12,7 @@ import Header from './components/common/Header';
 import SignIn from './components/common/SignIn';
 import SignUp from './components/common/SignUp';
 import ProfilePage from "./components/profile/ProfilePage";
+import PrivateRoute from "./components/PrivateRoute"
 
 import registerServiceWorker from './registerServiceWorker';
 
@@ -31,10 +32,10 @@ ReactDOM.render(
       <div class="full-container">
         <Header/>
         <Switch>
-          <Route exact path="/" component={App}></Route>
+          <PrivateRoute exact path="/" component={App}></PrivateRoute>
           <Route exact path="/login" component={SignIn}></Route>
           <Route exact path="/signup" component={SignUp}></Route>
-          <Route exact path="/profile" component={ProfilePage}></Route>
+          <PrivateRoute exact path="/profile" component={ProfilePage}></PrivateRoute>
         </Switch>
       </div>
     </BrowserRouter>
