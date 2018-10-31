@@ -3,3 +3,4 @@ export const USER_PROFILE = 'USER_PROFILE';
 export const SIGNUP = 'SIGNUP';
 export const ERROR = 'ERROR';
 export const LOADING = 'LOADING';
+export const LOADED = 'LOADED';

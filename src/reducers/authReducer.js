@@ -1,12 +1,13 @@
 import {
   // SIGNUP,
   SET_CURRENT_USER,
+  LOADING,
+  LOADED,
   // USER_PROFILE,
   // ERROR
 } from '../actions/types';
 
 import { isEmpty } from '../utils/validate';
-import { LOADING } from './../actions/types';
 
 const initialState = {
   loading: false,
@@ -29,6 +30,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         loading: true
+      };
+    case LOADED:
+      return {
+        ...state,
+        loading: false
       }
 		default:
 			return state;
