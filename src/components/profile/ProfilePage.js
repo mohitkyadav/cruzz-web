@@ -3,10 +3,16 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 import coverPhoto from '../../static/img/retro-hop.jpg';
-import spinner from '../../static/img/index.svg';
+// import spinner from '../../static/img/index.svg';
+import avtar from '../../static/img/avtar.jpg'
 
 
 class ProfilePage extends Component {
+
+  // function(event) {
+  //   this.props.dispatch(actio());
+  //   event.preventDefault();
+  // }
 
   render() {
 
@@ -21,7 +27,12 @@ class ProfilePage extends Component {
                 <div className="uk-grid-small uk-flex-inline" uk-grid>
 
                   <div className="uk-width-auto">
-                    <img className="uk-border-circle" width="150" alt="#" height="40" src={spinner}/>
+                    <div className="uk-inline-clip uk-transition-toggle" tabindex="0">
+                      <img className="uk-transition-scale-up uk-transition-opaque" width="150" src={avtar} alt="" uk-tooltip="title: Upload new Profile Picture; pos: bottom-center"/>
+                      <div className="uk-position-center">
+                        <span className="uk-transition-slide-bottom-small" uk-icon="icon: cloud-upload; ratio: 3"></span>
+                      </div>
+                    </div>
                   </div>
 
                   <div className="uk-width-expand uk-align-center">

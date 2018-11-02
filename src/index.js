@@ -32,7 +32,7 @@ ReactDOM.render(
       <div class="full-container">
         <Header/>
         <Switch>
-          <PrivateRoute exact path="/" component={App}></PrivateRoute>
+          <Route exact path="/" component={App}></Route>
           <Route exact path="/login" component={SignIn}></Route>
           <Route exact path="/signup" component={SignUp}></Route>
           <PrivateRoute exact path="/profile" component={ProfilePage}></PrivateRoute>
