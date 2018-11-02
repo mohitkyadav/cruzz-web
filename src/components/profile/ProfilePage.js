@@ -28,7 +28,7 @@ class ProfilePage extends Component {
 
                   <div className="uk-width-auto">
                     <div className="uk-inline-clip uk-transition-toggle" tabindex="0">
-                      <img className="uk-transition-scale-up uk-transition-opaque" width="150" src={avtar} alt="" uk-tooltip="title: Upload new Profile Picture; pos: bottom-center"/>
+                      <img className="uk-transition-scale-down uk-transition-opaque" width="150" src={avtar} alt="" uk-tooltip="title: Upload new Profile Picture; pos: bottom-center"/>
                       <div className="uk-position-center">
                         <span className="uk-transition-slide-bottom-small" uk-icon="icon: cloud-upload; ratio: 3"></span>
                       </div>

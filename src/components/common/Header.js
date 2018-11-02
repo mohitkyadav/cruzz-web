@@ -74,6 +74,12 @@ class Header extends Component {
                 null
               }
               {
+                this.props.auth.authenticated ? (
+                  <li><Link className="ov-color-white ov-nav-link" to="#" uk-icon="icon: rss; ratio: 1.2" uk-tooltip="title: Feed; pos: bottom-center"></Link></li>
+                ):
+                null
+              }
+              {
                 this.props.auth.authenticated ?
                 <li><Link className="ov-color-white ov-nav-link" onClick={this.signOut.bind(this)} to="#" uk-icon="icon: sign-out; ratio: 1.2" uk-tooltip="title: Sign out; pos: bottom-center"></Link></li> :
                 <li><Link className="ov-color-white ov-nav-link" to="/login" uk-icon="icon: sign-in; ratio: 1.2" uk-tooltip="title: Sign in; pos: bottom-center"></Link></li>
