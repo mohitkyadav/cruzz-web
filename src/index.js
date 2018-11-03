@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { Route } from "react-router";
 import { BrowserRouter, Switch } from "react-router-dom";
 import { Provider } from 'react-redux';
-// import jwt_decode from 'jwt-decode';
 
 import store from './store';
 
@@ -11,8 +10,8 @@ import App from './components/App';
 import Header from './components/common/Header';
 import SignIn from './components/common/SignIn';
 import SignUp from './components/common/SignUp';
-import ProfilePage from "./components/profile/ProfilePage";
-import PrivateRoute from "./components/PrivateRoute"
+import ProfilePage from './components/profile/ProfilePage';
+import PrivateRoute from './components/PrivateRoute';
 
 import registerServiceWorker from './registerServiceWorker';
 
