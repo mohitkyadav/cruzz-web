@@ -30,12 +30,12 @@ class ProfilePage extends Component {
 
                   <div className="uk-width-auto">
                     <div className="uk-inline-clip uk-transition-toggle" tabIndex="0">
-                      <img className="uk-transition-scale-down uk-transition-opaque" width="150" src={avtar} alt="" uk-tooltip="title: Upload new Profile Picture; pos: bottom-center"/>
+                      <img className="uk-transition-scale-down ov-curser-pointer uk-transition-opaque" width="150" src={avtar} onClick={(e) => this.updateProfilePic(e)} alt="" uk-tooltip="title: Upload new Profile Picture; pos: bottom-center"/>
                       <div className="uk-position-center">
                         <form style={{ display: 'none' }} onSubmit={this.updateProfilePic.bind(this)}>
                           <input id="dp" name="dp" type="file" ref="dp"/>
                         </form>
-                        <span className="uk-transition-slide-bottom-small ov-curser-pointer" onClick={(e) => this.updateProfilePic(e)} uk-icon="icon: cloud-upload; ratio: 3"></span>
+                        <span className="uk-transition-slide-bottom-small" uk-icon="icon: cloud-upload; ratio: 3"></span>
                       </div>
                     </div>
                   </div>

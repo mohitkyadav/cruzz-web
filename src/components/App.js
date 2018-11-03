@@ -1,28 +1,46 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import '../static/css/style.css';
+import logo from '../static/img/index.svg';
+
 
 class App extends Component {
   render() {
+    let spinner;
+
+    if (!this.props.auth.loading) {
+      spinner = null;
+    } else {
+      spinner = (
+        <img src={logo} width="100px" className="loading uk-align-center" alt="logo" />
+      );
+    }
     return (
       <div className="App">
-        <header className="App-header">
-          <button class="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #offcanvas-push">Push</button>
-          <div id="offcanvas-push" uk-offcanvas="mode: push; overlay: true">
-            <div class="uk-offcanvas-bar">
+        <div id="offcanvas-push" uk-offcanvas="mode: push; overlay: true">
+          <div className="uk-offcanvas-bar">
 
-              <button class="uk-offcanvas-close" type="button" uk-close></button>
+            <button className="uk-offcanvas-close" type="button" data-uk-close="true"></button>
 
-              <h3>Title</h3>
+            <h3>Notifications</h3>
 
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>Comming soon.</p>
 
-            </div>
           </div>
-        </header>
+        </div>
+
+        <div className="uk-align-center uk-height-1-1 uk-width-1-1">
+          {spinner}
+        </div>
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps)(withRouter(App));
