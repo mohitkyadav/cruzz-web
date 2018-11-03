@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
+import fireStorage from "../../firebase";
+
 import coverPhoto from '../../static/img/retro-hop.jpg';
 // import spinner from '../../static/img/index.svg';
 import avtar from '../../static/img/avtar.jpg'
@@ -9,11 +11,34 @@ import avtar from '../../static/img/avtar.jpg'
 
 class ProfilePage extends Component {
 
-  updateProfilePic(event) {
-    // this.props.dispatch(action());
-    this.refs.dp.click();
-    console.log(this.refs.dp.value);
+  uploadProfilePic(event) {
+    console.log("yolo");
+    console.log(event.target.files[0]);
+    const image = event.target.files[0];
+    // console.log(image.name);
+    let uploadTask = fireStorage.ref(`dp/${image.name}`).put(image);
+    uploadTask.on('state_changed',
+      (snapshot) => {
+        console.log("uploading");
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        fireStorage.ref('dp').child(image.name).getDownloadURL().then(
+          url => {
+            console.log(url)
+          }
+        );
+      }
+    )
     event.preventDefault();
+  }
+
+  updateProfilePic() {
+    // this.props.dispatch(action());
+    // this.refs.dp.click();
+    document.getElementById("dp").click();
   }
 
   render() {
@@ -32,16 +57,16 @@ class ProfilePage extends Component {
                     <div className="uk-inline-clip uk-transition-toggle" tabIndex="0">
                       <img className="uk-transition-scale-down ov-curser-pointer uk-transition-opaque" width="150" src={avtar} onClick={(e) => this.updateProfilePic(e)} alt="" uk-tooltip="title: Upload new Profile Picture; pos: bottom-center"/>
                       <div className="uk-position-center">
-                        <form style={{ display: 'none' }} onSubmit={this.updateProfilePic.bind(this)}>
-                          <input id="dp" name="dp" type="file" ref="dp"/>
+                        <form style={{ display: 'none' }} onSubmit={this.uploadProfilePic.bind(this)}>
+                          <input id="dp" name="dp" type="file" ref="dp" onChange={(e) => this.uploadProfilePic(e)}/>
                         </form>
-                        <span className="uk-transition-slide-bottom-small" uk-icon="icon: cloud-upload; ratio: 3"></span>
+                        <span className="uk-transition-slide-bottom-small" onClick={(e) => this.updateProfilePic(e)} uk-icon="icon: cloud-upload; ratio: 3"></span>
                       </div>
                     </div>
                   </div>
 
                   <div className="uk-width-expand uk-align-center">
-                    <h3 onClick={this.uploadPofilePic} className="uk-card-title uk-margin-remove-bottom">Mohit Kumar Yadav</h3>
+                    <h3 className="uk-card-title uk-margin-remove-bottom">Mohit Kumar Yadav</h3>
                     <p className="uk-text-meta uk-margin-remove-top">A below avg human </p>
                   </div>
 
