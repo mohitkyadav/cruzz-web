@@ -66,9 +66,13 @@ class ProfilePage extends Component {
                   </div>
 
                   <div className="uk-width-expand uk-align-center">
-                    <h3 className="uk-card-title uk-margin-remove-bottom">Mohit Kumar Yadav</h3>
-                    <p className="uk-text-meta uk-margin-remove-top">A below avg human </p>
-                  </div>
+                    <h3 className="uk-card-title uk-margin-remove-bottom">{this.props.auth.user.username}</h3>
+                    {
+                      this.props.auth.user.bio ? (
+                        <p className="uk-text-meta uk-margin-remove-top">A below avg human </p>
+                      ): null
+                    }
+                    </div>
 
                 </div>
               </div>

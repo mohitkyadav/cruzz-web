@@ -87,6 +87,17 @@ class Header extends Component {
             </ul>
           </div>
         </nav>
+        <div id="offcanvas-push" data-uk-offcanvas="mode: push; overlay: true">
+          <div className="uk-offcanvas-bar">
+
+            <button className="uk-offcanvas-close" type="button" data-uk-close="true"></button>
+
+            <h3>Notifications</h3>
+
+            <p>Comming soon.</p>
+
+          </div>
+        </div>
       </div>
     );
   }
