@@ -29,7 +29,7 @@ if (localStorage.jwtToken) {
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter basename={process.env.PUBLIC_URL}>
-      <div class="full-container">
+      <div className="full-container">
         <Header/>
         <Switch>
           <Route exact path="/" component={App}></Route>

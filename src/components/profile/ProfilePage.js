@@ -9,10 +9,12 @@ import avtar from '../../static/img/avtar.jpg'
 
 class ProfilePage extends Component {
 
-  // function(event) {
-  //   this.props.dispatch(actio());
-  //   event.preventDefault();
-  // }
+  updateProfilePic(event) {
+    // this.props.dispatch(action());
+    this.refs.dp.click();
+    console.log(this.refs.dp.value);
+    event.preventDefault();
+  }
 
   render() {
 
@@ -24,19 +26,22 @@ class ProfilePage extends Component {
             <div className="uk-height-medium uk-background-cover uk-light uk-flex" data-uk-parallax="bgy: -200" style={{ backgroundImage: `url(${coverPhoto})`}}>
 
               <div className="uk-overlay uk-overlay-primary uk-position-bottom uk-padding-remove">
-                <div className="uk-grid-small uk-flex-inline" uk-grid>
+                <div className="uk-grid-small uk-flex-inline" uk-grid="true">
 
                   <div className="uk-width-auto">
-                    <div className="uk-inline-clip uk-transition-toggle" tabindex="0">
+                    <div className="uk-inline-clip uk-transition-toggle" tabIndex="0">
                       <img className="uk-transition-scale-down uk-transition-opaque" width="150" src={avtar} alt="" uk-tooltip="title: Upload new Profile Picture; pos: bottom-center"/>
                       <div className="uk-position-center">
-                        <span className="uk-transition-slide-bottom-small" uk-icon="icon: cloud-upload; ratio: 3"></span>
+                        <form style={{ display: 'none' }} onSubmit={this.updateProfilePic.bind(this)}>
+                          <input id="dp" name="dp" type="file" ref="dp"/>
+                        </form>
+                        <span className="uk-transition-slide-bottom-small ov-curser-pointer" onClick={(e) => this.updateProfilePic(e)} uk-icon="icon: cloud-upload; ratio: 3"></span>
                       </div>
                     </div>
                   </div>
 
                   <div className="uk-width-expand uk-align-center">
-                    <h3 className="uk-card-title uk-margin-remove-bottom">Mohit Kumar Yadav</h3>
+                    <h3 onClick={this.uploadPofilePic} className="uk-card-title uk-margin-remove-bottom">Mohit Kumar Yadav</h3>
                     <p className="uk-text-meta uk-margin-remove-top">A below avg human </p>
                   </div>
 
@@ -46,7 +51,7 @@ class ProfilePage extends Component {
             </div>
           </div>
 
-          <div className="uk-text-center" data-uk-grid>
+          <div className="uk-text-center" data-uk-grid="true">
             <div className="uk-width-expand@m">
               <div className="uk-card uk-card-default uk-card-body">Expand</div>
             </div>
@@ -55,7 +60,7 @@ class ProfilePage extends Component {
             </div>
           </div>
 
-          <div className="uk-text-center" data-uk-grid>
+          <div className="uk-text-center" data-uk-grid="true">
             <div className="uk-width-expand@m">
               <div className="uk-card uk-card-default uk-card-body">Expand</div>
             </div>
@@ -64,19 +69,19 @@ class ProfilePage extends Component {
             </div>
           </div>
 
-          <div className="uk-text-center" data-uk-grid>
+          <div className="uk-text-center" data-uk-grid="true">
             <div className="uk-width-2-3@m uk-align-center">
               <div className="uk-card uk-card-default uk-card-body">2-3</div>
             </div>
           </div>
 
-          <div className="uk-text-center" data-uk-grid>
+          <div className="uk-text-center" data-uk-grid="true">
             <div className="uk-width-2-3@m uk-align-center">
               <div className="uk-card uk-card-default uk-card-body">2-3</div>
             </div>
           </div>
 
-          <div className="uk-text-center" data-uk-grid>
+          <div className="uk-text-center" data-uk-grid="true">
             <div className="uk-width-2-3@m uk-align-center">
               <div className="uk-card uk-card-default uk-card-body">2-3</div>
             </div>

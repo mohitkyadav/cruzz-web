@@ -46,10 +46,10 @@ class Header extends Component {
               <Link to="#" className="uk-navbar-toggle ov-color-white ov-nav-link" uk-icon="icon: search"></Link>
               <div className="uk-navbar-dropdown uk-padding-small uk-width-large@m uk-width-medium" uk-drop="mode: click; cls-drop: uk-navbar-dropdown; boundary: !nav; animation: uk-animation-slide-left-small;">
 
-                <div className="uk-grid-small uk-flex-middle" uk-grid>
+                <div className="uk-grid-small uk-flex-middle" uk-grid="true">
                   <div className="uk-width-expand">
                     <form className="uk-search uk-search-navbar uk-width-1-1">
-                      <input className="uk-search-input" type="search" placeholder="Search..." autofocus/>
+                      <input className="uk-search-input" type="search" placeholder="Search..." autoFocus/>
                     </form>
                   </div>
                 </div>

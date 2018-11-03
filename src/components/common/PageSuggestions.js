@@ -16,7 +16,7 @@ class PageSuggestions extends Component {
 
             <hr className="uk-margin-remove"/>
             <Link to="#">
-              <div className="uk-grid-small uk-flex-inline uk-width-1-1 uk-padding-small uk-margin-remove-top" uk-grid>
+              <div className="uk-grid-small uk-flex-inline uk-width-1-1 uk-padding-small uk-margin-remove-top" uk-grid="true">
                 <div className="uk-width-1-5">
                   <img className="uk-border-circle" width="40" height="40" alt="me" src="https://avatars0.githubusercontent.com/u/25580776?s=400&u=9369191f891fcda2a8269e44421ea2357aa0f33d&v=4"/>
                 </div>
@@ -29,7 +29,7 @@ class PageSuggestions extends Component {
 
             <hr className="uk-margin-remove"/>
             <Link to="#">
-              <div className="uk-grid-small uk-flex-inline uk-width-1-1 uk-padding-small" uk-grid>
+              <div className="uk-grid-small uk-flex-inline uk-width-1-1 uk-padding-small" uk-grid="true">
                 <div className="uk-width-1-5">
                   <img className="uk-border-circle" width="40" height="40" alt="me" src="https://avatars0.githubusercontent.com/u/25580776?s=400&u=9369191f891fcda2a8269e44421ea2357aa0f33d&v=4"/>
                 </div>

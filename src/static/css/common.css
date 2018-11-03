@@ -22,3 +22,7 @@ nav {
   background: rgb(45, 97, 194);
   height: 60px;
 }
+
+.ov-curser-pointer {
+  cursor: pointer;
+}

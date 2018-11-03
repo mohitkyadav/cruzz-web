@@ -30,7 +30,7 @@ class SignUp extends Component {
             <div className="uk-card uk-width-1-2@m uk-align-center uk-card-default uk-box-shadow-hover-small uk-box-shadow-medium" data-uk-scrollspy="cls: uk-animation-slide-bottom-medium; target: > div; delay: 40; repeat: true">
 
               <div className="uk-card-header">
-                <h2 class="uk-card-title uk-margin-remove-bottom">Sign Up</h2>
+                <h2 className="uk-card-title uk-margin-remove-bottom">Sign Up</h2>
               </div>
               <div className="uk-card-body uk-padding-remove-bottom">
                 <form className="uk-align-center" onSubmit={this.signUp.bind(this)}>
