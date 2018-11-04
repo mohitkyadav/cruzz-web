@@ -7,6 +7,7 @@ import fireStorage from "../../firebase";
 import coverPhoto from '../../static/img/retro-hop.jpg';
 // import spinner from '../../static/img/index.svg';
 import avtar from '../../static/img/avtar.jpg'
+import PageSuggestions from "../common/PageSuggestions";
 
 
 class ProfilePage extends Component {
@@ -85,7 +86,7 @@ class ProfilePage extends Component {
               <div className="uk-card uk-card-default uk-card-body">Expand</div>
             </div>
             <div className="uk-width-1-3@m">
-              <div className="uk-card uk-card-default uk-card-body">1-3</div>
+              <PageSuggestions/>
             </div>
           </div>
 
@@ -95,18 +96,6 @@ class ProfilePage extends Component {
             </div>
             <div className="uk-width-1-3@m">
               <div className="uk-card uk-card-default uk-card-body">1-3</div>
-            </div>
-          </div>
-
-          <div className="uk-text-center" data-uk-grid="true">
-            <div className="uk-width-2-3@m uk-align-center">
-              <div className="uk-card uk-card-default uk-card-body">2-3</div>
-            </div>
-          </div>
-
-          <div className="uk-text-center" data-uk-grid="true">
-            <div className="uk-width-2-3@m uk-align-center">
-              <div className="uk-card uk-card-default uk-card-body">2-3</div>
             </div>
           </div>
 
