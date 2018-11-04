@@ -75,7 +75,7 @@ class Header extends Component {
               }
               {
                 this.props.auth.authenticated ? (
-                  <li><Link className="ov-color-white ov-nav-link" to="#" uk-icon="icon: rss; ratio: 1.2" uk-tooltip="title: Feed; pos: bottom-center"></Link></li>
+                  <li><Link className="ov-color-white ov-nav-link" to="/feed" uk-icon="icon: rss; ratio: 1.2" uk-tooltip="title: Feed; pos: bottom-center"></Link></li>
                 ):
                 null
               }

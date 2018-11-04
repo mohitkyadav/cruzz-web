@@ -17,6 +17,7 @@ import registerServiceWorker from './registerServiceWorker';
 
 import { setCurrentUser } from './actions/authActions';
 import setAuthToken from './utils/setAuthToken';
+import PostFeed from './components/feed/PostFeed';
 
 if (localStorage.jwtToken) {
 	// Set auth token header auth
@@ -35,6 +36,7 @@ ReactDOM.render(
           <Route exact path="/login" component={SignIn}></Route>
           <Route exact path="/signup" component={SignUp}></Route>
           <PrivateRoute exact path="/profile" component={ProfilePage}></PrivateRoute>
+          <PrivateRoute exact path="/feed" component={PostFeed}></PrivateRoute>
         </Switch>
       </div>
     </BrowserRouter>
