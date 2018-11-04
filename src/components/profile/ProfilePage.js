@@ -60,7 +60,7 @@ class ProfilePage extends Component {
                         <form style={{ display: 'none' }} onSubmit={this.uploadProfilePic.bind(this)}>
                           <input id="dp" name="dp" type="file" ref="dp" onChange={(e) => this.uploadProfilePic(e)}/>
                         </form>
-                        <span className="uk-transition-slide-bottom-small" onClick={(e) => this.updateProfilePic(e)} uk-icon="icon: cloud-upload; ratio: 3"></span>
+                        <span className="uk-transition-slide-bottom-small ov-curser-pointer" onClick={(e) => this.updateProfilePic(e)} uk-icon="icon: cloud-upload; ratio: 3"></span>
                       </div>
                     </div>
                   </div>
