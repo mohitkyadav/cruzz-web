@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { SET_CURRENT_USER, LOADING, LOADED, AUTHENTICATED } from './types';
+import { SET_CURRENT_USER, SET_CURRENT_PROFILE, LOADING, LOADED, AUTHENTICATED } from './types';
 
 import setAuthToken from '../utils/setAuthToken';
 import { isEmpty } from './../utils/validate';
@@ -38,13 +38,15 @@ export const signIn = (user, history) => dispatch => {
   ).then(res => {
       // Save / Set token to local storage
       console.log(res.data);
-      const { token, username } = res.data.user;
+      let { token, username } = res.data.user;
+      token = 'Token ' + token;
 			localStorage.setItem('jwtToken', token);
 			localStorage.setItem('username', username);
 			// Set auth header
       setAuthToken(token);
       axios.get(`https://cruzz.herokuapp.com/api/profile/retrieve/${username}/`).then(response => {
-          dispatch({ type: SET_CURRENT_USER, payload: response.data.profile });
+          console.log(response.data);
+          dispatch({ type: SET_CURRENT_USER, payload: response.data.user });
           history.push('/');
       }).catch(err => console.log(err.response));
   }).catch(err => console.log(err.response));
@@ -68,7 +70,8 @@ export const setCurrentUser = username => dispatch => {
   dispatch(loading());
 	axios.get(`https://cruzz.herokuapp.com/api/profile/retrieve/${username}/`).then(response => {
     console.log(response.data);
-    dispatch({ type: SET_CURRENT_USER, payload: response.data.profile });
+    dispatch({ type: SET_CURRENT_USER, payload: response.data.user });
+    dispatch({ type: SET_CURRENT_PROFILE, payload: response.data.profile });
     dispatch(loaded());
   }).catch(err => console.log(err.response));
 };

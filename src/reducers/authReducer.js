@@ -1,6 +1,7 @@
 import {
   // SIGNUP,
   SET_CURRENT_USER,
+  SET_CURRENT_PROFILE,
   LOADING,
   LOADED,
   // USER_PROFILE,
@@ -13,7 +14,7 @@ import { AUTHENTICATED } from './../actions/types';
 const initialState = {
   loading: false,
 	authenticated: false,
-	user: {},
+  user: {},
   userProfile: {},
   error: ''
 };
@@ -22,9 +23,16 @@ export default function(state = initialState, action) {
 	switch (action.type) {
     case SET_CURRENT_USER:
 			return {
-				...state,
+        ...state,
 				authenticated: !isEmpty(action.payload),
         user: action.payload,
+        loading: false
+      };
+    case SET_CURRENT_PROFILE:
+			return {
+        ...state,
+				authenticated: !isEmpty(action.payload),
+        userProfile: action.payload,
         loading: false
       };
     case LOADING:

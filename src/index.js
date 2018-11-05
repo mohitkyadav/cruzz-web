@@ -21,7 +21,7 @@ import PostFeed from './components/feed/PostFeed';
 
 if (localStorage.jwtToken) {
 	// Set auth token header auth
-	setAuthToken(localStorage.jwtToken);
+  setAuthToken(localStorage.jwtToken);
   // Set current user
   store.dispatch(authenticated(localStorage.jwtToken));
 	store.dispatch(setCurrentUser(localStorage.username));
