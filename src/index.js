@@ -15,14 +15,15 @@ import PrivateRoute from './components/PrivateRoute';
 
 import registerServiceWorker from './registerServiceWorker';
 
-import { setCurrentUser } from './actions/authActions';
+import { setCurrentUser, authenticated } from './actions/authActions';
 import setAuthToken from './utils/setAuthToken';
 import PostFeed from './components/feed/PostFeed';
 
 if (localStorage.jwtToken) {
 	// Set auth token header auth
 	setAuthToken(localStorage.jwtToken);
-	// Set current user
+  // Set current user
+  store.dispatch(authenticated(localStorage.jwtToken));
 	store.dispatch(setCurrentUser(localStorage.username));
 }
 

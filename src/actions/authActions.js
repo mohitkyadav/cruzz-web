@@ -1,8 +1,9 @@
 import axios from 'axios';
 
-import { SET_CURRENT_USER, LOADING, LOADED } from './types';
+import { SET_CURRENT_USER, LOADING, LOADED, AUTHENTICATED } from './types';
 
 import setAuthToken from '../utils/setAuthToken';
+import { isEmpty } from './../utils/validate';
 
 export const signUp = user => dispatch => {
   dispatch(loading());
@@ -70,6 +71,13 @@ export const setCurrentUser = username => dispatch => {
     dispatch({ type: SET_CURRENT_USER, payload: response.data.profile });
     dispatch(loaded());
   }).catch(err => console.log(err.response));
+};
+
+export const authenticated = userToken => {
+  return {
+    type: AUTHENTICATED,
+    payload: !isEmpty(userToken)
+  };
 };
 
 export const loading = () => {

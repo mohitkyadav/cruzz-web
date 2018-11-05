@@ -8,6 +8,7 @@ import {
 } from '../actions/types';
 
 import { isEmpty } from '../utils/validate';
+import { AUTHENTICATED } from './../actions/types';
 
 const initialState = {
   loading: false,
@@ -36,6 +37,11 @@ export default function(state = initialState, action) {
         ...state,
         loading: false
       }
+    case AUTHENTICATED:
+      return {
+        ...state,
+        authenticated: action.payload
+      };
 		default:
 			return state;
 	}

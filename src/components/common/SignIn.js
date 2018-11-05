@@ -19,6 +19,13 @@ class SignIn extends Component {
       this.props.signIn(user, this.props.history);
     }
   }
+
+  componentDidMount() {
+    if (this.props.auth.authenticated) {
+      this.props.history.push('/profile');
+    }
+  }
+
   render() {
     return (
       <div data-uk-scrollspy="cls: uk-animation-slide-bottom-small; target: > div; delay: 100;">
