@@ -6,11 +6,35 @@ import fireStorage from "../../firebase";
 
 import coverPhoto from '../../static/img/retro-hop.jpg';
 // import spinner from '../../static/img/index.svg';
-import avtar from '../../static/img/avtar.jpg'
+// import avtar from '../../static/img/avtar.jpg'
 import PageSuggestions from "../common/PageSuggestions";
 
 
 class ProfilePage extends Component {
+
+  uploadCoverPic(event) {
+    console.log("yolo");
+    console.log(event.target.files[0]);
+    const image = event.target.files[0];
+    // console.log(image.name);
+    let uploadTask = fireStorage.ref(`covers/${image.name}`).put(image);
+    uploadTask.on('state_changed',
+      (snapshot) => {
+        console.log("uploading");
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        fireStorage.ref('covers').child(image.name).getDownloadURL().then(
+          url => {
+            console.log(url)
+          }
+        );
+      }
+    )
+    event.preventDefault();
+  }
 
   uploadProfilePic(event) {
     console.log("yolo");
@@ -42,6 +66,12 @@ class ProfilePage extends Component {
     document.getElementById("dp").click();
   }
 
+  updateCoverPic() {
+    // this.props.dispatch(action());
+    // this.refs.dp.click();
+    document.getElementById("cover").click();
+  }
+
   render() {
 
     return (
@@ -49,14 +79,18 @@ class ProfilePage extends Component {
         <div className="uk-container uk-padding-small" data-uk-scrollspy="cls: uk-animation-slide-bottom-medium; target: > div; delay: 40;">
 
           <div className="uk-margin-medium-bottom">
-            <div className="uk-height-medium uk-background-cover uk-light uk-flex" data-uk-parallax="bgy: -200" style={{ backgroundImage: `url(${coverPhoto})`}}>
+            <div className="uk-height-medium uk-background-cover uk-light uk-flex" data-uk-parallax="bgy: -200"
+            style={{
+              backgroundImage: `url(${
+                this.props.auth.userProfile.cover === "https://thumb.ibb.co/eN5O0f/temp.jpg" ? coverPhoto : this.props.auth.userProfile.cover
+              })`}}>
 
               <div className="uk-overlay uk-overlay-primary uk-position-bottom uk-padding-remove">
                 <div className="uk-grid-small uk-flex-inline" uk-grid="true">
 
                   <div className="uk-width-auto">
                     <div className="uk-inline-clip uk-transition-toggle" tabIndex="0">
-                      <img className="uk-transition-scale-down ov-curser-pointer uk-transition-opaque" width="150" src={avtar} onClick={(e) => this.updateProfilePic(e)} alt="" data-uk-tooltip="title: Upload new Profile Picture; pos: bottom-center"/>
+                      <img className="uk-transition-scale-down ov-curser-pointer uk-transition-opaque" width="150" src={this.props.auth.userProfile.image} onClick={(e) => this.updateProfilePic(e)} alt="" data-uk-tooltip="title: Upload new Profile Picture; pos: bottom-center"/>
                       <div className="uk-position-center">
                         <form style={{ display: 'none' }} onSubmit={this.uploadProfilePic.bind(this)}>
                           <input id="dp" name="dp" type="file" ref="dp" onChange={(e) => this.uploadProfilePic(e)}/>
@@ -67,13 +101,24 @@ class ProfilePage extends Component {
                   </div>
 
                   <div className="uk-width-expand uk-align-center">
-                    <h3 className="uk-card-title uk-margin-remove-bottom">{this.props.auth.user.email}</h3>
-                    {
-                      this.props.auth.user.bio ? (
-                        <p className="uk-text-meta uk-margin-remove-top">A below avg human </p>
-                      ): null
-                    }
+                    <div className="uk-width-1-1" data-uk-grid="true">
+                      <div className="uk-width-auto">
+                        <h3 className="uk-card-title uk-margin-remove-bottom">{this.props.auth.user.first_name}Mohit Yadav Yadav Yadav</h3>
+                        {
+                          this.props.auth.userProfile.bio ? (
+                            <p className="uk-text-meta uk-margin-remove-top">{this.props.auth.userProfile.bio}dattebayo!</p>
+                          ): (<p className="uk-text-meta uk-margin-remove-top uk-margin-remove-bottom">dattebayo!</p>)
+                        }
+                      </div>
+                      <div className="uk-width-expand">
+                        <button className="uk-icon-button uk-button-default uk-margin-small-bottom" data-uk-icon="pencil" data-uk-tooltip="title: Edit profile; pos: right"></button>
+                        <form style={{ display: 'none' }} onSubmit={this.uploadCoverPic.bind(this)}>
+                          <input id="cover" name="cover" type="file" ref="cover" onChange={(e) => this.uploadCoverPic(e)}/>
+                        </form>
+                        <button className="uk-icon-button uk-button-default" onClick={(e) => this.updateCoverPic(e)} data-uk-icon="cloud-upload" data-uk-tooltip="title: Upload cover photo; pos: right"></button>
+                      </div>
                     </div>
+                  </div>
 
                 </div>
               </div>
