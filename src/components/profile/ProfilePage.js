@@ -8,16 +8,30 @@ import coverPhoto from '../../static/img/retro-hop.jpg';
 // import spinner from '../../static/img/index.svg';
 // import avtar from '../../static/img/avtar.jpg'
 import PageSuggestions from "../common/PageSuggestions";
+import { updateUserProfile } from '../../actions/authActions';
 
 
 class ProfilePage extends Component {
 
   updateProfile(event) {
+    let user = {};
     console.log("prolo");
-    console.log(this.refs.new_first_name.value);
-    console.log(this.refs.new_last_name.value);
-    console.log(this.refs.new_email.value);
-    console.log(this.refs.new_bio.value);
+    if(this.refs.new_first_name.value) {
+      user.first_name = this.refs.new_first_name.value;
+    }
+    if(this.refs.new_last_name.value) {
+      user.last_name = this.refs.new_last_name.value;
+    }
+    if(this.refs.new_email.value) {
+      user.email = this.refs.new_email.value;
+    }
+    if(this.refs.new_bio.value) {
+      user.bio = this.refs.new_bio.value;
+    }
+    const updatedUser = {
+      user: user
+    }
+    this.props.updateUserProfile(updatedUser, this.props.history);
     event.preventDefault();
   }
 
@@ -37,7 +51,13 @@ class ProfilePage extends Component {
       () => {
         fireStorage.ref('covers').child(image.name).getDownloadURL().then(
           url => {
-            console.log(url)
+            console.log(url);
+            const updatedUser = {
+              user : {
+                cover: url
+              }
+            };
+            this.props.updateUserProfile(updatedUser, this.props.history);
           }
         );
       }
@@ -62,6 +82,12 @@ class ProfilePage extends Component {
         fireStorage.ref('dp').child(image.name).getDownloadURL().then(
           url => {
             console.log(url)
+            const updatedUser = {
+              user : {
+                image: url
+              }
+            };
+            this.props.updateUserProfile(updatedUser, this.props.history);
           }
         );
       }
@@ -208,4 +234,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, {})(withRouter(ProfilePage));
+export default connect(mapStateToProps, { updateUserProfile })(withRouter(ProfilePage));

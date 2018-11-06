@@ -5,6 +5,22 @@ import { SET_CURRENT_USER, SET_CURRENT_PROFILE, LOADING, LOADED, AUTHENTICATED }
 import setAuthToken from '../utils/setAuthToken';
 import { isEmpty } from './../utils/validate';
 
+export const updateUserProfile = user => dispatch => {
+  dispatch(loading());
+  axios.post(
+    'https://cruzz.herokuapp.com/api/authentication/users/update/',
+    user
+  ).then(res => {
+      console.log(res.data);
+      // dispatch(setCurrentUser());
+      dispatch(loaded());
+  }).catch(err => {
+    console.log(err.response);
+    dispatch(loaded());
+  });
+}
+
+
 export const signUp = user => dispatch => {
   dispatch(loading());
   axios.post(
