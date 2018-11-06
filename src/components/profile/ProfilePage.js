@@ -14,7 +14,6 @@ class ProfilePage extends Component {
 
   updateProfile(event) {
     let user = {};
-    console.log("prolo");
     if(this.refs.new_first_name.value) {
       user.first_name = this.refs.new_first_name.value;
     }
@@ -35,7 +34,6 @@ class ProfilePage extends Component {
   }
 
   uploadCoverPic(event) {
-    console.log("yolo");
     console.log(event.target.files[0]);
     const image = event.target.files[0];
     // console.log(image.name);
@@ -65,7 +63,6 @@ class ProfilePage extends Component {
   }
 
   uploadProfilePic(event) {
-    console.log("yolo");
     console.log(event.target.files[0]);
     const image = event.target.files[0];
     // console.log(image.name);
@@ -124,7 +121,7 @@ class ProfilePage extends Component {
 
                   <div className="uk-width-auto">
                     <div className="uk-inline-clip uk-transition-toggle" tabIndex="0">
-                      <img className="uk-transition-scale-down ov-curser-pointer uk-transition-opaque" width="150" src={this.props.auth.userProfile.image} onClick={(e) => this.updateProfilePic(e)} alt="" data-uk-tooltip="title: Upload new Profile Picture; pos: bottom-center"/>
+                      <img className="uk-transition-scale-down ov-curser-pointer uk-transition-opaque" width="150px" src={this.props.auth.userProfile.image} onClick={(e) => this.updateProfilePic(e)} alt="" data-uk-tooltip="title: Upload new Profile Picture; pos: bottom-center"/>
                       <div className="uk-position-center">
                         <form style={{ display: 'none' }} onSubmit={this.uploadProfilePic.bind(this)}>
                           <input id="dp" name="dp" type="file" ref="dp" onChange={(e) => this.uploadProfilePic(e)}/>
@@ -137,12 +134,12 @@ class ProfilePage extends Component {
                   <div className="uk-width-expand uk-align-center">
                     <div className="uk-width-1-1" data-uk-grid="true">
                       <div className="uk-width-auto">
-                        <h3 className="uk-card-title uk-margin-remove-bottom">{this.props.auth.user.first_name}Mohit Yadav Yadav Yadav</h3>
-                        {
-                          this.props.auth.userProfile.bio ? (
-                            <p className="uk-text-meta uk-margin-remove-top">{this.props.auth.userProfile.bio}dattebayo!</p>
-                          ): (<p className="uk-text-meta uk-margin-remove-top uk-margin-remove-bottom">dattebayo!</p>)
-                        }
+                        <h3 className="uk-card-title uk-margin-remove-bottom">
+                          {this.props.auth.user.first_name ? this.props.auth.user.first_name: "Name"}
+                          &nbsp;
+                          {this.props.auth.user.last_name ? this.props.auth.user.last_name: "Last"}
+                        </h3>
+                        <h5 className="uk-margin-remove-top">{this.props.auth.user.bio ? this.props.auth.user.bio: "dattebayo! ✌"}</h5>
                       </div>
                       <div className="uk-width-expand">
                         <button className="uk-icon-button uk-button-default uk-margin-small-bottom" data-uk-toggle="target: #ov-profile-modal" data-uk-icon="pencil" data-uk-tooltip="title: Edit profile; pos: right"></button>

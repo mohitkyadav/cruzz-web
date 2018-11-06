@@ -12,7 +12,7 @@ export const updateUserProfile = user => dispatch => {
     user
   ).then(res => {
       console.log(res.data);
-      // dispatch(setCurrentUser());
+      dispatch(setCurrentUser(res.data.user.username));
       dispatch(loaded());
   }).catch(err => {
     console.log(err.response);
