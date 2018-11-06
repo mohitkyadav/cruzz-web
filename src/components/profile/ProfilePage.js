@@ -10,7 +10,6 @@ import coverPhoto from '../../static/img/retro-hop.jpg';
 import PageSuggestions from "../common/PageSuggestions";
 import { updateUserProfile } from '../../actions/authActions';
 
-
 class ProfilePage extends Component {
 
   updateProfile(event) {
@@ -154,7 +153,6 @@ class ProfilePage extends Component {
                               <fieldset className="uk-fieldset">
 
                                 <legend className="uk-legend">Update  Profile</legend>
-
                                 <div className="uk-margin">
                                   <p>First Name <span className="uk-margin-small-right uk-align-right" data-uk-icon="info" data-uk-tooltip="pos: top; title: Full name if page"></span></p>
                                   <input className="uk-input" ref="new_first_name" defaultValue={this.props.auth.user.first_name ? this.props.auth.user.first_name: ""} type="text" placeholder="First Name"/>
@@ -175,11 +173,19 @@ class ProfilePage extends Component {
                                   <textarea className="uk-textarea" ref="new_bio" defaultValue={this.props.auth.user.bio ? this.props.auth.user.bio: ""} rows="5" placeholder="Bio"></textarea>
                                 </div>
 
-                                </fieldset>
-                                <p className="uk-text-right">
+                              </fieldset>
+
+                              <div className="uk-flex-inline uk-width-1-1">
+                                <p className="uk-text-right uk-align-left">
                                   <button className="uk-button uk-button-secondary uk-modal-close" type="button">Cancel</button>
                                   <button className="uk-button uk-button-primary" onSubmit={(e) => this.updateProfile(e)} type="submit">Update</button>
                                 </p>
+                                {
+                                  this.props.auth.loading ? (
+                                    <div className="uk-text-right uk-animation-scale-up" data-uk-spinner="ratio: 1.5"></div>
+                                  ) : (<span className="uk-margin-small-right uk-animation-scale-down uk-text-success" data-uk-icon="icon: check; ratio: 2" data-uk-tooltip="pos: top; title: all done 👌"></span>)
+                                }
+                              </div>
                             </form>
 
                           </div>
