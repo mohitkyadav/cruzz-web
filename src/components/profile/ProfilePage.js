@@ -9,6 +9,7 @@ import coverPhoto from '../../static/img/retro-hop.jpg';
 // import avtar from '../../static/img/avtar.jpg'
 import PageSuggestions from "../common/PageSuggestions";
 import { updateUserProfile } from '../../actions/authActions';
+import { loading, loaded } from './../../actions/authActions';
 
 class ProfilePage extends Component {
 
@@ -40,9 +41,11 @@ class ProfilePage extends Component {
     let uploadTask = fireStorage.ref(`covers/${image.name}`).put(image);
     uploadTask.on('state_changed',
       (snapshot) => {
+        this.props.loading();
         console.log("uploading");
       },
       (error) => {
+        this.props.loaded();
         console.log(error);
       },
       () => {
@@ -70,9 +73,11 @@ class ProfilePage extends Component {
     uploadTask.on('state_changed',
       (snapshot) => {
         console.log("uploading");
+        this.props.loading();
       },
       (error) => {
         console.log(error);
+        this.props.loaded();
       },
       () => {
         fireStorage.ref('dp').child(image.name).getDownloadURL().then(
@@ -92,14 +97,10 @@ class ProfilePage extends Component {
   }
 
   updateProfilePic() {
-    // this.props.dispatch(action());
-    // this.refs.dp.click();
     document.getElementById("dp").click();
   }
 
   updateCoverPic() {
-    // this.props.dispatch(action());
-    // this.refs.dp.click();
     document.getElementById("cover").click();
   }
 
@@ -126,7 +127,12 @@ class ProfilePage extends Component {
                         <form style={{ display: 'none' }} onSubmit={this.uploadProfilePic.bind(this)}>
                           <input id="dp" name="dp" type="file" ref="dp" onChange={(e) => this.uploadProfilePic(e)}/>
                         </form>
-                        <span className="uk-transition-slide-bottom-small ov-curser-pointer" onClick={(e) => this.updateProfilePic(e)} uk-icon="icon: cloud-upload; ratio: 3"></span>
+                        {
+                          !this.props.auth.loading ?
+                          (
+                            <span className="uk-transition-slide-bottom-small ov-curser-pointer" onClick={(e) => this.updateProfilePic(e)} uk-icon="icon: cloud-upload; ratio: 3"></span>
+                          ): <div className="uk-text-right uk-animation-scale-up" data-uk-spinner="ratio: 1.5"></div>
+                        }
                       </div>
                     </div>
                   </div>
@@ -152,22 +158,22 @@ class ProfilePage extends Component {
                                 <legend className="uk-legend">Update  Profile</legend>
                                 <div className="uk-margin">
                                   <p>First Name <span className="uk-margin-small-right uk-align-right" data-uk-icon="info" data-uk-tooltip="pos: top; title: Full name if page"></span></p>
-                                  <input className="uk-input" ref="new_first_name" defaultValue={this.props.auth.user.first_name ? this.props.auth.user.first_name: ""} type="text" placeholder="First Name"/>
+                                  <input className="uk-input" ref="new_first_name" placeholder={this.props.auth.user.first_name ? this.props.auth.user.first_name: "First Name"} type="text"/>
                                 </div>
 
                                 <div className="uk-margin">
                                   <p>Last Name <span className="uk-margin-small-right uk-align-right" data-uk-icon="info" data-uk-tooltip="pos: top; title: Leave blank if page"></span></p>
-                                  <input className="uk-input" ref="new_last_name" defaultValue={this.props.auth.user.last_name ? this.props.auth.user.last_name: ""} type="text" placeholder="Last Name"/>
+                                  <input className="uk-input" ref="new_last_name" placeholder={this.props.auth.user.last_name ? this.props.auth.user.last_name: "Last Name"} type="text"/>
                                 </div>
 
                                 <div className="uk-margin">
                                   <p>E-mail <span className="uk-margin-small-right uk-align-right" data-uk-icon="info" data-uk-tooltip="pos: top; title: Email"></span></p>
-                                  <input className="uk-input" ref="new_email" defaultValue={this.props.auth.user.email ? this.props.auth.user.email: ""} type="email" placeholder="E-mail"/>
+                                  <input className="uk-input" ref="new_email" placeholder={this.props.auth.user.email ? this.props.auth.user.email: ""} type="E-mail"/>
                                 </div>
 
                                 <div className="uk-margin">
                                   <p>Bio</p>
-                                  <textarea className="uk-textarea" ref="new_bio" defaultValue={this.props.auth.user.bio ? this.props.auth.user.bio: ""} rows="5" placeholder="Bio"></textarea>
+                                  <textarea className="uk-textarea" ref="new_bio" placeholder={this.props.auth.user.bio ? this.props.auth.user.bio: "Bio"} rows="5"></textarea>
                                 </div>
 
                               </fieldset>
@@ -237,4 +243,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { updateUserProfile })(withRouter(ProfilePage));
+export default connect(mapStateToProps, { updateUserProfile, loading, loaded })(withRouter(ProfilePage));
