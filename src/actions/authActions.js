@@ -20,7 +20,6 @@ export const updateUserProfile = user => dispatch => {
   });
 }
 
-
 export const signUp = user => dispatch => {
   dispatch(loading());
   axios.post(
