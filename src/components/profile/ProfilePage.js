@@ -11,7 +11,48 @@ import PageSuggestions from "../common/PageSuggestions";
 import { updateUserProfile } from '../../actions/authActions';
 import { loading, loaded } from './../../actions/authActions';
 
+import axios from 'axios';
+import PostFeed from "../feed/PostFeed";
+
 class ProfilePage extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = ({
+      suggestedPages: {},
+      posts: {}
+    });
+    this.fetchPosts = this.fetchPosts.bind(this);
+    this.fetchFollowers = this.fetchFollowers.bind(this);
+    this.fetchFollowing = this.fetchFollowing.bind(this);
+  }
+
+  componentDidMount() {
+    this.fetchPosts();
+    this.fetchFollowers();
+    this.fetchFollowing();
+  }
+
+  fetchPosts() {
+    console.log("fetching posts");
+    axios.get('https://cruzz.herokuapp.com/api/post/view/?limit=2&offset=2/')
+    .then(res => {
+      this.setState({
+        posts: res.data.posts
+      });
+      console.log(this.state.posts);
+    }).catch(err => {
+      console.log(err.response);
+    });
+  }
+
+  fetchFollowers() {
+    console.log("fetching followers");
+  }
+
+  fetchFollowing() {
+    console.log("fetching following");
+  }
 
   updateProfile(event) {
     let user = {};
@@ -131,7 +172,7 @@ class ProfilePage extends Component {
                           !this.props.auth.loading ?
                           (
                             <span className="uk-transition-slide-bottom-small ov-curser-pointer" onClick={(e) => this.updateProfilePic(e)} uk-icon="icon: cloud-upload; ratio: 3"></span>
-                          ): <div className="uk-text-right uk-animation-scale-up" data-uk-spinner="ratio: 1.5"></div>
+                          ): <div className="uk-text-right uk-animation-scale-up" data-uk-spinner="ratio: 2.5"></div>
                         }
                       </div>
                     </div>
@@ -209,69 +250,80 @@ class ProfilePage extends Component {
             </div>
           </div>
 
-          <div className="uk-text-center" data-uk-grid="true">
+           <div className="uk-width-auto uk-align-center">
+              <div className="uk-card uk-card-default uk-card-body">
+                <h4>
+                  Create a new post
+                  <Link className="uk-margin-small-left" to="/new/post" data-uk-icon="icon: plus-circle; ratio: 2"></Link>
+                </h4>
+              </div>
+            </div>
+          <div className="uk-text-center uk-grid-match" data-uk-grid="true">
             <div className="uk-width-expand@m">
               <div className="uk-card uk-card-default uk-padding-remove uk-card-body">
-
-                  <ul className="uk-flex-center uk-subnav uk-subnav-pill" data-uk-switcher="animation: uk-animation-slide-top-small, uk-animation-slide-top-small; duration: 200;">
-                    <li className="uk-active"><Link to="#">Following</Link></li>
-                    <li><Link to="#">Followers</Link></li>
-                  </ul>
-                  <ul className="uk-switcher uk-margin">
-                    <div>
-                      <li className="uk-padding-small uk-box-shadow-hover-small">
-                        <Link to={"/user/admin2"}>
-                          <div className="uk-grid-small uk-flex-inline uk-width-1-1 uk-margin-remove-top" uk-grid="true">
-                            <div className="uk-width-1-5">
-                              <img className="uk-border-circle" width="40" height="40" alt="me" src="https://avatars0.githubusercontent.com/u/25580776?s=400&u=9369191f891fcda2a8269e44421ea2357aa0f33d&v=4"/>
-                            </div>
-                            <div className="uk-width-4-5 uk-text-left">
-                              <h6 className="uk-margin-remove-bottom">Encore</h6>
-                              <p className="uk-text-meta uk-margin-remove-top">Music Club</p>
-                            </div>
+                <ul className="uk-flex-center uk-subnav uk-subnav-pill" data-uk-switcher="animation: uk-animation-slide-top-small, uk-animation-slide-top-small; duration: 200;">
+                  <li className="uk-active"><Link to="#">Following</Link></li>
+                  <li><Link to="#">Followers</Link></li>
+                </ul>
+                <ul className="uk-switcher uk-margin">
+                  <div>
+                    <li className="uk-padding-small">
+                      <Link to={"/user/admin2"}>
+                        <div className="uk-grid-small uk-flex-inline uk-width-1-1 uk-margin-remove-top" uk-grid="true">
+                          <div className="uk-width-1-5">
+                            <img className="uk-border-circle" width="40" height="40" alt="me" src="https://avatars0.githubusercontent.com/u/25580776?s=400&u=9369191f891fcda2a8269e44421ea2357aa0f33d&v=4"/>
                           </div>
-                        </Link>
-                      </li>
-                      <li className="uk-padding-small uk-box-shadow-hover-small">
-                        <Link to="#">
-                          <div className="uk-grid-small uk-flex-inline uk-width-1-1 uk-margin-remove-top" uk-grid="true">
-                            <div className="uk-width-1-5">
-                              <img className="uk-border-circle" width="40" height="40" alt="me" src="https://avatars0.githubusercontent.com/u/25580776?s=400&u=9369191f891fcda2a8269e44421ea2357aa0f33d&v=4"/>
-                            </div>
-                            <div className="uk-width-4-5 uk-text-left">
-                              <h6 className="uk-margin-remove-bottom">Encore</h6>
-                              <p className="uk-text-meta uk-margin-remove-top">Music Club</p>
-                            </div>
+                          <div className="uk-width-4-5 uk-text-left">
+                            <h6 className="uk-margin-remove-bottom">Encore</h6>
+                            <p className="uk-text-meta uk-margin-remove-top">Music Club</p>
                           </div>
-                        </Link>
-                      </li>
-                      <hr/>
-                      <Link className="uk-button uk-margin-bottom-small" to={"/user/" + this.props.auth.user.username + "/followers"}>Show all following</Link>
-                    </div>
-                    <div>
-                      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    </div>
-                  </ul>
+                        </div>
+                      </Link>
+                    </li>
+                    <li className="uk-padding-small">
+                      <Link to="#">
+                        <div className="uk-grid-small uk-flex-inline uk-width-1-1 uk-margin-remove-top" uk-grid="true">
+                          <div className="uk-width-1-5">
+                            <img className="uk-border-circle" width="40" height="40" alt="me" src="https://avatars0.githubusercontent.com/u/25580776?s=400&u=9369191f891fcda2a8269e44421ea2357aa0f33d&v=4"/>
+                          </div>
+                          <div className="uk-width-4-5 uk-text-left">
+                            <h6 className="uk-margin-remove-bottom">Encore</h6>
+                            <p className="uk-text-meta uk-margin-remove-top">Music Club</p>
+                          </div>
+                        </div>
+                      </Link>
+                    </li>
+                    <hr/>
+                    <Link className="uk-button uk-margin-bottom-small" to={"/user/" + this.props.auth.user.username + "/followers"}>Show all following</Link>
+                  </div>
+                  <div>
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  </div>
+                </ul>
               </div>
-
             </div>
-            <div className="uk-width-1-3@m">
+            <div className="uk-width-expand@m">
               <PageSuggestions/>
             </div>
           </div>
 
-          <div className="uk-text-center" data-uk-grid="true">
-            <div className="uk-width-expand@m">
-              <div className="uk-card uk-card-default uk-card-body">Expand</div>
-            </div>
-            <div className="uk-width-1-3@m">
-              <div className="uk-card uk-card-default uk-card-body">1-3</div>
-            </div>
-          </div>
-
-          <div className="uk-text-center" data-uk-grid="true">
-            <div className="uk-width-2-3@m uk-align-center">
-              <div className="uk-card uk-card-default uk-card-body">2-3</div>
+          <div data-uk-grid="true">
+            <div className="uk-width-4-5@m uk-align-center">
+            {
+              this.state.posts.length > 0 ? (
+                <div>
+                  {this.state.posts.map((post, key) => {
+                    return (
+                      <div key={key}>
+                        <PostFeed post={post}/>
+                      </div>
+                    )
+                  })}
+                </div>
+              ):(
+                <div>Nothing here </div>
+              )
+            }
             </div>
           </div>
 

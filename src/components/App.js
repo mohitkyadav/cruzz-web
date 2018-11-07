@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom';
 
 import '../static/css/style.css';
 import logo from '../static/img/index.svg';
-import PostFeed from './feed/PostFeed';
 
 
 class App extends Component {
@@ -22,9 +21,6 @@ class App extends Component {
       <div className="App">
         <div className="uk-align-center uk-height-1-1 uk-width-1-1">
           {spinner}
-
-          <PostFeed/>
-
         </div>
       </div>
     );
