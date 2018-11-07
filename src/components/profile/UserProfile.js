@@ -3,7 +3,6 @@ import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import axios from 'axios';
 
-
 // import fireStorage from "../../firebase";
 
 import coverPhoto from '../../static/img/retro-hop.jpg';
@@ -19,7 +18,8 @@ class UserProfile extends Component {
     this.state = ({
       username: null,
       profile: {}
-    })
+    });
+    this.handleFollow = this.handleFollow.bind(this);
   }
 
   componentDidMount() {
@@ -41,6 +41,35 @@ class UserProfile extends Component {
     console.log(username);
   }
 
+  handleFollow() {
+    this.props.loading();
+    if(this.state.profile.following) {
+      axios.delete('https://cruzz.herokuapp.com/api/profile/' + this.state.username + '/follow')
+      .then(res => {
+        console.log(res.data);
+        this.setState({
+          profile: res.data.profile
+        });
+        this.props.loaded();
+      }).catch(err => {
+        console.log(err.response);
+        this.props.loaded();
+      });
+    } else {
+      axios.post('https://cruzz.herokuapp.com/api/profile/' + this.state.username + '/follow')
+      .then(res => {
+        console.log(res.data);
+        this.setState({
+          profile: res.data.profile
+        });
+        this.props.loaded();
+      }).catch(err => {
+        console.log(err.response);
+        this.props.loaded();
+      });
+    }
+    this.props.loaded();
+  }
   render() {
 
     return (
@@ -59,11 +88,8 @@ class UserProfile extends Component {
 
                   <div className="uk-width-auto">
                     <div className="uk-inline-clip uk-transition-toggle" tabIndex="0">
-                      <img className="uk-transition-scale-down ov-curser-pointer uk-transition-opaque" width="150px" src={this.state.profile.image} alt="" data-uk-tooltip="title: Upload new Profile Picture; pos: bottom-center"/>
+                      <img className="uk-transition-scale-down ov-curser-pointer uk-transition-opaque" width="150px" src={this.state.profile.image} alt=""/>
                       <div className="uk-position-center">
-                        <form style={{ display: 'none' }}>
-                          <input id="dp" name="dp" type="file" ref="dp"/>
-                        </form>
                         {
                           !this.props.auth.loading ?
                           (
@@ -84,7 +110,12 @@ class UserProfile extends Component {
                         </h3>
                         <h5 className="uk-margin-remove-top">{this.state.profile.bio ? this.state.profile.bio: "dattebayo! ✌"}</h5>
                       </div>
-                      <div className="uk-width-expand">
+                      <div className="uk-width-expand uk-align-right">
+                        {
+                          this.state.profile.following ?
+                          (<button onClick={this.handleFollow} className="uk-button uk-button-danger">Unfollow</button>):
+                          (<button onClick={this.handleFollow} className="uk-button uk-button-default">Follow</button>)
+                        }
 
                       </div>
                     </div>
