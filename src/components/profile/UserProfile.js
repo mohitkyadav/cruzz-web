@@ -70,6 +70,7 @@ class UserProfile extends Component {
     }
     this.props.loaded();
   }
+
   render() {
 
     return (
