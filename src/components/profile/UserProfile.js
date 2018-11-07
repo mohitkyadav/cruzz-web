@@ -84,7 +84,7 @@ class UserProfile extends Component {
               })`}}>
 
               <div className="uk-overlay uk-overlay-primary uk-position-bottom uk-padding-remove">
-                <div className="uk-grid-small uk-flex-inline" uk-grid="true">
+                <div className="uk-width-1-1 uk-flex-inline" uk-grid="true">
 
                   <div className="uk-width-auto">
                     <div className="uk-inline-clip uk-transition-toggle" tabIndex="0">
@@ -100,9 +100,9 @@ class UserProfile extends Component {
                     </div>
                   </div>
 
-                  <div className="uk-width-expand uk-align-center">
-                    <div className="uk-width-1-1" data-uk-grid="true">
-                      <div className="uk-width-auto">
+                  <div className="uk-width-expand uk-padding-remove-top">
+                    <div className="uk-width-1-1" >
+                      <div className="uk-width-auto uk-margin-small-top">
                         <h3 className="uk-card-title uk-margin-remove-bottom">
                           {this.state.profile.first_name ? this.state.profile.first_name: "Name"}
                           &nbsp;
@@ -110,11 +110,11 @@ class UserProfile extends Component {
                         </h3>
                         <h5 className="uk-margin-remove-top">{this.state.profile.bio ? this.state.profile.bio: "dattebayo! ✌"}</h5>
                       </div>
-                      <div className="uk-width-expand uk-align-right">
+                      <div className="uk-width-auto uk-margin-small-top">
                         {
                           this.state.profile.following ?
-                          (<button onClick={this.handleFollow} className="uk-button uk-button-danger">Unfollow</button>):
-                          (<button onClick={this.handleFollow} className="uk-button uk-button-default">Follow</button>)
+                          (<button onClick={this.handleFollow} className="uk-button uk-button-small uk-button-default">Following</button>):
+                          (<button onClick={this.handleFollow} className="uk-button uk-button-small uk-button-default">Follow</button>)
                         }
 
                       </div>
