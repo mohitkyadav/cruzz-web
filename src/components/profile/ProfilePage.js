@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 import fireStorage from "../../firebase";
@@ -211,7 +211,49 @@ class ProfilePage extends Component {
 
           <div className="uk-text-center" data-uk-grid="true">
             <div className="uk-width-expand@m">
-              <div className="uk-card uk-card-default uk-card-body">Expand</div>
+              <div className="uk-card uk-card-default uk-padding-remove uk-card-body">
+
+                  <ul className="uk-flex-center uk-subnav uk-subnav-pill" data-uk-switcher="animation: uk-animation-slide-top-small, uk-animation-slide-top-small; duration: 200;">
+                    <li className="uk-active"><Link to="#">Following</Link></li>
+                    <li><Link to="#">Followers</Link></li>
+                  </ul>
+                  <ul className="uk-switcher uk-margin">
+                    <div>
+                      <li className="uk-padding-small uk-box-shadow-hover-small">
+                        <Link to="#">
+                          <div className="uk-grid-small uk-flex-inline uk-width-1-1 uk-margin-remove-top" uk-grid="true">
+                            <div className="uk-width-1-5">
+                              <img className="uk-border-circle" width="40" height="40" alt="me" src="https://avatars0.githubusercontent.com/u/25580776?s=400&u=9369191f891fcda2a8269e44421ea2357aa0f33d&v=4"/>
+                            </div>
+                            <div className="uk-width-4-5 uk-text-left">
+                              <h6 className="uk-margin-remove-bottom">Encore</h6>
+                              <p className="uk-text-meta uk-margin-remove-top">Music Club</p>
+                            </div>
+                          </div>
+                        </Link>
+                      </li>
+                      <li className="uk-padding-small uk-box-shadow-hover-small">
+                        <Link to="#">
+                          <div className="uk-grid-small uk-flex-inline uk-width-1-1 uk-margin-remove-top" uk-grid="true">
+                            <div className="uk-width-1-5">
+                              <img className="uk-border-circle" width="40" height="40" alt="me" src="https://avatars0.githubusercontent.com/u/25580776?s=400&u=9369191f891fcda2a8269e44421ea2357aa0f33d&v=4"/>
+                            </div>
+                            <div className="uk-width-4-5 uk-text-left">
+                              <h6 className="uk-margin-remove-bottom">Encore</h6>
+                              <p className="uk-text-meta uk-margin-remove-top">Music Club</p>
+                            </div>
+                          </div>
+                        </Link>
+                      </li>
+                      <hr/>
+                      <Link className="uk-button uk-margin-bottom-small" to="#">Show all following</Link>
+                    </div>
+                    <div>
+                      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </div>
+                  </ul>
+              </div>
+
             </div>
             <div className="uk-width-1-3@m">
               <PageSuggestions/>
