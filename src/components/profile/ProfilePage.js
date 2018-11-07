@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import fireStorage from "../../firebase";
 
 import coverPhoto from '../../static/img/retro-hop.jpg';
-// import spinner from '../../static/img/index.svg';
+import spinner from '../../static/img/index.svg';
 // import avtar from '../../static/img/avtar.jpg'
 import PageSuggestions from "../common/PageSuggestions";
 import { updateUserProfile } from '../../actions/authActions';
@@ -35,12 +35,11 @@ class ProfilePage extends Component {
 
   fetchPosts() {
     console.log("fetching posts");
-    axios.get('https://cruzz.herokuapp.com/api/post/view/?limit=2&offset=2/')
+    axios.get('https://cruzz.herokuapp.com/api/post/view/?limit=10&offset=10/')
     .then(res => {
       this.setState({
         posts: res.data.posts
       });
-      console.log(this.state.posts);
     }).catch(err => {
       console.log(err.response);
     });
@@ -321,7 +320,11 @@ class ProfilePage extends Component {
                   })}
                 </div>
               ):(
-                <div>Nothing here </div>
+                <div>
+                  <div>
+                    <img alt="loading" className="uk-align-center" src={spinner}></img>
+                  </div>
+                </div>
               )
             }
             </div>

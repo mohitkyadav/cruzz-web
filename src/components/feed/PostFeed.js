@@ -53,17 +53,9 @@ class PostFeed extends Component {
   }
 
   handleDateTime (date) {
-    const year = String(date).split('-')[0];
-    const month = String(date).split('-')[1];
-    const day = String(String(date).split('-')[2]).split('T')[0];
-    const time = String(date).split('T')[1];
-    const hour = String(time).split(':')[0];
-    const minutes = String(time).split(':')[1];
-    console.log(year);
-    console.log(month);
-    console.log(day);
-    console.log(hour);
-    console.log(minutes);
+    const dateLocal = new Date(date);
+    const timeLocal = dateLocal.toLocaleTimeString();
+    return (String(dateLocal.toDateString()) + " " + timeLocal);
   }
 
   render () {
@@ -78,23 +70,27 @@ class PostFeed extends Component {
                 <img className="uk-border-circle" width="40" height="40" alt="" src={this.state.post.author.image}/>
               </div>
               <div className="uk-width-expand">
-                <h5 className="uk-margin-remove-bottom">{this.state.post.title}</h5>
-                  <p className="uk-margin-remove-top">
-                    <Link className="uk-link-heading" to={
-                      this.state.post.author.username !== this.props.auth.user.username ? ("/user/" + this.state.post.author.username)
-                      : "/profile"
-                    }>{this.state.post.author.username}</Link>
-                    &nbsp;
-                    posted on
-                    &nbsp;
-                    <time className="uk-text-meta" dateTime={this.state.post.createdAt}>{this.handleDateTime(this.state.post.createdAt)}{this.state.post.createdAt}</time>
-                  </p>
+                <h5 className="uk-margin-remove-bottom">
+                  <Link className="uk-link-heading" to={"/view/post/" + this.state.post.slug}>
+                    {this.state.post.title}
+                  </Link>
+                </h5>
+                <p className="uk-margin-remove-top">
+                  <Link className="uk-link-heading" to={
+                    this.state.post.author.username !== this.props.auth.user.username ? ("/user/" + this.state.post.author.username)
+                    : "/profile"
+                  }>{this.state.post.author.username}</Link>
+                  &nbsp;
+                  posted on
+                  &nbsp;
+                  <time className="uk-text-meta" dateTime={this.state.post.createdAt}>{this.handleDateTime(this.state.post.createdAt)}</time>
+                </p>
               </div>
             </div>
           </div>
 
           <div className="uk-card-body">
-            <p>{this.state.post.description}</p>
+            <p>{this.state.post.body}</p>
           </div>
 
           <div className="uk-card-footer">

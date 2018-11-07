@@ -21,6 +21,7 @@ import PostFeed from './components/feed/PostFeed';
 import UserProfile from './components/profile/UserProfile';
 import Followers from './components/common/Followers';
 import PostOperations from './components/common/PostOperations';
+import PostDetails from './components/feed/PostDetails';
 
 if (localStorage.jwtToken) {
 	// Set auth token header auth
@@ -44,6 +45,7 @@ ReactDOM.render(
           <PrivateRoute exact path="/user/:username/:follow" component={Followers}></PrivateRoute>
           <PrivateRoute exact path="/feed" component={PostFeed}></PrivateRoute>
           <PrivateRoute exact path="/new/post" component={PostOperations}></PrivateRoute>
+          <PrivateRoute exact path="/view/post/:slug" component={PostDetails}></PrivateRoute>
         </Switch>
       </div>
     </BrowserRouter>

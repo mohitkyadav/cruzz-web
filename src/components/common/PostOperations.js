@@ -10,7 +10,9 @@ class PostOperations extends Component {
     super(props);
     this.state = ({
       slug: null,
-      post: {}
+      post: {
+        author: {}
+      }
     });
     this.handlePost = this.handlePost.bind(this);
   }
@@ -20,13 +22,15 @@ class PostOperations extends Component {
     const postData = {
       post: {
         title: this.refs.postTitle.value,
-        description: this.refs.postDes.value,
         body: this.refs.postBody.value
       }
     };
     axios.post('https://cruzz.herokuapp.com/api/post/create/', postData)
     .then(res => {
-      console.log(res.data);
+      this.setState({
+        post: res.data.post
+      });
+      this.props.history.push('/view/post/' + res.data.post.slug);
       this.props.loaded();
     }).catch(err => {
       console.log(err.response);
@@ -49,10 +53,6 @@ class PostOperations extends Component {
 
                 <div className="uk-margin">
                   <input className="uk-input" ref="postTitle" type="text" placeholder="Title"/>
-                </div>
-
-                <div className="uk-margin">
-                  <input className="uk-input" ref="postDes" rows="5" placeholder="Summary"></input>
                 </div>
 
                 <div className="uk-margin">
