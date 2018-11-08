@@ -3,7 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 
 class PostFeed extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     // Don't call this.setState() here!
     this.state = {
@@ -22,48 +22,48 @@ class PostFeed extends Component {
     this.handleDateTime = this.handleDateTime.bind(this);
   }
 
-  dangerous (html) {
+  dangerous(html) {
     return {
       __html: html
     }
   }
-  upVote (e) {
+  upVote(e) {
     // console.log(e);
     let upvotes = this.state.upvotes;
     this.setState({ upvotes: upvotes + 1});
   }
 
-  downVote (e) {
+  downVote(e) {
     // console.log(e);
     let downvotes = this.state.downvotes;
     this.setState({ downvotes: downvotes + 1});
   }
 
-  comment (e) {
+  comment(e) {
     // console.log(e);
     let comments = this.state.comments;
     this.setState({ comments: comments + 1});
   }
 
-  share (e) {
+  share(e) {
     // console.log(e);
     let shares = this.state.shares;
     this.setState({ shares: shares + 1});
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.setState({
       post: this.props.post
     });
   }
 
-  handleDateTime (date) {
+  handleDateTime(date) {
     const dateLocal = new Date(date);
     const timeLocal = dateLocal.toLocaleTimeString();
     return (String(dateLocal.toDateString()) + " " + timeLocal);
   }
 
-  render () {
+  render() {
     return (
       <div className="uk-container uk-padding-small uk-width-1-1" data-uk-scrollspy="cls: uk-animation-slide-bottom-medium; target: > div; delay: 40;">
 

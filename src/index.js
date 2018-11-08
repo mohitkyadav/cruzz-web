@@ -21,6 +21,7 @@ import UserProfile from './components/profile/UserProfile';
 import Followers from './components/common/Followers';
 import PostOperations from './components/common/PostOperations';
 import PostDetails from './components/feed/PostDetails';
+import PageSuggestions from './components/common/PageSuggestions';
 
 if (localStorage.jwtToken) {
 	// Set auth token header auth
@@ -39,6 +40,7 @@ ReactDOM.render(
           <Route exact path="/" component={App}></Route>
           <Route exact path="/login" component={SignIn}></Route>
           <Route exact path="/signup" component={SignUp}></Route>
+          <PrivateRoute exact path="/discover/pages" component={PageSuggestions}></PrivateRoute>
           <PrivateRoute exact path="/profile/:username" component={ProfilePage}></PrivateRoute>
           <PrivateRoute exact path="/user/:username" component={UserProfile}></PrivateRoute>
           <PrivateRoute exact path="/user/:username/:follow" component={Followers}></PrivateRoute>

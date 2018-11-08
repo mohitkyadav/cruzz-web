@@ -6,7 +6,6 @@ import fireStorage from "../../firebase";
 
 import coverPhoto from '../../static/img/retro-hop.jpg';
 import spinner from '../../static/img/index.svg';
-// import avtar from '../../static/img/avtar.jpg'
 import PageSuggestions from "../common/PageSuggestions";
 import { updateUserProfile } from '../../actions/authActions';
 import { loading, loaded } from './../../actions/authActions';
@@ -370,7 +369,7 @@ class ProfilePage extends Component {
               </div>
             </div>
             <div className="uk-width-expand@m">
-              <PageSuggestions/>
+              <PageSuggestions full={false}/>
             </div>
           </div>
 

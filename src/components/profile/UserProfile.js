@@ -277,7 +277,7 @@ class UserProfile extends Component {
               </div>
             </div>
             <div className="uk-width-1-3@m">
-              <PageSuggestions/>
+              <PageSuggestions full={false}/>
             </div>
           </div>
 
