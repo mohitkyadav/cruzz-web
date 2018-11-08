@@ -55,7 +55,7 @@ class Followers extends Component {
                           return (
                             <div key={key}>
                               <li className="uk-padding-small">
-                                <Link to={"/user/" + f.username}>
+                                <Link className="uk-link-heading" to={"/user/" + f.username}>
                                   <div className="uk-grid-small uk-flex-inline uk-width-1-1 uk-margin-remove-top" uk-grid="true">
                                     <div className="uk-width-1-5">
                                       <img className="uk-border-circle" width="50" height="50" alt="me" src={f.image}/>
