@@ -39,7 +39,7 @@ ReactDOM.render(
           <Route exact path="/" component={App}></Route>
           <Route exact path="/login" component={SignIn}></Route>
           <Route exact path="/signup" component={SignUp}></Route>
-          <PrivateRoute exact path="/profile" component={ProfilePage}></PrivateRoute>
+          <PrivateRoute exact path="/profile/:username" component={ProfilePage}></PrivateRoute>
           <PrivateRoute exact path="/user/:username" component={UserProfile}></PrivateRoute>
           <PrivateRoute exact path="/user/:username/:follow" component={Followers}></PrivateRoute>
           <PrivateRoute exact path="/view/post/:slug" component={PostDetails}></PrivateRoute>

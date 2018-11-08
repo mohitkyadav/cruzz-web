@@ -28,14 +28,13 @@ class ProfilePage extends Component {
   }
 
   componentDidMount() {
-    this.fetchPosts();
+    this.fetchPosts(this.props.match.params.username);
     this.fetchFollowers();
     this.fetchFollowing();
   }
 
-  fetchPosts() {
-    console.log("fetching posts");
-    axios.get('https://cruzz.herokuapp.com/api/post/view/?limit=10&offset=10/')
+  fetchPosts(username) {
+    axios.get('https://cruzz.herokuapp.com/api/post/view/?author=' + username + '&limit=10&offset=10/')
     .then(res => {
       this.setState({
         posts: res.data.posts
