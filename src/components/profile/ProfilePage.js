@@ -39,9 +39,8 @@ class ProfilePage extends Component {
     const URI =  'https://cruzz.herokuapp.com/api/profile/following/?user=' + username + '&limit=100&offset=0';
     axios.get(URI).then(res => {
       this.setState({
-        following: res.data.profiles
+        following: res.data.profiles.slice(0, 2)
       })
-      console.log(res.data);
     }).catch(err => {
       console.log(err.response);
     });
@@ -52,9 +51,8 @@ class ProfilePage extends Component {
     console.log(URI);
     axios.get(URI).then(res => {
       this.setState({
-        followers: res.data.profiles
+        followers: res.data.profiles.slice(0, 2)
       })
-      console.log(res.data);
     }).catch(err => {
       console.log(err.response);
     });
@@ -70,7 +68,6 @@ class ProfilePage extends Component {
       console.log(err.response);
     });
   }
-
 
   updateProfile(event) {
     let user = {};
@@ -337,7 +334,7 @@ class ProfilePage extends Component {
                                   <Link to={"/user/" + f.username}>
                                     <div className="uk-grid-small uk-flex-inline uk-width-1-1 uk-margin-remove-top" uk-grid="true">
                                       <div className="uk-width-1-5">
-                                        <img className="uk-border-circle" width="40" height="40" alt="me" src={f.image}/>
+                                        <img className="uk-border-circle" width="50" height="50" alt="me" src={f.image}/>
                                       </div>
                                       <div className="uk-width-4-5 uk-text-left">
                                         <h6 className="uk-margin-remove-bottom">{f.first_name}</h6>
