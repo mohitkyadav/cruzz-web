@@ -17,7 +17,6 @@ import registerServiceWorker from './registerServiceWorker';
 
 import { setCurrentUser, authenticated } from './actions/authActions';
 import setAuthToken from './utils/setAuthToken';
-import PostFeed from './components/feed/PostFeed';
 import UserProfile from './components/profile/UserProfile';
 import Followers from './components/common/Followers';
 import PostOperations from './components/common/PostOperations';
@@ -43,9 +42,9 @@ ReactDOM.render(
           <PrivateRoute exact path="/profile" component={ProfilePage}></PrivateRoute>
           <PrivateRoute exact path="/user/:username" component={UserProfile}></PrivateRoute>
           <PrivateRoute exact path="/user/:username/:follow" component={Followers}></PrivateRoute>
-          <PrivateRoute exact path="/feed" component={PostFeed}></PrivateRoute>
-          <PrivateRoute exact path="/new/post" component={PostOperations}></PrivateRoute>
           <PrivateRoute exact path="/view/post/:slug" component={PostDetails}></PrivateRoute>
+          <PrivateRoute exact path="/:operation/post/" component={PostOperations}></PrivateRoute>
+          <PrivateRoute exact path="/:operation/post/:slug" component={PostOperations}></PrivateRoute>
         </Switch>
       </div>
     </BrowserRouter>

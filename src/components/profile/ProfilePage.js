@@ -314,7 +314,7 @@ class ProfilePage extends Component {
                   {this.state.posts.map((post, key) => {
                     return (
                       <div key={key}>
-                        <PostFeed post={post}/>
+                        <PostFeed post={post} full={false}/>
                       </div>
                     )
                   })}

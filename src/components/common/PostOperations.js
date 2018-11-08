@@ -6,30 +6,74 @@ import { loading, loaded } from './../../actions/authActions';
 import axios from 'axios';
 
 class PostOperations extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.state = ({
+      operation: "new",
       slug: null,
       post: {
         author: {}
-      }
+      },
+      postBody: "Post Body"
     });
+    this.handleChange = this.handleChange.bind(this);
     this.handlePost = this.handlePost.bind(this);
+    this.getPostData = this.getPostData.bind(this);
   }
 
-  handlePost(event) {
+  componentDidMount () {
+    this.setState({
+      operation: this.props.match.params.operation,
+      slug: this.props.match.params.slug
+    });
+    if(this.props.match.params.operation === 'edit') {
+      this.getPostData();
+    }
+  }
+
+  handleChange (event) {
+    this.setState({postBody: event.target.value});
+  }
+
+  getPostData () {
     this.props.loading();
+    axios.get('https://cruzz.herokuapp.com/api/post/view/' + this.props.match.params.slug)
+    .then(res => {
+      this.setState({
+        post: res.data.post,
+        postBody: res.data.post.body
+      });
+      console.log(res.data);
+      this.props.loaded();
+    }).catch(err => {
+      console.log(err.response);
+      this.props.loaded();
+    });
+    this.props.loaded();
+  }
+
+  handlePost (event) {
+    this.props.loading();
+    const createPostURI = 'https://cruzz.herokuapp.com/api/post/create/';
+    const editPostURI = 'https://cruzz.herokuapp.com/api/post/update/' + this.state.slug + '/';
+    let handlePostURI = '';
+    if(this.state.operation === 'new') {
+      handlePostURI = createPostURI;
+    } else {
+      handlePostURI = editPostURI;
+    }
     const postData = {
       post: {
         title: this.refs.postTitle.value,
         body: this.refs.postBody.value
       }
     };
-    axios.post('https://cruzz.herokuapp.com/api/post/create/', postData)
+    axios.post(handlePostURI, postData)
     .then(res => {
       this.setState({
         post: res.data.post
       });
+      console.log(res.data);
       this.props.history.push('/view/post/' + res.data.post.slug);
       this.props.loaded();
     }).catch(err => {
@@ -40,7 +84,7 @@ class PostOperations extends Component {
     event.preventDefault();
   }
 
-  render() {
+  render () {
     return (
       <div className="uk-container uk-align-center uk-margin-remove-bottom" data-uk-scrollspy="cls: uk-animation-slide-bottom-medium; target: > div; delay: 40;">
         <div className="uk-card uk-card-default uk-card-hover">
@@ -48,15 +92,36 @@ class PostOperations extends Component {
           <div className="uk-card-body">
             <form onSubmit={this.handlePost.bind(this)}>
               <fieldset className="uk-fieldset">
+                {
+                  this.state.operation === "new" ?
+                  (
+                    <legend className="uk-legend">New Post</legend>
+                  ): (
+                    <legend className="uk-legend">Edit Post</legend>
+                  )
+                }
 
-                <legend className="uk-legend">New Post</legend>
 
                 <div className="uk-margin">
-                  <input className="uk-input" ref="postTitle" type="text" placeholder="Title"/>
+                  {
+                    this.state.operation === "edit" ?
+                    (
+                      <input className="uk-input" ref="postTitle" type="text" defaultValue={this.state.post.title} placeholder="Title"/>
+                    ): (
+                      <input className="uk-input" ref="postTitle" type="text" placeholder="Title"/>
+                    )
+                  }
                 </div>
 
                 <div className="uk-margin">
-                  <textarea className="uk-textarea" ref="postBody" rows="5" placeholder="Post Body"></textarea>
+                  {
+                    this.state.operation === "edit" ?
+                    (
+                      <textarea className="uk-textarea" ref="postBody" rows="5" value={this.state.postBody} onChange={this.handleChange} placeholder="Post Body"></textarea>
+                    ): (
+                      <textarea className="uk-textarea" ref="postBody" rows="5" placeholder="Post Body"></textarea>
+                    )
+                  }
                 </div>
               </fieldset>
               <button className="uk-button uk-button-secondary">Post</button>

@@ -104,16 +104,29 @@ class PostFeed extends Component {
                 <span className="uk-badge uk-label-danger">{this.state.downvotes}</span>
               </div>
               <div className="uk-margin-small-left">
-                <Link to="#" className="uk-icon-button uk-button-default" onClick={this.comment} data-uk-icon="comments" data-uk-tooltip="title: comment; pos: bottom-center"></Link>
+                {
+                  this.props.full ?
+                  (
+                    <Link to="#" className="uk-icon-button uk-button-default" onClick={this.comment} data-uk-icon="comments" data-uk-tooltip="title: comments; pos: bottom-center"></Link>
+                  ): (
+                    <Link to={'/view/post/' + this.state.post.slug} className="uk-icon-button uk-button-default" onClick={this.comment} data-uk-icon="comments" data-uk-tooltip="title: comment; pos: bottom-center"></Link>
+                  )
+                }
                 <span className="uk-badge">{this.state.comments}</span>
               </div>
               <div className="uk-margin-small-left">
                 <Link to="#" className="uk-icon-button uk-button-default" onClick={this.share} data-uk-icon="forward" data-uk-tooltip="title: share; pos: bottom-center"></Link>
                 <span className="uk-badge">{this.state.shares}</span>
               </div>
-              <div className="uk-margin-small-left">
-                <Link to="#" className="uk-icon-button uk-button-default" data-uk-icon="expand" data-uk-tooltip="title: read full thread; pos: bottom-center"></Link>
-              </div>
+              {
+                this.props.auth.user.username === this.state.post.author.username ?
+                (
+                  <div className="uk-margin-small-left">
+                    <Link to={'/edit/post/' + this.state.post.slug} className="uk-icon-button uk-button-primary" data-uk-icon="file-edit" data-uk-tooltip="title: edit; pos: bottom-center"></Link>
+                  </div>
+                ):null
+              }
+
             </div>
           </div>
 
