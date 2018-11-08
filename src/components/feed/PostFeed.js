@@ -22,6 +22,11 @@ class PostFeed extends Component {
     this.handleDateTime = this.handleDateTime.bind(this);
   }
 
+  dangerous (html) {
+    return {
+      __html: html
+    }
+  }
   upVote (e) {
     // console.log(e);
     let upvotes = this.state.upvotes;
@@ -90,7 +95,7 @@ class PostFeed extends Component {
           </div>
 
           <div className="uk-card-body">
-            <p>{this.state.post.body}</p>
+            <div dangerouslySetInnerHTML={this.dangerous(this.state.post.body)}></div>
           </div>
 
           <div className="uk-card-footer">
