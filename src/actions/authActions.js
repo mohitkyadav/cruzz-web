@@ -20,7 +20,7 @@ export const updateUserProfile = user => dispatch => {
   });
 }
 
-export const signUp = user => dispatch => {
+export const signUp = (user, history) => dispatch => {
   dispatch(loading());
   axios.post(
     'https://cruzz.herokuapp.com/api/authentication/users/registration',
@@ -29,12 +29,14 @@ export const signUp = user => dispatch => {
       // Save / Set token to local storage
       console.log(res.data);
       const { token, username } = res.data.user;
-			localStorage.setItem('jwtToken', token);
+			localStorage.setItem('jwtToken', 'Token ' + token);
 			localStorage.setItem('username', username);
 			// Set auth header
-      setAuthToken(token);
+      setAuthToken('Token ' + token);
       axios.get(`https://cruzz.herokuapp.com/api/profile/retrieve/${username}/`).then(response => {
-          dispatch({ type: SET_CURRENT_USER, payload: response.data.profile })
+        console.log(response.data);
+        dispatch({ type: SET_CURRENT_USER, payload: response.data.user });
+        history.push('/');
       }).catch(err => {
         console.log(err.response);
         dispatch(loaded());

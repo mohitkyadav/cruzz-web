@@ -12,14 +12,14 @@ class SignUp extends Component {
     if (this.refs.password.value === this.refs.confirmPassword.value) {
       const user = {
         user: {
+          "first_name": this.refs.first_name.value,
+          "last_name": this.refs.last_name.value,
           "email": this.refs.email.value,
           "username": this.refs.username.value,
-          "password": this.refs.password.value,
-          "is_staff": "False",
-          "is_superuser": "False"
+          "password": this.refs.password.value
         }
       }
-      this.props.signUp(user);
+      this.props.signUp(user, this.props.history);
     }
   }
 
@@ -36,31 +36,45 @@ class SignUp extends Component {
                 <form className="uk-align-center" onSubmit={this.signUp.bind(this)}>
                   <div className="uk-margin">
                     <div className="uk-inline uk-width-1-1">
-                    <span className=" uk-form-icon" uk-icon="icon: mail"></span>
-                      <input className="uk-input" type="email" placeholder="Email" ref="email" />
+                      <span className=" uk-form-icon" uk-icon="icon: mail"></span>
+                      <input className="uk-input" type="email" placeholder="Email" ref="email" required={true}/>
                     </div>
                   </div>
-                <div className="uk-margin">
-                  <div className="uk-inline uk-width-1-1">
-                    <span className=" uk-form-icon" uk-icon="icon: user"></span>
-                      <input className="uk-input" type="text" placeholder="Username" ref="username" />
-                  </div>
+                  <div className="uk-margin">
+                    <div className="uk-inline uk-width-1-1">
+                      <span className=" uk-form-icon" uk-icon="icon: user"></span>
+                      <input className="uk-input" type="text" placeholder="Username" ref="username" required={true}/>
+                    </div>
 
-                <div className="uk-margin uk-margin-auto">
-                  <div className="uk-inline uk-width-1-1">
-                    <span className="uk-form-icon" uk-icon="icon: lock"></span>
-                      <input className="uk-input" type="password" placeholder="Password" ref="password" />
+                    <div className="uk-margin uk-margin-auto">
+                      <div className="uk-inline uk-width-1-1">
+                        <span className="uk-form-icon" uk-icon="icon: user"></span>
+                        <input className="uk-input" type="text" placeholder="First Name" ref="first_name" required={true}/>
+                      </div>
+                    </div>
+
+                    <div className="uk-margin uk-margin-auto">
+                      <div className="uk-inline uk-width-1-1">
+                        <span className="uk-form-icon" uk-icon="icon: user"></span>
+                        <input className="uk-input" type="text" placeholder="Last Name" ref="last_name" required={true}/>
+                      </div>
+                    </div>
+
+                    <div className="uk-margin uk-margin-auto">
+                      <div className="uk-inline uk-width-1-1">
+                        <span className="uk-form-icon" uk-icon="icon: lock"></span>
+                        <input className="uk-input" type="password" placeholder="Password" ref="password" required={true}/>
+                      </div>
+                    </div>
+                    <div className="uk-inline uk-width-1-1">
+                      <span className="uk-form-icon" uk-icon="icon: lock"></span>
+                      <input className="uk-input" type="password" placeholder="Confirm Password" ref="confirmPassword" required={true}/>
+                    </div>
                   </div>
-                </div>
-                <div className="uk-inline uk-width-1-1">
-                    <span className="uk-form-icon" uk-icon="icon: lock"></span>
-                      <input className="uk-input" type="password" placeholder="Confirm Password" ref="confirmPassword" />
-                  </div>
-                </div>
-                <p className="uk-margin">
-                  <button className="uk-button uk-button-primary uk-align-center uk-width-1-3@m uk-width-1-1" type="submit">Sign-up</button>
-                </p>
-              </form>
+                  <p className="uk-margin">
+                    <button className="uk-button uk-button-primary uk-align-center uk-width-1-3@m uk-width-1-1" type="submit">Sign-up</button>
+                  </p>
+                </form>
             </div>
             <div className="uk-card-footer">
               <p className="uk-margin uk-margin-small-top">Already have an account, Click <Link to="/login">here</Link> to sign in.</p>
