@@ -20,7 +20,9 @@ class ProfilePage extends Component {
     super(props);
     this.state = ({
       suggestedPages: {},
-      posts: {}
+      posts: {},
+      following : {},
+      followers: {}
     });
     this.fetchPosts = this.fetchPosts.bind(this);
     this.fetchFollowers = this.fetchFollowers.bind(this);
@@ -29,12 +31,37 @@ class ProfilePage extends Component {
 
   componentDidMount() {
     this.fetchPosts(this.props.match.params.username);
-    this.fetchFollowers();
-    this.fetchFollowing();
+    this.fetchFollowing(this.props.match.params.username);
+    this.fetchFollowers(this.props.match.params.username);
+  }
+
+  fetchFollowing(username) {
+    const URI =  'https://cruzz.herokuapp.com/api/profile/following/?user=' + username + '&limit=100&offset=0';
+    axios.get(URI).then(res => {
+      this.setState({
+        following: res.data.profiles
+      })
+      console.log(res.data);
+    }).catch(err => {
+      console.log(err.response);
+    });
+  }
+
+  fetchFollowers(username) {
+    const URI =  'https://cruzz.herokuapp.com/api/profile/followers/?user=' + username + '&limit=100&offset=0';
+    console.log(URI);
+    axios.get(URI).then(res => {
+      this.setState({
+        followers: res.data.profiles
+      })
+      console.log(res.data);
+    }).catch(err => {
+      console.log(err.response);
+    });
   }
 
   fetchPosts(username) {
-    axios.get('https://cruzz.herokuapp.com/api/post/view/?author=' + username + '&limit=10&offset=10/')
+    axios.get('https://cruzz.herokuapp.com/api/post/view/?author=' + username + '&limit=100&offset=0/')
     .then(res => {
       this.setState({
         posts: res.data.posts
@@ -44,13 +71,6 @@ class ProfilePage extends Component {
     });
   }
 
-  fetchFollowers() {
-    console.log("fetching followers");
-  }
-
-  fetchFollowing() {
-    console.log("fetching following");
-  }
 
   updateProfile(event) {
     let user = {};
@@ -265,38 +285,90 @@ class ProfilePage extends Component {
                 </ul>
                 <ul className="uk-switcher uk-margin">
                   <div>
-                    <li className="uk-padding-small">
-                      <Link to={"/user/admin2"}>
-                        <div className="uk-grid-small uk-flex-inline uk-width-1-1 uk-margin-remove-top" uk-grid="true">
-                          <div className="uk-width-1-5">
-                            <img className="uk-border-circle" width="40" height="40" alt="me" src="https://avatars0.githubusercontent.com/u/25580776?s=400&u=9369191f891fcda2a8269e44421ea2357aa0f33d&v=4"/>
-                          </div>
-                          <div className="uk-width-4-5 uk-text-left">
-                            <h6 className="uk-margin-remove-bottom">Encore</h6>
-                            <p className="uk-text-meta uk-margin-remove-top">Music Club</p>
+                    {
+                      this.state.following.length > 0 ? (
+                        <div>
+                          {this.state.following.map((f, key) => {
+                            return (
+                              <div key={key}>
+                                <li className="uk-padding-small">
+                                  <Link to={"/user/" + f.username}>
+                                    <div className="uk-grid-small uk-flex-inline uk-width-1-1 uk-margin-remove-top" uk-grid="true">
+                                      <div className="uk-width-1-5">
+                                        <img className="uk-border-circle" width="50" height="50" alt="me" src={f.image}/>
+                                      </div>
+                                      <div className="uk-width-4-5 uk-text-left">
+                                        <h6 className="uk-margin-remove-bottom">{f.first_name}</h6>
+                                        <p className="uk-text-meta uk-margin-remove-top">{f.bio}</p>
+                                      </div>
+                                    </div>
+                                  </Link>
+                                </li>
+                              </div>
+                            )
+                          })}
+                        </div>
+                      ):(
+                        <div>
+                          <div>
+                          {
+                            this.state.following.length === 0 ?
+                            (<h2>Not following anyone yet ;(</h2>) :
+                            (<img alt="loading" className="uk-align-center" src={spinner}></img>)
+                          }
                           </div>
                         </div>
-                      </Link>
-                    </li>
-                    <li className="uk-padding-small">
-                      <Link to="#">
-                        <div className="uk-grid-small uk-flex-inline uk-width-1-1 uk-margin-remove-top" uk-grid="true">
-                          <div className="uk-width-1-5">
-                            <img className="uk-border-circle" width="40" height="40" alt="me" src="https://avatars0.githubusercontent.com/u/25580776?s=400&u=9369191f891fcda2a8269e44421ea2357aa0f33d&v=4"/>
-                          </div>
-                          <div className="uk-width-4-5 uk-text-left">
-                            <h6 className="uk-margin-remove-bottom">Encore</h6>
-                            <p className="uk-text-meta uk-margin-remove-top">Music Club</p>
-                          </div>
-                        </div>
-                      </Link>
-                    </li>
-                    <hr/>
-                    <Link className="uk-button uk-margin-bottom-small" to={"/user/" + this.props.auth.user.username + "/followers"}>Show all following</Link>
+                      )
+                    }
+                    {
+                      this.state.following.length > 0 ?
+                      (<Link className="uk-button uk-margin-bottom-small" to={"/user/" + this.props.auth.user.username + "/following"}>Show more people you follow</Link>)
+                      : null
+                    }
                   </div>
                   <div>
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    {
+                      this.state.followers.length > 0 ? (
+                        <div>
+                          {this.state.followers.map((f, key) => {
+                            return (
+                              <div key={key}>
+                                <li className="uk-padding-small">
+                                  <Link to={"/user/" + f.username}>
+                                    <div className="uk-grid-small uk-flex-inline uk-width-1-1 uk-margin-remove-top" uk-grid="true">
+                                      <div className="uk-width-1-5">
+                                        <img className="uk-border-circle" width="40" height="40" alt="me" src={f.image}/>
+                                      </div>
+                                      <div className="uk-width-4-5 uk-text-left">
+                                        <h6 className="uk-margin-remove-bottom">{f.first_name}</h6>
+                                        <p className="uk-text-meta uk-margin-remove-top">{f.bio}</p>
+                                      </div>
+                                    </div>
+                                  </Link>
+                                </li>
+                              </div>
+                            )
+                          })}
+                        </div>
+                      ):(
+                        <div>
+                          <div>
+                          {
+                            this.state.followers.length === 0 ?
+                            (<h2>No followers yet ;(</h2>) :
+                            (<img alt="loading" className="uk-align-center" src={spinner}></img>)
+                          }
+                          </div>
+                        </div>
+                      )
+                    }
+                    {
+                      this.state.followers.length > 0 ?
+                      (<Link className="uk-button uk-margin-bottom-small" to={"/user/" + this.props.auth.user.username + "/followers"}>Show all your followers</Link>)
+                      : null
+                    }
                   </div>
+
                 </ul>
               </div>
             </div>
