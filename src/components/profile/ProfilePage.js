@@ -47,7 +47,6 @@ class ProfilePage extends Component {
 
   fetchFollowers(username) {
     const URI =  'https://cruzz.herokuapp.com/api/profile/followers/?user=' + username + '&limit=100&offset=0';
-    console.log(URI);
     axios.get(URI).then(res => {
       this.setState({
         followers: res.data.profiles.slice(0, 2)
@@ -137,7 +136,6 @@ class ProfilePage extends Component {
       () => {
         fireStorage.ref('dp').child(image.name).getDownloadURL().then(
           url => {
-            console.log(url)
             const updatedUser = {
               user : {
                 image: url

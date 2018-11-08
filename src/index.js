@@ -37,7 +37,7 @@ ReactDOM.render(
       <div className="full-container">
         <Header/>
         <Switch>
-          <Route exact path="/" component={App}></Route>
+          <PrivateRoute exact path="/" component={App}></PrivateRoute>
           <Route exact path="/login" component={SignIn}></Route>
           <Route exact path="/signup" component={SignUp}></Route>
           <PrivateRoute exact path="/discover/pages" component={PageSuggestions}></PrivateRoute>

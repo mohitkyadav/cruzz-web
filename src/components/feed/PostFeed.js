@@ -83,7 +83,7 @@ class PostFeed extends Component {
                 <p className="uk-margin-remove-top">
                   <Link className="uk-link-heading" to={
                     this.state.post.author.username !== this.props.auth.user.username ? ("/user/" + this.state.post.author.username)
-                    : "/profile"
+                    : ("/profile/" + this.state.post.author.username)
                   }>{this.state.post.author.username}</Link>
                   &nbsp;
                   posted on

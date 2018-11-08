@@ -25,7 +25,6 @@ class PageSuggestions extends Component {
         full: this.props.full
       });
     }
-    console.log(this.props.full);
   }
 
   suggestPages() {
