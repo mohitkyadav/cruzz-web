@@ -46,7 +46,6 @@ class PostFeed extends Component {
         this.props.loaded();
       });
     } else {
-      this.downVote();
       axios.get(URI).then(res => {
         console.log(res.data);
         this.setState({
@@ -69,8 +68,10 @@ class PostFeed extends Component {
         this.setState({
           post: res.data.post
         });
+        this.props.loaded();
       }).catch(err => {
         console.log(err.response);
+        this.props.loaded();
       });
     } else {
       axios.get(URI).then(res => {
