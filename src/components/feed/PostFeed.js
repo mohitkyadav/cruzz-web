@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 import axios from 'axios';
+import { loading, loaded } from './../../actions/authActions';
 
 class PostFeed extends Component {
   constructor(props) {
@@ -30,15 +31,30 @@ class PostFeed extends Component {
     }
   }
   upVote(e) {
-    // console.log(e);
-    let upvotes = this.state.upvotes;
-    this.setState({ upvotes: upvotes + 1});
+    this.props.loading();
+    const URI = 'https://cruzz.herokuapp.com/api/post/' + this.state.post.slug + '/vote/';
+    axios.get(URI).then(res => {
+      console.log(res.data);
+      this.setState({
+        post: res.data.post
+      });
+      this.props.loaded();
+    }).catch(err => {
+      console.log(err.response);
+      this.props.loaded();
+    });
   }
 
   downVote(e) {
-    // console.log(e);
-    let downvotes = this.state.downvotes;
-    this.setState({ downvotes: downvotes + 1});
+    const URI = 'https://cruzz.herokuapp.com/api/post/' + this.state.post.slug + '/vote/';
+    axios.delete(URI).then(res => {
+      console.log(res.data);
+      this.setState({
+        post: res.data.post
+      });
+    }).catch(err => {
+      console.log(err.response);
+    })
   }
 
   comment(e) {
@@ -116,17 +132,17 @@ class PostFeed extends Component {
             <div className="uk-flex-inline">
 
               <div>
-                <Link to="#"  className={this.state.upvoted ? ("uk-icon-button uk-button-primary"): ("uk-icon-button uk-button-default")} onClick={this.upVote} data-uk-icon="arrow-up" data-uk-tooltip="title: upvote; pos: bottom-center"></Link>
+                <Link to="#"  className={this.state.post.upvoted ? ("uk-icon-button uk-button-primary"): ("uk-icon-button uk-button-default")} onClick={this.upVote} data-uk-icon="arrow-up" data-uk-tooltip="title: upvote; pos: bottom-center"></Link>
                 <span className="uk-badge uk-label-success">{this.state.post.upvotesCount}</span>
               </div>
 
               <div className="uk-margin-small-left">
-                <Link to="#" className={this.state.downvoted ? ("uk-icon-button uk-button-primary"): ("uk-icon-button uk-button-default")} onClick={this.downVote} data-uk-icon="arrow-down" data-uk-tooltip="title: downvote; pos: bottom-center"></Link>
+                <Link to="#" className={this.state.post.downvoted ? ("uk-icon-button uk-button-primary"): ("uk-icon-button uk-button-default")} onClick={this.downVote} data-uk-icon="arrow-down" data-uk-tooltip="title: downvote; pos: bottom-center"></Link>
                 <span className="uk-badge uk-label-danger">{this.state.post.downvotesCount}</span>
               </div>
 
               <div className="uk-margin-small-left">
-                <Link to="#"  className={this.state.favorited ? ("uk-icon-button uk-button-danger"): ("uk-icon-button uk-button-default")} onClick={this.downVote} data-uk-icon="heart" data-uk-tooltip="title: add to favorites; pos: bottom-center"></Link>
+                <Link to="#"  className={this.state.post.favorited ? ("uk-icon-button uk-button-danger"): ("uk-icon-button uk-button-default")} onClick={this.downVote} data-uk-icon="heart" data-uk-tooltip="title: add to favorites; pos: bottom-center"></Link>
                 <span className="uk-badge uk-label-danger">{this.state.post.favoritesCount}</span>
               </div>
 
@@ -174,4 +190,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, {})(withRouter(PostFeed));
+export default connect(mapStateToProps, {loading, loaded})(withRouter(PostFeed));

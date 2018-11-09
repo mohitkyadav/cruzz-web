@@ -30,8 +30,15 @@ class UserProfile extends Component {
     this.fetchFollowing = this.fetchFollowing.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    if(prevProps.match.params.username !== this.props.match.params.username) {
+      window.location.reload();
+    }
+  }
+
   componentDidMount() {
     const { username } = this.props.match.params;
+    console.log(username);
     this.props.loading();
     axios.get(`https://cruzz.herokuapp.com/api/profile/retrieve/${username}/`).then(response => {
       console.log(response.data);
@@ -173,13 +180,13 @@ class UserProfile extends Component {
           </div>
 
           <div className="uk-text-center uk-grid-match" data-uk-grid="true">
-            <div className="uk-width-auto uk-align-center">
+            {/* <div className="uk-width-auto uk-align-center">
               <div className="uk-card uk-card-default uk-card-body">
                 New post
                 <hr/>
                 <Link to="/new/post" data-uk-icon="icon: plus-circle; ratio: 5"></Link>
               </div>
-            </div>
+            </div> */}
             <div className="uk-width-expand@m">
               <div className="uk-card uk-card-default uk-padding-remove uk-card-body">
 
