@@ -57,6 +57,7 @@ class PostFeed extends Component {
     this.setState({
       post: this.props.post
     });
+    console.log(this.props.post);
   }
 
   deletePost() {
@@ -111,19 +112,24 @@ class PostFeed extends Component {
           </div>
 
           <div className="uk-card-footer">
+
             <div className="uk-flex-inline">
+
               <div>
-                <Link to="#" className="uk-icon-button uk-button-default" onClick={this.upVote} data-uk-icon="arrow-up" data-uk-tooltip="title: upvote; pos: bottom-center"></Link>
-                <span className="uk-badge uk-label-success">{this.state.upvotes}</span>
+                <Link to="#"  className={this.state.upvoted ? ("uk-icon-button uk-button-primary"): ("uk-icon-button uk-button-default")} onClick={this.upVote} data-uk-icon="arrow-up" data-uk-tooltip="title: upvote; pos: bottom-center"></Link>
+                <span className="uk-badge uk-label-success">{this.state.post.upvotesCount}</span>
               </div>
+
               <div className="uk-margin-small-left">
-                <Link to="#" className="uk-icon-button uk-button-default" onClick={this.downVote} data-uk-icon="arrow-down" data-uk-tooltip="title: downvote; pos: bottom-center"></Link>
-                <span className="uk-badge uk-label-danger">{this.state.downvotes}</span>
+                <Link to="#" className={this.state.downvoted ? ("uk-icon-button uk-button-primary"): ("uk-icon-button uk-button-default")} onClick={this.downVote} data-uk-icon="arrow-down" data-uk-tooltip="title: downvote; pos: bottom-center"></Link>
+                <span className="uk-badge uk-label-danger">{this.state.post.downvotesCount}</span>
               </div>
+
               <div className="uk-margin-small-left">
-                <Link to="#" className="uk-icon-button uk-button-default" onClick={this.downVote} data-uk-icon="heart" data-uk-tooltip="title: add to favorites; pos: bottom-center"></Link>
+                <Link to="#"  className={this.state.favorited ? ("uk-icon-button uk-button-danger"): ("uk-icon-button uk-button-default")} onClick={this.downVote} data-uk-icon="heart" data-uk-tooltip="title: add to favorites; pos: bottom-center"></Link>
                 <span className="uk-badge uk-label-danger">{this.state.post.favoritesCount}</span>
               </div>
+
               <div className="uk-margin-small-left">
                 {
                   this.props.full ?
@@ -135,15 +141,14 @@ class PostFeed extends Component {
                 }
                 <span className="uk-badge">{this.state.comments}</span>
               </div>
-              <div className="uk-margin-small-left">
-                <Link to="#" className="uk-icon-button uk-button-default" onClick={this.share} data-uk-icon="forward" data-uk-tooltip="title: share; pos: bottom-center"></Link>
-                <span className="uk-badge">{this.state.shares}</span>
-              </div>
+
+            </div>
+            <div className="uk-flex-inline uk-align-right@s">
               {
                 this.props.auth.user.username === this.state.post.author.username ?
                 (
                   <div className="uk-margin-small-left">
-                    <Link to={'/edit/post/' + this.state.post.slug} className="uk-icon-button uk-button-primary" data-uk-icon="file-edit" data-uk-tooltip="title: edit; pos: bottom-center"></Link>
+                    <Link to={'/edit/post/' + this.state.post.slug} className="uk-icon-button uk-button-secondary" data-uk-icon="file-edit" data-uk-tooltip="title: edit; pos: bottom-center"></Link>
                   </div>
                 ):null
               }
@@ -155,7 +160,6 @@ class PostFeed extends Component {
                   </div>
                 ):null
               }
-
             </div>
           </div>
 
