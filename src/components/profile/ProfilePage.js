@@ -176,6 +176,11 @@ class ProfilePage extends Component {
                   <div className="uk-width-auto">
                     <div className="uk-inline-clip uk-transition-toggle" tabIndex="0">
                       <img className="uk-transition-scale-down ov-curser-pointer uk-transition-opaque" style={{height:"150px"}} width="150px" src={this.props.auth.userProfile.image} onClick={(e) => this.updateProfilePic(e)} alt="" data-uk-tooltip="title: Upload new Profile Picture; pos: bottom-center"/>
+                        {
+                          this.props.auth.userProfile.official_page ? (
+                            <span className="uk-position-absolute uk-transform-center" style={{left: "10%", top: "10%"}} data-uk-icon="icon: check; ratio: 1.3" data-uk-tooltip="title: Official profile; pos: top"></span>
+                          ): null
+                        }
                       <div className="uk-position-center">
                         <form style={{ display: 'none' }} onSubmit={this.uploadProfilePic.bind(this)}>
                           <input id="dp" name="dp" type="file" ref="dp" onChange={(e) => this.uploadProfilePic(e)}/>

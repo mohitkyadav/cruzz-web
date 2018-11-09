@@ -151,14 +151,18 @@ class PostDetails extends Component {
                               <img className="uk-border-circle" width="40" alt="" height="40" src={comment.author.image}/>
                             </div>
                             <div className="uk-width-expand">
-                              <h4 className="uk-margin-remove-bottom">{comment.author.first_name}</h4>
+                              <Link className="uk-link-heading" to={
+                                  comment.author.username === this.props.auth.user.username ? ("/profile/" + this.props.auth.user.username)
+                                  : ("/profile/" + comment.author.username)
+                                }>{comment.author.first_name}
+                              </Link>
                               <p className="uk-text-meta uk-margin-remove-top"><time dateTime="2016-04-01T19:00"> commented on {this.handleDateTime(comment.createdAt)}</time></p>
                             </div>
                           </div>
                         </div>
 
                         <div className="uk-card-body">
-                            <p>{comment.body}</p>
+                          <p>{comment.body}</p>
                         </div>
 
                         <div className="uk-card-footer uk-width-1-1 uk-flex-inline">
@@ -176,10 +180,10 @@ class PostDetails extends Component {
                               </div>
                             </div>
 
-                            {/* <Link to="#" data-uk-toggle={"target:" + comment.id} className="uk-icon-button uk-button-secondary" data-uk-icon="file-edit" data-uk-tooltip="title: edit; pos: bottom-center"></Link> */}
+                            {/* <button data-uk-toggle={"target: #" + comment.id} className="uk-icon-button uk-button-secondary" data-uk-icon="file-edit" data-uk-tooltip="title: edit; pos: bottom-center"></button> */}
                           </div>
 
-                          <div className="uk-margin-small-left uk-animation-scale-down">
+                          <div className="uk-animation-scale-down">
                             <Link to="#" className="uk-icon-button uk-text-danger uk-button-secondary" onClick={ (e) => this.deleteComment(e, comment.id)} data-uk-icon="trash" data-uk-tooltip="title: delete; pos: bottom-center"></Link>
                           </div>
                         </div>

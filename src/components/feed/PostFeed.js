@@ -157,7 +157,7 @@ class PostFeed extends Component {
                   <Link className="uk-link-heading" to={
                     this.state.post.author.username !== this.props.auth.user.username ? ("/user/" + this.state.post.author.username)
                     : ("/profile/" + this.state.post.author.username)
-                  }>{this.state.post.author.username}</Link>
+                  }>{this.state.post.author.first_name}</Link>
                   &nbsp;
                   posted on
                   &nbsp;
