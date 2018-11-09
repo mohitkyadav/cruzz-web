@@ -14,7 +14,8 @@ class PostFeed extends Component {
       comments: 0,
       shares: 0,
       post: {
-        author: {}
+        author: {},
+        tagList: []
       }
     };
     this.upVote = this.upVote.bind(this);
@@ -121,10 +122,21 @@ class PostFeed extends Component {
                 </p>
               </div>
             </div>
+            <div className="uk-flex-inline uk-align-right">
+              {this.state.post.tagList.map(
+                (tag, key) => {
+                  return(
+                    <label className="uk-badge uk-label-success uk-padding-small uk-margin-small-left uk-margin-remove-top" key={key}>
+                      {tag}
+                    </label>
+                  )
+                }
+              )}
+            </div>
           </div>
 
           <div className="uk-card-body">
-            <div dangerouslySetInnerHTML={this.dangerous(this.state.post.body)}></div>
+            <div className="uk-margin-small-top" dangerouslySetInnerHTML={this.dangerous(this.state.post.body)}></div>
           </div>
 
           <div className="uk-card-footer">

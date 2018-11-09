@@ -211,22 +211,22 @@ class ProfilePage extends Component {
                                 <legend className="uk-legend">Update  Profile</legend>
                                 <div className="uk-margin">
                                   <p>First Name <span className="uk-margin-small-right uk-align-right" data-uk-icon="info" data-uk-tooltip="pos: top; title: Full name if page"></span></p>
-                                  <input className="uk-input" ref="new_first_name" placeholder={this.props.auth.user.first_name ? this.props.auth.user.first_name: "First Name"} type="text"/>
+                                  <input className="uk-input" ref="new_first_name" defaultValue={this.props.auth.user.first_name !== '' ? this.props.auth.user.first_name: "First Name"} type="text"/>
                                 </div>
 
                                 <div className="uk-margin">
                                   <p>Last Name <span className="uk-margin-small-right uk-align-right" data-uk-icon="info" data-uk-tooltip="pos: top; title: Leave blank if page"></span></p>
-                                  <input className="uk-input" ref="new_last_name" placeholder={this.props.auth.user.last_name ? this.props.auth.user.last_name: "Last Name"} type="text"/>
+                                  <input className="uk-input" ref="new_last_name" defaultValue={this.props.auth.user.last_name !=='' ? this.props.auth.user.last_name: "Last Name"} type="text"/>
                                 </div>
 
                                 <div className="uk-margin">
                                   <p>E-mail <span className="uk-margin-small-right uk-align-right" data-uk-icon="info" data-uk-tooltip="pos: top; title: Email"></span></p>
-                                  <input className="uk-input" ref="new_email" placeholder={this.props.auth.user.email ? this.props.auth.user.email: ""} type="E-mail"/>
+                                  <input className="uk-input" ref="new_email" defaultValue={this.props.auth.user.email !== '' ? this.props.auth.user.email: ""} type="E-mail"/>
                                 </div>
 
                                 <div className="uk-margin">
                                   <p>Bio</p>
-                                  <textarea className="uk-textarea" ref="new_bio" placeholder={this.props.auth.user.bio ? this.props.auth.user.bio: "Bio"} rows="5"></textarea>
+                                  <textarea className="uk-textarea" ref="new_bio" placeholder="Bio" rows="5"></textarea>
                                 </div>
 
                               </fieldset>
