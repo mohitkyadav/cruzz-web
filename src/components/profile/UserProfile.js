@@ -306,11 +306,19 @@ class UserProfile extends Component {
                   })}
                 </div>
               ):(
-                <div>
-                  <div>
-                    <img alt="loading" className="uk-align-center" src={spinner}></img>
-                  </div>
-                </div>
+                  this.state.posts.length > 0 ? (
+                    <div>
+                      <div>
+                        <img alt="loading" className="uk-align-center" src={spinner}></img>
+                      </div>
+                    </div>
+                  ): (
+                    <div>
+                      <div className="uk-align-center">
+                        <h2>No posts here ;(</h2>
+                      </div>
+                    </div>
+                  )
               )
             }
             </div>
