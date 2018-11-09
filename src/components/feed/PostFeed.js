@@ -20,6 +20,7 @@ class PostFeed extends Component {
     };
     this.upVote = this.upVote.bind(this);
     this.downVote = this.downVote.bind(this);
+    this.favoritePost = this.favoritePost.bind(this);
     this.comment = this.comment.bind(this);
     this.share = this.share.bind(this);
     this.deletePost = this.deletePost.bind(this);
@@ -45,7 +46,28 @@ class PostFeed extends Component {
       this.props.loaded();
     });
   }
-
+  favoritePost(e) {
+    const URI = 'https://cruzz.herokuapp.com/api/post/' + this.state.post.slug + '/favorite/';
+    if(this.state.post.favorited) {
+      axios.delete(URI).then(res => {
+        console.log(res.data);
+        this.setState({
+          post: res.data.post
+        });
+      }).catch(err => {
+        console.log(err.response);
+      });
+    } else {
+      axios.get(URI).then(res => {
+        console.log(res.data);
+        this.setState({
+          post: res.data.post
+        });
+      }).catch(err => {
+        console.log(err.response);
+      });
+    }
+  }
   downVote(e) {
     const URI = 'https://cruzz.herokuapp.com/api/post/' + this.state.post.slug + '/vote/';
     axios.delete(URI).then(res => {
@@ -55,7 +77,7 @@ class PostFeed extends Component {
       });
     }).catch(err => {
       console.log(err.response);
-    })
+    });
   }
 
   comment(e) {
@@ -154,7 +176,7 @@ class PostFeed extends Component {
               </div>
 
               <div className="uk-margin-small-left">
-                <Link to="#"  className={this.state.post.favorited ? ("uk-icon-button uk-button-danger"): ("uk-icon-button uk-button-default")} onClick={this.downVote} data-uk-icon="heart" data-uk-tooltip="title: add to favorites; pos: bottom-center"></Link>
+                <Link to="#"  className={this.state.post.favorited ? ("uk-icon-button uk-button-danger"): ("uk-icon-button uk-button-default")} onClick={this.favoritePost} data-uk-icon="heart" data-uk-tooltip="title: add to favorites; pos: bottom-center"></Link>
                 <span className="uk-badge uk-label-danger">{this.state.post.favoritesCount}</span>
               </div>
 
