@@ -168,7 +168,6 @@ class UserProfile extends Component {
                           (<button onClick={this.handleFollow} className="uk-button uk-button-small uk-button-default">Following</button>):
                           (<button onClick={this.handleFollow} className="uk-button uk-button-small uk-button-default">Follow</button>)
                         }
-
                       </div>
                     </div>
                   </div>
@@ -191,8 +190,8 @@ class UserProfile extends Component {
               <div className="uk-card uk-card-default uk-padding-remove uk-card-body">
 
                 <ul className="uk-flex-center uk-subnav uk-subnav-pill" data-uk-switcher="animation: uk-animation-slide-top-small, uk-animation-slide-top-small; duration: 200;">
-                  <li className="uk-active"><Link to="#">Following</Link></li>
-                  <li><Link to="#">Followers</Link></li>
+                  <li className="uk-active"><Link to="#">Following - {this.state.profile.followingCount}</Link></li>
+                  <li><Link to="#">Followers - {this.state.profile.followersCount}</Link></li>
                 </ul>
                 <ul className="uk-switcher uk-margin">
                   <div>
@@ -233,7 +232,7 @@ class UserProfile extends Component {
                     }
                     {
                       this.state.following.length > 0 ?
-                      (<Link className="uk-button uk-margin-bottom-small" to={"/user/" + this.props.auth.user.username + "/following"}>Show more people you follow</Link>)
+                      (<Link className="uk-button uk-margin-bottom-small" to={"/user/" + this.state.profile.username + "/following"}>Show more people you follow</Link>)
                       : null
                     }
                   </div>
@@ -275,7 +274,7 @@ class UserProfile extends Component {
                     }
                     {
                       this.state.followers.length > 0 ?
-                      (<Link className="uk-button uk-margin-bottom-small" to={"/user/" + this.props.auth.user.username + "/followers"}>Show all your followers</Link>)
+                      (<Link className="uk-button uk-margin-bottom-small" to={"/user/" + this.state.profile.username + "/followers"}>Show all your followers</Link>)
                       : null
                     }
                   </div>

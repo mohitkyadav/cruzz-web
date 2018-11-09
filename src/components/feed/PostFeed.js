@@ -74,7 +74,6 @@ class PostFeed extends Component {
       });
     } else {
       axios.get(URI).then(res => {
-        console.log(res.data);
         this.setState({
           post: res.data.post
         });
@@ -119,7 +118,6 @@ class PostFeed extends Component {
     this.setState({
       post: this.props.post
     });
-    console.log(this.props.post);
   }
 
   deletePost() {
@@ -212,7 +210,7 @@ class PostFeed extends Component {
                     <Link to={'/view/post/' + this.state.post.slug} className="uk-icon-button uk-button-default" data-uk-icon="comments" data-uk-tooltip="title: comment; pos: bottom-center"></Link>
                   )
                 }
-                <span className="uk-badge">{this.state.comments}</span>
+                <span className="uk-badge">{this.state.post.commentsCount}</span>
               </div>
 
             </div>
