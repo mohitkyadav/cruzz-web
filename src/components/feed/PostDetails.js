@@ -55,11 +55,19 @@ class PostDetails extends Component {
   getComments() {
     const URI = 'https://cruzz.herokuapp.com/api/post/' + this.props.match.params.slug + '/comments/view?limit=100&offset=0';
     axios.get(URI).then(res => {
-      // this.setState
+      this.setState({
+        comments: res.data.comments
+      });
       console.log(res.data);
     }).catch(err => {
       console.log(err.response);
     });
+  }
+
+  handleDateTime(date) {
+    const dateLocal = new Date(date);
+    const timeLocal = dateLocal.toLocaleTimeString();
+    return (String(dateLocal.toDateString()) + " " + timeLocal);
   }
 
   render() {
@@ -72,7 +80,7 @@ class PostDetails extends Component {
                 return (
                   <div key={key} data-uk-scrollspy="cls: uk-animation-slide-bottom-medium; target: > div; delay: 40;">
                     <PostFeed post={post} full={true}/>
-                    <div className="uk-card uk-card-secondary uk-align-center uk-width-4-5@m">
+                    <div className="uk-card uk-card-secondary uk-box-shadow-large uk-align-center uk-width-4-5@m">
                       <form className="uk-padding-small" onSubmit={this.handleComment.bind(this)}>
                         <input className="uk-input uk-form-large" ref="commentBody" type="text" placeholder="type your comment..."/>
                         <button className="uk-button uk-button-default uk-margin-small-top uk-margin-small-bottom uk-align-center uk-width-2-5" type="submit">comment</button>
@@ -90,40 +98,47 @@ class PostDetails extends Component {
         }
 
         <div>
+            {
+              this.state.comments.length > 0 ? (
+                <div>
+                  {this.state.comments.map((comment, key) => {
+                    return (
+                      <div key={key}>
 
-          <div className="uk-card uk-card-default uk-align-center uk-width-4-5@m">
+                        <div className="uk-card uk-card-default uk-align-center uk-width-4-5@m">
 
-            <div className="uk-card-header uk-padding-remove-bottom">
-              <div className="uk-grid-small uk-flex-inline" datauk-grid="true">
-                <div className="uk-width-auto">
-                  <img className="uk-border-circle" width="40" alt="" height="40" src="https://avatars0.githubusercontent.com/u/25580776?s=400&u=9369191f891fcda2a8269e44421ea2357aa0f33d&v=4"/>
+                        <div className="uk-card-header uk-padding-remove-bottom">
+                          <div className="uk-grid-small uk-flex-inline" datauk-grid="true">
+                            <div className="uk-width-auto">
+                              <img className="uk-border-circle" width="40" alt="" height="40" src={comment.author.image}/>
+                            </div>
+                            <div className="uk-width-expand">
+                              <h4 className="uk-margin-remove-bottom">{comment.author.first_name}</h4>
+                              <p className="uk-text-meta uk-margin-remove-top"><time dateTime="2016-04-01T19:00"> commented on {this.handleDateTime(comment.createdAt)}</time></p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="uk-card-body">
+                            <p>{comment.body}</p>
+                        </div>
+
+                        <div className="uk-card-footer uk-width-1-1 uk-flex-inline">
+                          <div className="uk-animation-scale-down">
+                            <Link to="#" className="uk-icon-button uk-button-secondary" data-uk-icon="file-edit" data-uk-tooltip="title: edit; pos: bottom-center"></Link>
+                          </div>
+                          <div className="uk-margin-small-left uk-animation-scale-down">
+                            <Link to="#" className="uk-icon-button uk-text-danger uk-button-secondary" data-uk-icon="trash" data-uk-tooltip="title: delete; pos: bottom-center"></Link>
+                          </div>
+                        </div>
+
+                        </div>
+                      </div>
+                    )
+                  })}
                 </div>
-                <div className="uk-width-expand">
-                  <h4 className="uk-margin-remove-bottom">username</h4>
-                  <p className="uk-text-meta uk-margin-remove-top"><time dateTime="2016-04-01T19:00"> commented on April 01, 2016</time></p>
-                </div>
-              </div>
-            </div>
-
-            <div className="uk-card-body">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
-            </div>
-
-            <div className="uk-card-footer uk-flex-inline">
-              <div className="uk-margin-small-left">
-                <Link to="#" className="uk-icon-button uk-button-default" data-uk-icon="arrow-up" data-uk-tooltip="title: upvote; pos: bottom-center"></Link>
-                <span className="uk-badge uk-label-success">12</span>
-              </div>
-              <div className="uk-margin-small-left">
-                <Link to="#" className="uk-icon-button uk-button-default" data-uk-icon="arrow-down" data-uk-tooltip="title: downvote; pos: bottom-center"></Link>
-                <span className="uk-badge uk-label-danger">12</span>
-              </div>
-              <div className="uk-margin-small-left">
-                <Link to="#" className="uk-icon-button uk-button-primary" data-uk-icon="file-edit" data-uk-tooltip="title: edit; pos: bottom-center"></Link>
-              </div>
-            </div>
-
-          </div>
+              ):null
+            }
         </div>
       </div>
     )

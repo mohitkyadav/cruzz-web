@@ -21,7 +21,6 @@ class PostFeed extends Component {
     this.upVote = this.upVote.bind(this);
     this.downVote = this.downVote.bind(this);
     this.favoritePost = this.favoritePost.bind(this);
-    this.comment = this.comment.bind(this);
     this.share = this.share.bind(this);
     this.deletePost = this.deletePost.bind(this);
     this.handleDateTime = this.handleDateTime.bind(this);
@@ -108,12 +107,6 @@ class PostFeed extends Component {
         console.log(err.response);
       });
     }
-  }
-
-  comment(e) {
-    // console.log(e);
-    let comments = this.state.comments;
-    this.setState({ comments: comments + 1});
   }
 
   share(e) {
