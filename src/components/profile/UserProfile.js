@@ -133,7 +133,7 @@ class UserProfile extends Component {
 
                   <div className="uk-width-auto">
                     <div className="uk-inline-clip uk-transition-toggle" tabIndex="0">
-                      <img className="uk-transition-scale-down ov-curser-pointer uk-transition-opaque" width="150px" src={this.state.profile.image} alt=""/>
+                      <img className="uk-transition-scale-down ov-curser-pointer uk-transition-opaque" style={{height:"150px"}} width="150px" src={this.state.profile.image} alt=""/>
                       <div className="uk-position-center">
                         {
                           !this.props.auth.loading ?

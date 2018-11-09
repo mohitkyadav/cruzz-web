@@ -14,9 +14,11 @@ class PostOperations extends Component {
       post: {
         author: {}
       },
-      postBody: "Post Body"
+      postBody: "Post Body",
+      tagList: []
     });
     this.handleChange = this.handleChange.bind(this);
+    this.handleTags = this.handleTags.bind(this);
     this.handlePost = this.handlePost.bind(this);
     this.getPostData = this.getPostData.bind(this);
   }
@@ -31,8 +33,12 @@ class PostOperations extends Component {
     }
   }
 
-  handleChange (event) {
+  handleChange(event) {
     this.setState({postBody: event.target.value});
+  }
+
+  handleTags(event) {
+    this.setState({tagList: event.target.value.split(',')});
   }
 
   getPostData () {
@@ -41,9 +47,9 @@ class PostOperations extends Component {
     .then(res => {
       this.setState({
         post: res.data.post,
-        postBody: res.data.post.body
+        postBody: res.data.post.body,
+        tagList: res.data.post.tagList
       });
-      console.log(res.data);
       this.props.loaded();
     }).catch(err => {
       console.log(err.response);
@@ -65,7 +71,8 @@ class PostOperations extends Component {
     const postData = {
       post: {
         title: this.refs.postTitle.value,
-        body: this.refs.postBody.value
+        body: this.refs.postBody.value,
+        tagList: this.state.tagList
       }
     };
     axios.post(handlePostURI, postData)
@@ -77,6 +84,7 @@ class PostOperations extends Component {
       this.props.history.push('/view/post/' + res.data.post.slug);
       this.props.loaded();
     }).catch(err => {
+      console.log(postData);
       console.log(err.response);
       this.props.loaded();
     });
@@ -120,6 +128,16 @@ class PostOperations extends Component {
                       <textarea className="uk-textarea" ref="postBody" rows="5" value={this.state.postBody} onChange={this.handleChange} placeholder="Post Body"></textarea>
                     ): (
                       <textarea className="uk-textarea" ref="postBody" rows="5" placeholder="Post Body"></textarea>
+                    )
+                  }
+                </div>
+                <div className="uk-margin">
+                  {
+                    this.state.operation === "edit" ?
+                    (
+                      <input className="uk-input" name="tagList[]" ref="tagList" rows="5" value={this.state.tagList} onChange={this.handleTags} placeholder="Tags"/>
+                    ): (
+                      <input className="uk-input" name="tagList[]" ref="tagList" rows="5" value={this.state.tagList} onChange={this.handleTags} placeholder="Tag List"/>
                     )
                   }
                 </div>

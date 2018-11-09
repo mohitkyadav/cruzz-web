@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 class PostFeed extends Component {
   constructor(props) {
@@ -19,6 +20,7 @@ class PostFeed extends Component {
     this.downVote = this.downVote.bind(this);
     this.comment = this.comment.bind(this);
     this.share = this.share.bind(this);
+    this.deletePost = this.deletePost.bind(this);
     this.handleDateTime = this.handleDateTime.bind(this);
   }
 
@@ -55,6 +57,16 @@ class PostFeed extends Component {
     this.setState({
       post: this.props.post
     });
+  }
+
+  deletePost() {
+    const URI = 'https://cruzz.herokuapp.com/api/post/' + this.state.post.slug + '/delete/'
+    axios.get(URI).then(res => {
+      console.log(res.data);
+      this.props.history.push('/');
+    }).catch(err => {
+      console.log(err.response);
+    })
   }
 
   handleDateTime(date) {
@@ -109,12 +121,16 @@ class PostFeed extends Component {
                 <span className="uk-badge uk-label-danger">{this.state.downvotes}</span>
               </div>
               <div className="uk-margin-small-left">
+                <Link to="#" className="uk-icon-button uk-button-default" onClick={this.downVote} data-uk-icon="heart" data-uk-tooltip="title: add to favorites; pos: bottom-center"></Link>
+                <span className="uk-badge uk-label-danger">{this.state.post.favoritesCount}</span>
+              </div>
+              <div className="uk-margin-small-left">
                 {
                   this.props.full ?
                   (
-                    <Link to="#" className="uk-icon-button uk-button-default" onClick={this.comment} data-uk-icon="comments" data-uk-tooltip="title: comments; pos: bottom-center"></Link>
+                    <Link to="#" className="uk-icon-button uk-button-default" data-uk-icon="comments" data-uk-tooltip="title: comments; pos: bottom-center"></Link>
                   ): (
-                    <Link to={'/view/post/' + this.state.post.slug} className="uk-icon-button uk-button-default" onClick={this.comment} data-uk-icon="comments" data-uk-tooltip="title: comment; pos: bottom-center"></Link>
+                    <Link to={'/view/post/' + this.state.post.slug} className="uk-icon-button uk-button-default" data-uk-icon="comments" data-uk-tooltip="title: comment; pos: bottom-center"></Link>
                   )
                 }
                 <span className="uk-badge">{this.state.comments}</span>
@@ -128,6 +144,14 @@ class PostFeed extends Component {
                 (
                   <div className="uk-margin-small-left">
                     <Link to={'/edit/post/' + this.state.post.slug} className="uk-icon-button uk-button-primary" data-uk-icon="file-edit" data-uk-tooltip="title: edit; pos: bottom-center"></Link>
+                  </div>
+                ):null
+              }
+              {
+                this.props.auth.user.username === this.state.post.author.username ?
+                (
+                  <div className="uk-margin-small-left">
+                    <Link to="#" onClick={this.deletePost} className="uk-icon-button uk-button-secondary uk-text-danger" data-uk-icon="trash" data-uk-tooltip="title: delete; pos: bottom-center"></Link>
                   </div>
                 ):null
               }

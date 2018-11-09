@@ -60,13 +60,13 @@ class PostDetails extends Component {
           <div className="uk-card uk-card-default uk-align-center uk-width-4-5@m">
 
             <div className="uk-card-header uk-padding-remove-bottom">
-              <div className="uk-grid-small uk-flex-inline" uk-grid>
+              <div className="uk-grid-small uk-flex-inline" datauk-grid="true">
                 <div className="uk-width-auto">
                   <img className="uk-border-circle" width="40" alt="" height="40" src="https://avatars0.githubusercontent.com/u/25580776?s=400&u=9369191f891fcda2a8269e44421ea2357aa0f33d&v=4"/>
                 </div>
                 <div className="uk-width-expand">
                   <h4 className="uk-margin-remove-bottom">username</h4>
-                  <p className="uk-text-meta uk-margin-remove-top"><time datetime="2016-04-01T19:00"> commented on April 01, 2016</time></p>
+                  <p className="uk-text-meta uk-margin-remove-top"><time dateTime="2016-04-01T19:00"> commented on April 01, 2016</time></p>
                 </div>
               </div>
             </div>
