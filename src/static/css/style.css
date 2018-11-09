@@ -11,3 +11,9 @@ nav {
   /* background: linear-gradient(to right, rgb(54, 20, 166) 0%, rgb(33, 162, 233) 100%); */
   background: linear-gradient(to right, rgb(232, 246, 244) 0%, rgb(237, 247, 252) 100%);
 }
+
+@media screen and (max-width: 480px) {
+  .uk-navbar-center {
+    display: none
+  }
+}
