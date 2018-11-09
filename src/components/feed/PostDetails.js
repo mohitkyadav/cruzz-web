@@ -14,10 +14,12 @@ class PostDetails extends Component {
     super(props);
     this.state = ({
       posts: [],
-      comments: []
+      comments: [],
+      commentBody: ''
     });
     this.getComments = this.getComments.bind(this);
     this.handleComment = this.handleComment.bind(this);
+    this.handleCommentBody = this.handleCommentBody.bind(this);
   }
 
   componentDidMount() {
@@ -35,16 +37,53 @@ class PostDetails extends Component {
     });
   }
 
+  handleCommentBody(event) {
+    this.setState({
+      commentBody: event.target.value
+    });
+    event.preventDefault();
+  }
+
+  deleteComment(event, pk) {
+    const delURI = 'https://cruzz.herokuapp.com/api/post/' + this.props.match.params.slug + '/comments/delete/' + pk  + '/';
+    axios.get(delURI).then(res => {
+      this.getComments();
+    }).catch(err => {
+      console.log(err.response);
+    });
+    event.preventDefault();
+  }
+
+  editComment(event, pk) {
+    const edtURI = 'https://cruzz.herokuapp.com/api/post/' + this.props.match.params.slug + '/comments/update/' + pk  + '/';
+      let comment = {
+        comment : {
+          body: this.state.commentBody
+        }
+      }
+      axios.post(edtURI, comment).then(res => {
+        this.setState({
+          commentBody: ''
+        });
+        this.getComments();
+      }).catch(err => {
+        console.log(err.response);
+      });
+    event.preventDefault();
+  }
+
   handleComment(event) {
-    const URI = 'https://cruzz.herokuapp.com/api/post/' + this.props.match.params.slug + '/comments/create/';
-    const comment = {
+
+    const createURI = 'https://cruzz.herokuapp.com/api/post/' + this.props.match.params.slug + '/comments/create/';
+    let comment = {
       comment : {
-        body: this.refs.commentBody.value
+        body: this.state.commentBody
       }
     }
-    axios.post(URI, comment).then(res => {
-      console.log(res.data);
-      this.refs.commentBody.value = '';
+    axios.post(createURI, comment).then(res => {
+      this.setState({
+        commentBody: ''
+      });
       this.getComments();
     }).catch(err => {
       console.log(err.response);
@@ -58,7 +97,6 @@ class PostDetails extends Component {
       this.setState({
         comments: res.data.comments
       });
-      console.log(res.data);
     }).catch(err => {
       console.log(err.response);
     });
@@ -82,7 +120,7 @@ class PostDetails extends Component {
                     <PostFeed post={post} full={true}/>
                     <div className="uk-card uk-card-secondary uk-box-shadow-large uk-align-center uk-width-4-5@m">
                       <form className="uk-padding-small" onSubmit={this.handleComment.bind(this)}>
-                        <input className="uk-input uk-form-large" ref="commentBody" type="text" placeholder="type your comment..."/>
+                        <input className="uk-input uk-form-large" ref="commentBody" value={this.state.commentBody} onChange={this.handleCommentBody} type="text" placeholder="type your comment..."/>
                         <button className="uk-button uk-button-default uk-margin-small-top uk-margin-small-bottom uk-align-center uk-width-2-5" type="submit">comment</button>
                       </form>
                     </div>
@@ -125,10 +163,24 @@ class PostDetails extends Component {
 
                         <div className="uk-card-footer uk-width-1-1 uk-flex-inline">
                           <div className="uk-animation-scale-down">
-                            <Link to="#" className="uk-icon-button uk-button-secondary" data-uk-icon="file-edit" data-uk-tooltip="title: edit; pos: bottom-center"></Link>
+
+                            <div id={comment.id} data-uk-modal="true">
+                              <div className="uk-modal-dialog uk-modal-body">
+                                <form className="uk-padding-small" onSubmit={(e) => this.editComment(e, comment.id)}>
+                                  <input className="uk-input uk-form-large" onChange={this.handleCommentBody} defaultValue={comment.body} ref="commentBody" type="text" placeholder="type your comment..."/>
+                                  <p>
+                                    hit enter to update your comment or click cancel to go back
+                                  </p>
+                                  <button className="uk-button uk-button-secondary uk-margin-small-top uk-modal-close" type="button">Cancel</button>
+                                </form>
+                              </div>
+                            </div>
+
+                            {/* <Link to="#" data-uk-toggle={"target:" + comment.id} className="uk-icon-button uk-button-secondary" data-uk-icon="file-edit" data-uk-tooltip="title: edit; pos: bottom-center"></Link> */}
                           </div>
+
                           <div className="uk-margin-small-left uk-animation-scale-down">
-                            <Link to="#" className="uk-icon-button uk-text-danger uk-button-secondary" data-uk-icon="trash" data-uk-tooltip="title: delete; pos: bottom-center"></Link>
+                            <Link to="#" className="uk-icon-button uk-text-danger uk-button-secondary" onClick={ (e) => this.deleteComment(e, comment.id)} data-uk-icon="trash" data-uk-tooltip="title: delete; pos: bottom-center"></Link>
                           </div>
                         </div>
 
