@@ -10,15 +10,17 @@ import spinner from '../../static/img/index.svg';
 
 
 class PostDetails extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = ({
-      posts: []
+      posts: [],
+      comments: []
     });
-    this.handlePost = this.handlePost.bind(this);
+    this.getComments = this.getComments.bind(this);
+    this.handleComment = this.handleComment.bind(this);
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.props.loading();
     axios.get('https://cruzz.herokuapp.com/api/post/view/' + this.props.match.params.slug + '/')
     .then(res => {
@@ -26,14 +28,38 @@ class PostDetails extends Component {
         posts: [res.data.post]
       });
       this.props.loaded();
+      this.getComments();
     }).catch(err => {
       console.log(err.response);
       this.props.loaded();
     });
   }
 
-  handlePost (event) {
+  handleComment(event) {
+    const URI = 'https://cruzz.herokuapp.com/api/post/' + this.props.match.params.slug + '/comments/create/';
+    const comment = {
+      comment : {
+        body: this.refs.commentBody.value
+      }
+    }
+    axios.post(URI, comment).then(res => {
+      console.log(res.data);
+      this.refs.commentBody.value = '';
+      this.getComments();
+    }).catch(err => {
+      console.log(err.response);
+    });
     event.preventDefault();
+  }
+
+  getComments() {
+    const URI = 'https://cruzz.herokuapp.com/api/post/' + this.props.match.params.slug + '/comments/view?limit=100&offset=0';
+    axios.get(URI).then(res => {
+      // this.setState
+      console.log(res.data);
+    }).catch(err => {
+      console.log(err.response);
+    });
   }
 
   render() {
@@ -44,8 +70,14 @@ class PostDetails extends Component {
             <div>
               {this.state.posts.map((post, key) => {
                 return (
-                  <div key={key}>
+                  <div key={key} data-uk-scrollspy="cls: uk-animation-slide-bottom-medium; target: > div; delay: 40;">
                     <PostFeed post={post} full={true}/>
+                    <div className="uk-card uk-card-secondary uk-align-center uk-width-4-5@m">
+                      <form className="uk-padding-small" onSubmit={this.handleComment.bind(this)}>
+                        <input className="uk-input uk-form-large" ref="commentBody" type="text" placeholder="type your comment..."/>
+                        <button className="uk-button uk-button-default uk-margin-small-top uk-margin-small-bottom uk-align-center uk-width-2-5" type="submit">comment</button>
+                      </form>
+                    </div>
                   </div>
                 )
               })}
@@ -56,7 +88,9 @@ class PostDetails extends Component {
             </div>
           )
         }
+
         <div>
+
           <div className="uk-card uk-card-default uk-align-center uk-width-4-5@m">
 
             <div className="uk-card-header uk-padding-remove-bottom">

@@ -147,7 +147,7 @@ class PostFeed extends Component {
 
   render() {
     return (
-      <div className="uk-container uk-padding-small uk-width-1-1" data-uk-scrollspy="cls: uk-animation-slide-bottom-medium; target: > div; delay: 40;">
+      <div className="uk-container uk-padding-small uk-width-1-1">
 
         <div className="uk-card uk-card-default uk-align-center uk-width-1-1@m uk-box-shadow-hover-medium uk-box-shadow-small">
 
