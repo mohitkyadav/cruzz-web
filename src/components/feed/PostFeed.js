@@ -34,23 +34,63 @@ class PostFeed extends Component {
   }
   upVote(e) {
     this.props.loading();
-    const URI = 'https://cruzz.herokuapp.com/api/post/' + this.state.post.slug + '/vote/';
-    axios.get(URI).then(res => {
-      console.log(res.data);
-      this.setState({
-        post: res.data.post
+    const URI = 'https://cruzz.herokuapp.com/api/post/' + this.state.post.slug + '/upvote/';
+    if(this.state.post.upvoted) {
+      axios.delete(URI).then(res => {
+        this.setState({
+          post: res.data.post
+        });
+        this.props.loaded();
+      }).catch(err => {
+        console.log(err.response);
+        this.props.loaded();
+      });
+    } else {
+      this.downVote();
+      axios.get(URI).then(res => {
+        console.log(res.data);
+        this.setState({
+          post: res.data.post
+        });
+        if(this.state.post.downvoted) {
+          this.downVote();
+        }
+      }).catch(err => {
+        console.log(err.response);
       });
       this.props.loaded();
-    }).catch(err => {
-      console.log(err.response);
-      this.props.loaded();
-    });
+    }
   }
+
+  downVote(e) {
+    const URI = 'https://cruzz.herokuapp.com/api/post/' + this.state.post.slug + '/downvote/';
+    if(this.state.post.downvoted) {
+      axios.delete(URI).then(res => {
+        this.setState({
+          post: res.data.post
+        });
+      }).catch(err => {
+        console.log(err.response);
+      });
+    } else {
+      axios.get(URI).then(res => {
+        console.log(res.data);
+        this.setState({
+          post: res.data.post
+        });
+        if(this.state.post.upvoted) {
+          this.upVote();
+        }
+      }).catch(err => {
+        console.log(err.response);
+      });
+    }
+  }
+
   favoritePost(e) {
     const URI = 'https://cruzz.herokuapp.com/api/post/' + this.state.post.slug + '/favorite/';
     if(this.state.post.favorited) {
       axios.delete(URI).then(res => {
-        console.log(res.data);
         this.setState({
           post: res.data.post
         });
@@ -67,17 +107,6 @@ class PostFeed extends Component {
         console.log(err.response);
       });
     }
-  }
-  downVote(e) {
-    const URI = 'https://cruzz.herokuapp.com/api/post/' + this.state.post.slug + '/vote/';
-    axios.delete(URI).then(res => {
-      console.log(res.data);
-      this.setState({
-        post: res.data.post
-      });
-    }).catch(err => {
-      console.log(err.response);
-    });
   }
 
   comment(e) {
@@ -148,7 +177,7 @@ class PostFeed extends Component {
               {this.state.post.tagList.map(
                 (tag, key) => {
                   return(
-                    <label className="uk-badge uk-label-success uk-padding-small uk-margin-small-left uk-margin-remove-top" key={key}>
+                    <label className="uk-badge uk-label-success uk-padding-small uk-margin-small-left uk-margin-remove-top uk-animation-scale-up" key={key}>
                       {tag}
                     </label>
                   )
@@ -166,17 +195,17 @@ class PostFeed extends Component {
             <div className="uk-flex-inline">
 
               <div>
-                <Link to="#"  className={this.state.post.upvoted ? ("uk-icon-button uk-button-primary"): ("uk-icon-button uk-button-default")} onClick={this.upVote} data-uk-icon="arrow-up" data-uk-tooltip="title: upvote; pos: bottom-center"></Link>
+                <Link to="#"  className={this.state.post.upvoted ? ("uk-icon-button uk-button-primary uk-animation-scale-down"): ("uk-icon-button uk-button-default")} onClick={this.upVote} data-uk-icon="arrow-up" data-uk-tooltip="title: upvote; pos: bottom-center"></Link>
                 <span className="uk-badge uk-label-success">{this.state.post.upvotesCount}</span>
               </div>
 
               <div className="uk-margin-small-left">
-                <Link to="#" className={this.state.post.downvoted ? ("uk-icon-button uk-button-primary"): ("uk-icon-button uk-button-default")} onClick={this.downVote} data-uk-icon="arrow-down" data-uk-tooltip="title: downvote; pos: bottom-center"></Link>
+                <Link to="#" className={this.state.post.downvoted ? ("uk-icon-button uk-button-primary uk-animation-scale-down"): ("uk-icon-button uk-button-default")} onClick={this.downVote} data-uk-icon="arrow-down" data-uk-tooltip="title: downvote; pos: bottom-center"></Link>
                 <span className="uk-badge uk-label-danger">{this.state.post.downvotesCount}</span>
               </div>
 
               <div className="uk-margin-small-left">
-                <Link to="#"  className={this.state.post.favorited ? ("uk-icon-button uk-button-danger"): ("uk-icon-button uk-button-default")} onClick={this.favoritePost} data-uk-icon="heart" data-uk-tooltip="title: add to favorites; pos: bottom-center"></Link>
+                <Link to="#"  className={this.state.post.favorited ? ("uk-icon-button uk-button-danger uk-animation-scale-down"): ("uk-icon-button uk-button-default")} onClick={this.favoritePost} data-uk-icon="heart" data-uk-tooltip="title: add to favorites; pos: bottom-center"></Link>
                 <span className="uk-badge uk-label-danger">{this.state.post.favoritesCount}</span>
               </div>
 
@@ -198,7 +227,7 @@ class PostFeed extends Component {
                 this.props.auth.user.username === this.state.post.author.username ?
                 (
                   <div className="uk-margin-small-left">
-                    <Link to={'/edit/post/' + this.state.post.slug} className="uk-icon-button uk-button-secondary" data-uk-icon="file-edit" data-uk-tooltip="title: edit; pos: bottom-center"></Link>
+                    <Link to={'/edit/post/' + this.state.post.slug} className="uk-icon-button uk-button-secondary uk-animation-scale-down" data-uk-icon="file-edit" data-uk-tooltip="title: edit; pos: bottom-center"></Link>
                   </div>
                 ):null
               }
@@ -206,7 +235,7 @@ class PostFeed extends Component {
                 this.props.auth.user.username === this.state.post.author.username ?
                 (
                   <div className="uk-margin-small-left">
-                    <Link to="#" onClick={this.deletePost} className="uk-icon-button uk-button-secondary uk-text-danger" data-uk-icon="trash" data-uk-tooltip="title: delete; pos: bottom-center"></Link>
+                    <Link to="#" onClick={this.deletePost} className="uk-icon-button uk-button-secondary uk-text-danger  uk-animation-scale-down" data-uk-icon="trash" data-uk-tooltip="title: delete; pos: bottom-center"></Link>
                   </div>
                 ):null
               }
