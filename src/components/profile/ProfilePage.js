@@ -221,7 +221,7 @@ class ProfilePage extends Component {
 
                                 <div className="uk-margin">
                                   <p>E-mail <span className="uk-margin-small-right uk-align-right" data-uk-icon="info" data-uk-tooltip="pos: top; title: Email"></span></p>
-                                  <input className="uk-input" ref="new_email" defaultValue={this.props.auth.user.email !== '' ? this.props.auth.user.email: ""} type="E-mail"/>
+                                  <input className="uk-input uk-disabled" ref="new_email" defaultValue={this.props.auth.user.email !== '' ? this.props.auth.user.email: ""} type="E-mail"/>
                                 </div>
 
                                 <div className="uk-margin">

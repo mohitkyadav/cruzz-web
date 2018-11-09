@@ -55,6 +55,13 @@ class SignIn extends Component {
                     </div>
                   </div>
                   </div>
+                  <div className="uk-text-danger uk-text-capitalize">
+                    {
+                      this.props.auth.errors ? (
+                        this.props.auth.errors.error[0]
+                      ): null
+                    }
+                  </div>
                   <p className="uk-margin">
                     <button className="uk-button uk-button-primary uk-align-center uk-width-1-3@m uk-width-1-1" type="submit">Sign-in</button>
                   </p>

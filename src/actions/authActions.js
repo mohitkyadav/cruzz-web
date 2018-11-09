@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { SET_CURRENT_USER, SET_CURRENT_PROFILE, LOADING, LOADED, AUTHENTICATED } from './types';
+import { SET_CURRENT_USER, SET_CURRENT_PROFILE, LOADING, LOADED, AUTHENTICATED, ERROR } from './types';
 
 import setAuthToken from '../utils/setAuthToken';
 import { isEmpty } from './../utils/validate';
@@ -36,6 +36,7 @@ export const signUp = (user, history) => dispatch => {
       axios.get(`https://cruzz.herokuapp.com/api/profile/retrieve/${username}/`).then(response => {
         console.log(response.data);
         dispatch({ type: SET_CURRENT_USER, payload: response.data.user });
+        dispatch({ type: ERROR, payload: '' });
         history.push('/');
       }).catch(err => {
         console.log(err.response);
@@ -43,6 +44,7 @@ export const signUp = (user, history) => dispatch => {
       });
   }).catch(err => {
     console.log(err.response);
+    dispatch({ type: ERROR, payload: err.response.data.errors });
     dispatch(loaded());
   });
 };
@@ -64,9 +66,14 @@ export const signIn = (user, history) => dispatch => {
       axios.get(`https://cruzz.herokuapp.com/api/profile/retrieve/${username}/`).then(response => {
           console.log(response.data);
           dispatch({ type: SET_CURRENT_USER, payload: response.data.user });
+          dispatch({ type: ERROR, payload: '' });
           history.push('/');
       }).catch(err => console.log(err.response));
-  }).catch(err => console.log(err.response));
+  }).catch(err => {
+    dispatch({ type: ERROR, payload: err.response.data.errors });
+    console.log(err.response)
+    dispatch(loaded());
+  });
 };
 
 export const signOut = history => dispatch => {

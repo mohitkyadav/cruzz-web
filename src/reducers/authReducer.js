@@ -5,7 +5,7 @@ import {
   LOADING,
   LOADED,
   // USER_PROFILE,
-  // ERROR
+  ERROR
 } from '../actions/types';
 
 import { isEmpty } from '../utils/validate';
@@ -16,7 +16,9 @@ const initialState = {
 	authenticated: false,
   user: {},
   userProfile: {},
-  error: ''
+  errors: {
+    error: []
+  }
 };
 
 export default function(state = initialState, action) {
@@ -44,11 +46,16 @@ export default function(state = initialState, action) {
       return {
         ...state,
         loading: false
-      }
+      };
     case AUTHENTICATED:
       return {
         ...state,
         authenticated: action.payload
+      };
+    case ERROR:
+      return {
+        ...state,
+        errors: action.payload
       };
 		default:
 			return state;

@@ -7,6 +7,24 @@ import { signUp } from '../../actions/authActions';
 import '../../static/css/common.css';
 
 class SignUp extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      mailError: ''
+    };
+    this.handleMail = this.handleMail.bind(this);
+  }
+
+  handleMail(event) {
+    const allowedDomain = 'iiitvadodara.ac.in'
+    if(event.target.value.split('@')[1] !== allowedDomain) {
+      this.setState({ mailError: 'Please use a @iiitvadodara.ac.in email'});
+    } else {
+      this.setState({ mailError: ''});
+    }
+  }
+
   signUp(event) {
     event.preventDefault();
     if (this.refs.password.value === this.refs.confirmPassword.value) {
@@ -37,7 +55,7 @@ class SignUp extends Component {
                   <div className="uk-margin">
                     <div className="uk-inline uk-width-1-1">
                       <span className=" uk-form-icon" uk-icon="icon: mail"></span>
-                      <input className="uk-input" type="email" placeholder="Email" ref="email" required={true}/>
+                      <input className="uk-input" type="email" placeholder="Email" ref="email" onChange={ (e) => {this.handleMail(e)}} required={true}/>
                     </div>
                   </div>
                   <div className="uk-margin">
@@ -71,8 +89,32 @@ class SignUp extends Component {
                       <input className="uk-input" type="password" placeholder="Confirm Password" ref="confirmPassword" required={true}/>
                     </div>
                   </div>
+                  {
+                    this.props.auth.errors ? (
+                      <div className="uk-text-danger uk-text-capitalize">
+                        {
+                          this.props.auth.errors.username
+                        }
+                      </div>
+                    ): null
+                  }
+                  {
+                    this.state.mailError !== '' ? (
+                      <div className="uk-text-danger">
+                        {
+                          this.state.mailError
+                        }
+                      </div>
+                    ): null
+                  }
                   <p className="uk-margin">
-                    <button className="uk-button uk-button-primary uk-align-center uk-width-1-3@m uk-width-1-1" type="submit">Sign-up</button>
+                    {
+                      this.state.mailError !== '' ? (
+                        <button className="uk-button uk-button-danger uk-disabled uk-align-center uk-width-1-3@m uk-width-1-1" type="submit">Sign-up</button>
+                      ): (
+                        <button className="uk-button uk-button-primary uk-align-center uk-width-1-3@m uk-width-1-1" type="submit">Sign-up</button>
+                      )
+                    }
                   </p>
                 </form>
             </div>

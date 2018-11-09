@@ -58,7 +58,7 @@ class PostOperations extends Component {
     this.props.loaded();
   }
 
-  handlePost (event) {
+  handlePost(event) {
     this.props.loading();
     const createPostURI = 'https://cruzz.herokuapp.com/api/post/create/';
     const editPostURI = 'https://cruzz.herokuapp.com/api/post/update/' + this.state.slug + '/';
