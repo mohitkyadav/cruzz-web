@@ -1,8 +1,15 @@
 # cruzz-web
-[![Build Status](https://travis-ci.com/mohitkyadav/cruzz-web.svg?token=pLJkWav1wbnbGfoLfZtG&branch=master)](https://travis-ci.com/mohitkyadav/cruzz-web)
+<p align='center'> <img src="src/static/img/index3.svg" align="center" width="150"></p>
 
-## Guidelines
-* Add tests relevant to a component or service
+<p align="center">
+<img src="https://travis-ci.com/mohitkyadav/cruzz-web.svg?token=pLJkWav1wbnbGfoLfZtG&branch=master" align="center">
+
+
+
+## Usage instructions
+* signup with a @iiitvadodara.ac.in email
+* Make sure https://cruze.herokuapp.com is live and working working
+
 
 ## Useful commands
 

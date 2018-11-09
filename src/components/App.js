@@ -66,7 +66,7 @@ class App extends Component {
             ):(
               <div>
                 <div>
-                  <img alt="loading" className="uk-align-center" src={spinner}></img>
+                  <img alt="" className="uk-align-center" src={spinner}></img>
                 </div>
               </div>
             )
