@@ -8,7 +8,7 @@
 
 ## Usage instructions
 * signup with a @iiitvadodara.ac.in email
-* Make sure https://cruze.herokuapp.com is live and working working
+* Make sure https://cruzz.herokuapp.com is live and working working
 
 
 ## Useful commands
