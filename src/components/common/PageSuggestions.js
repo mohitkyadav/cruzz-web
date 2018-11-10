@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 
 import '../../static/css/common.css';
-import spinner from '../../static/img/index.svg';
+// import spinner from '../../static/img/index.svg';
 import { connect } from 'react-redux';
 import { loading, loaded } from './../../actions/authActions';
 import axios from 'axios';
@@ -81,7 +81,7 @@ class PageSuggestions extends Component {
                   {
                     this.state.suggestedPages.length === 0 ?
                     (<h4>No suggestions for you </h4>) :
-                    (<img alt="loading" className="uk-align-center" src={spinner}></img>)
+                    (null)
                   }
                   </div>
                 </div>

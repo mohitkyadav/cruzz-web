@@ -145,16 +145,16 @@ class PostFeed extends Component {
           <div className="uk-card-header">
             <div className="uk-grid-small uk-flex-inline" data-uk-grid="true">
               <div className="uk-width-auto">
-                <img className="uk-border-circle" width="40" height="40" alt="" src={this.state.post.author.image}/>
+                <img className="uk-border-circle" width="50" height="50" alt="" src={this.state.post.author.image}/>
               </div>
               <div className="uk-width-expand">
-                <h5 className="uk-margin-remove-bottom">
+                <h4 className="uk-margin-remove-bottom">
                   <Link className="uk-link-heading" to={"/view/post/" + this.state.post.slug}>
                     {this.state.post.title}
                   </Link>
-                </h5>
+                </h4>
                 <p className="uk-margin-remove-top">
-                  <Link className="uk-link-heading" to={
+                  <Link className="uk-link-text uk-text-primary" to={
                     this.state.post.author.username !== this.props.auth.user.username ? ("/user/" + this.state.post.author.username)
                     : ("/profile/" + this.state.post.author.username)
                   }>{this.state.post.author.first_name}</Link>

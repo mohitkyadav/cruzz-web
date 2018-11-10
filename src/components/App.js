@@ -57,7 +57,7 @@ class App extends Component {
               <div>
                 {this.state.posts.map((post, key) => {
                   return (
-                    <div key={key}>
+                    <div key={key} data-uk-scrollspy="cls: uk-animation-slide-bottom-medium; target: > div; delay: 40;">
                       <PostFeed post={post} full={false}/>
                     </div>
                   )

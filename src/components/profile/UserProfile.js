@@ -199,8 +199,8 @@ class UserProfile extends Component {
               <div className="uk-card uk-card-default uk-padding-remove uk-card-body">
 
                 <ul className="uk-flex-center uk-subnav uk-subnav-pill" data-uk-switcher="animation: uk-animation-slide-top-small, uk-animation-slide-top-small; duration: 200;">
-                  <li className="uk-active"><Link to="#">Following - {this.state.profile.followingCount}</Link></li>
-                  <li><Link to="#">Followers - {this.state.profile.followersCount}</Link></li>
+                  <li className="uk-active uk-width-1-2"><Link to="#">Following - {this.state.profile.followingCount}</Link></li>
+                  <li className="uk-width-1-2"><Link to="#">Followers - {this.state.profile.followersCount}</Link></li>
                 </ul>
                 <ul className="uk-switcher uk-margin">
                   <div>
@@ -233,7 +233,9 @@ class UserProfile extends Component {
                           {
                             this.state.following.length === 0 ?
                             (<h2>Not following anyone yet ;(</h2>) :
-                            (<img alt="loading" className="uk-align-center" src={spinner}></img>)
+                            (
+                              <div data-uk-spinner="ration: 3"></div>
+                            )
                           }
                           </div>
                         </div>

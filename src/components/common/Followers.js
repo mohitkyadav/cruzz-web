@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import axios from 'axios';
 
 import { loading, loaded } from '../../actions/authActions';
-import spinner from '../../static/img/index.svg';
 
 class Followers extends Component {
 
@@ -77,7 +76,7 @@ class Followers extends Component {
                         {
                           this.state.followers.length === 0 ?
                           (<h2>No followers yet ;(</h2>) :
-                          (<img alt="loading" className="uk-align-center" src={spinner}></img>)
+                          (null)
                         }
                         </div>
                       </div>
