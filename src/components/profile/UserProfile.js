@@ -167,13 +167,17 @@ class UserProfile extends Component {
                         </h3>
                         <h5 className="uk-margin-remove-top">{this.state.profile.bio ? this.state.profile.bio: "dattebayo! ✌"}</h5>
                       </div>
-                      <div className="uk-width-auto uk-margin-small-top">
-                        {
-                          this.state.profile.following ?
-                          (<button onClick={this.handleFollow} className="uk-button uk-button-small uk-button-default">Following</button>):
-                          (<button onClick={this.handleFollow} className="uk-button uk-button-small uk-button-default">Follow</button>)
-                        }
-                      </div>
+                      {
+                        this.state.profile.username !== this.props.auth.user.username ? (
+                          <div className="uk-width-auto uk-margin-small-top">
+                            {
+                              this.state.profile.following ?
+                              (<button onClick={this.handleFollow} className="uk-button uk-button-small uk-button-default">Following</button>):
+                              (<button onClick={this.handleFollow} className="uk-button uk-button-small uk-button-default">Follow</button>)
+                            }
+                          </div>
+                        ): null
+                      }
                     </div>
                   </div>
 
