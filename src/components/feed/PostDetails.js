@@ -152,16 +152,26 @@ class PostDetails extends Component {
                         <div className="uk-card uk-card-default uk-align-center uk-width-4-5@m">
 
                         <div className="uk-card-header uk-padding-remove-bottom">
-                          <div className="uk-grid-small uk-flex-inline" datauk-grid="true">
+                          <div className="uk-grid-small uk-width-1-1 uk-flex-inline" datauk-grid="true">
                             <div className="uk-width-auto">
                               <img className="uk-border-circle" width="40" alt="" height="40" src={comment.author.image}/>
                             </div>
-                            <div className="uk-width-expand">
+                            <div className="uk-width-1-1">
                               <Link className="uk-link-heading" to={
                                   comment.author.username === this.props.auth.user.username ? ("/profile/" + this.props.auth.user.username)
                                   : ("/profile/" + comment.author.username)
                                 }>{comment.author.first_name}
                               </Link>
+                              {
+                                comment.author.username === this.state.posts[0].author.username ? (
+                                  <span className="uk-margin-small-left uk-align-right" uk-icon="star" data-uk-tooltip="title: author; pos: top"></span>
+                                ) : null
+                              }
+                              {
+                                comment.author.official_page ? (
+                                  <span className="uk-margin-small-left uk-align-right uk-animation-scale-down" uk-icon="check" data-uk-tooltip="title: official; pos: top"></span>
+                                ): null
+                              }
                               <p className="uk-text-meta uk-margin-remove-top"><time dateTime="2016-04-01T19:00"> commented on {this.handleDateTime(comment.createdAt)}</time></p>
                             </div>
                           </div>

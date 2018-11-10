@@ -93,7 +93,6 @@ export const signOut = history => dispatch => {
 export const setCurrentUser = username => dispatch => {
   dispatch(loading());
 	axios.get(`https://cruzz.herokuapp.com/api/profile/retrieve/${username}/`).then(response => {
-    console.log(response.data);
     dispatch({ type: SET_CURRENT_USER, payload: response.data.user });
     dispatch({ type: SET_CURRENT_PROFILE, payload: response.data.profile });
     dispatch(loaded());
