@@ -8,7 +8,7 @@
 
 ## Usage instructions
 * signup with a @iiitvadodara.ac.in email
-* Make sure https://cruze.herokuapp.com is live and working working
+* Make sure https://cruze.herokuapp.com is live and working
 
 
 ## Useful commands
@@ -22,9 +22,4 @@ yard build
 ```
 ```
 yard test
-```
-### deploy
-requires push access, use carefully.
-```
-npm run deploy
 ```
