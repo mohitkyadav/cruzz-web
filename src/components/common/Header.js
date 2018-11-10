@@ -49,7 +49,7 @@ class Header extends Component {
                 <div className="uk-grid-small uk-flex-middle" uk-grid="true">
                   <div className="uk-width-expand">
                     <form className="uk-search uk-search-navbar uk-width-1-1">
-                      <input className="uk-search-input" type="search" placeholder="Search..." autoFocus/>
+                      <input className="uk-search-input" type="search" placeholder="Search...coming soon..." autoFocus/>
                     </form>
                   </div>
                 </div>

@@ -54,19 +54,23 @@ class PageSuggestions extends Component {
                   {this.state.suggestedPages.map((f, key) => {
                     return (
                       <ul className="uk-list" key={key}>
-                        <li className="uk-padding-small">
-                          <Link className="uk-link-heading" to={"/user/" + f.username}>
-                            <div className="uk-grid-small uk-flex-inline uk-width-1-1 uk-margin-remove-top" uk-grid="true">
-                              <div className="uk-width-1-5">
-                                <img className="uk-border-circle" width="50" height="50" alt="me" src={f.image}/>
-                              </div>
-                              <div className="uk-width-4-5 uk-text-left">
-                                <h6 className="uk-margin-remove-bottom">{f.first_name}</h6>
-                                <p className="uk-text-meta uk-margin-remove-top">{f.bio}</p>
-                              </div>
-                            </div>
-                          </Link>
-                        </li>
+                        {
+                          this.props.auth.user.username !== f.username ? (
+                            <li className="uk-padding-small">
+                              <Link className="uk-link-heading" to={"/user/" + f.username}>
+                                <div className="uk-grid-small uk-flex-inline uk-width-1-1 uk-margin-remove-top" uk-grid="true">
+                                  <div className="uk-width-1-5">
+                                    <img className="uk-border-circle" width="50" height="50" alt="me" src={f.image}/>
+                                  </div>
+                                  <div className="uk-width-4-5 uk-text-left">
+                                    <h6 className="uk-margin-remove-bottom">{f.first_name}</h6>
+                                    <p className="uk-text-meta uk-margin-remove-top">{f.bio}</p>
+                                  </div>
+                                </div>
+                              </Link>
+                            </li>
+                          ): null
+                        }
                       </ul>
                     )
                   })}

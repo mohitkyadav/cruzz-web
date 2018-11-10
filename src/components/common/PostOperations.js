@@ -135,9 +135,9 @@ class PostOperations extends Component {
                   {
                     this.state.operation === "edit" ?
                     (
-                      <input className="uk-input" name="tagList[]" ref="tagList" rows="5" value={this.state.tagList} onChange={this.handleTags} placeholder="Tags"/>
+                      <input className="uk-input" name="tagList[]" ref="tagList" rows="5" value={this.state.tagList} onChange={this.handleTags} placeholder="comma separated tags"/>
                     ): (
-                      <input className="uk-input" name="tagList[]" ref="tagList" rows="5" value={this.state.tagList} onChange={this.handleTags} placeholder="Tag List"/>
+                      <input className="uk-input" name="tagList[]" ref="tagList" rows="5" value={this.state.tagList} onChange={this.handleTags} placeholder="comma separated tags"/>
                     )
                   }
                 </div>
