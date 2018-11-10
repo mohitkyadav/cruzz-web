@@ -27,8 +27,8 @@ yard test
 ## Demo
 ### Feed Page
 
-<img src="./demo/feed.png" alt="feed page" align="center">
+<img src="demo/Feed.png" alt="feed page" align="center">
 
 ### Profile Page
 
-<img src="./demo/profile.png" alt="feed page" align="center">
+<img src="demo/Profile.png" alt="feed page" align="center">
