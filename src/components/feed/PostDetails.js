@@ -61,6 +61,7 @@ class PostDetails extends Component {
           body: this.state.commentBody
         }
       }
+      this.props.loading()
       axios.post(edtURI, comment).then(res => {
         this.setState({
           commentBody: ''
@@ -68,7 +69,9 @@ class PostDetails extends Component {
         this.getComments();
       }).catch(err => {
         console.log(err.response);
+        this.props.loaded()
       });
+
     event.preventDefault();
   }
 
@@ -92,13 +95,16 @@ class PostDetails extends Component {
   }
 
   getComments() {
+    this.props.loading()
     const URI = 'https://cruzz.herokuapp.com/api/post/' + this.props.match.params.slug + '/comments/view?limit=100&offset=0';
     axios.get(URI).then(res => {
       this.setState({
-        comments: res.data.comments
+        comments: res.data.comments.reverse()
       });
+      this.props.loaded()
     }).catch(err => {
       console.log(err.response);
+      this.props.loaded()
     });
   }
 
@@ -166,26 +172,39 @@ class PostDetails extends Component {
                         </div>
 
                         <div className="uk-card-footer uk-width-1-1 uk-flex-inline">
-                          <div className="uk-animation-scale-down">
+                          {
+                            this.props.auth.user.username === comment.author.username ? (
+                            <div className="uk-animation-scale-down">
 
-                            <div id={comment.id} data-uk-modal="true">
-                              <div className="uk-modal-dialog uk-modal-body">
-                                <form className="uk-padding-small" onSubmit={(e) => this.editComment(e, comment.id)}>
-                                  <input className="uk-input uk-form-large" onChange={this.handleCommentBody} defaultValue={comment.body} ref="commentBody" type="text" placeholder="type your comment..."/>
-                                  <p>
-                                    hit enter to update your comment or click cancel to go back
-                                  </p>
-                                  <button className="uk-button uk-button-secondary uk-margin-small-top uk-modal-close" type="button">Cancel</button>
-                                </form>
+                              <button data-uk-toggle={"target: #edt-cmnt-" + comment.id} className="uk-icon-button uk-button-secondary" data-uk-icon="file-edit" data-uk-tooltip="title: edit; pos: bottom-center"></button>
+                              <div id={"edt-cmnt-"+comment.id} data-uk-modal="true">
+                                <div className="uk-modal-dialog uk-modal-body">
+                                  <form className="uk-padding-small" onSubmit={(e) => this.editComment(e, comment.id)}>
+                                    <input className="uk-input uk-form-large" onChange={this.handleCommentBody} defaultValue={comment.body} ref="commentBody" type="text" placeholder="type your comment..."/>
+                                    <p>
+                                      hit enter to update your comment or click cancel to go back
+                                    </p>
+                                    <div className="uk-flex-inline uk-width-1-1">
+                                      <button className="uk-button uk-button-secondary uk-margin-small-top uk-modal-close" type="button">Cancel</button>
+                                      {
+                                        this.props.auth.loading ? (
+                                          <div className="uk-text-right uk-align-right uk-margin-small-right uk-animation-scale-up" data-uk-spinner="ratio: 2"></div>
+                                        ) : (<span className="uk-margin-small-right uk-align-right uk-animation-scale-down uk-text-success uk-animation-reverse" data-uk-icon="icon: check; ratio: 2"></span>)
+                                      }
+                                    </div>
+                                  </form>
+                                </div>
                               </div>
-                            </div>
 
-                            {/* <button data-uk-toggle={"target: #" + comment.id} className="uk-icon-button uk-button-secondary" data-uk-icon="file-edit" data-uk-tooltip="title: edit; pos: bottom-center"></button> */}
-                          </div>
-
-                          <div className="uk-animation-scale-down">
-                            <Link to="#" className="uk-icon-button uk-text-danger uk-button-secondary" onClick={ (e) => this.deleteComment(e, comment.id)} data-uk-icon="trash" data-uk-tooltip="title: delete; pos: bottom-center"></Link>
-                          </div>
+                            </div>): null
+                          }
+                          {
+                            this.props.auth.user.username === comment.author.username ? (
+                              <div className="uk-animation-scale-down">
+                                <Link to="#" className="uk-icon-button uk-text-danger uk-margin-small-left uk-button-secondary" onClick={ (e) => this.deleteComment(e, comment.id)} data-uk-icon="trash" data-uk-tooltip="title: delete; pos: bottom-center"></Link>
+                              </div>
+                            ): null
+                          }
                         </div>
 
                         </div>

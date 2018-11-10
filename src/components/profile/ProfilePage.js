@@ -244,7 +244,7 @@ class ProfilePage extends Component {
                                 {
                                   this.props.auth.loading ? (
                                     <div className="uk-text-right uk-animation-scale-up" data-uk-spinner="ratio: 1.5"></div>
-                                  ) : (<span className="uk-margin-small-right uk-animation-scale-down uk-text-success" data-uk-icon="icon: check; ratio: 2" data-uk-tooltip="pos: top; title: all done 👌"></span>)
+                                  ) : (<span className="uk-margin-small-right uk-animation-scale-down uk-animation-reverse uk-text-success" data-uk-icon="icon: check; ratio: 2"></span>)
                                 }
                               </div>
                             </form>
