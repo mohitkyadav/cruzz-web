@@ -2,7 +2,7 @@
 <p align='center'> <img src="src/static/img/index3.svg" align="center" width="150"></p>
 
 <p align="center">
-<img src="https://travis-ci.org/mohitkyadav/cruzz-web.svg?token=pLJkWav1wbnbGfoLfZtG&branch=master" align="center">
+<img src="https://travis-ci.org/mohitkyadav/cruzz-web.svg?branch=master" align="center">
 
 
 
