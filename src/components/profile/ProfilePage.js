@@ -280,7 +280,7 @@ class ProfilePage extends Component {
               <div className="uk-card uk-card-default uk-padding-remove uk-card-body">
                 <ul className="uk-flex-center uk-subnav uk-subnav-pill" data-uk-switcher="animation: uk-animation-slide-top-small, uk-animation-slide-top-small; duration: 200;">
                   <li className="uk-active uk-width-1-2"><Link to="#">Following - {this.props.auth.userProfile.followingCount}</Link></li>
-                  <li className="uk-width-1-2"><Link to="#">Followers - {this.props.auth.userProfile.followersCount}</Link></li>
+                  <li className="uk-width-1-2 uk-padding-remove"><Link to="#">Followers - {this.props.auth.userProfile.followersCount}</Link></li>
                 </ul>
                 <ul className="uk-switcher uk-margin">
                   <div>

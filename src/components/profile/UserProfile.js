@@ -200,7 +200,7 @@ class UserProfile extends Component {
 
                 <ul className="uk-flex-center uk-subnav uk-subnav-pill" data-uk-switcher="animation: uk-animation-slide-top-small, uk-animation-slide-top-small; duration: 200;">
                   <li className="uk-active uk-width-1-2"><Link to="#">Following - {this.state.profile.followingCount}</Link></li>
-                  <li className="uk-width-1-2"><Link to="#">Followers - {this.state.profile.followersCount}</Link></li>
+                  <li className="uk-width-1-2 uk-padding-remove"><Link to="#">Followers - {this.state.profile.followersCount}</Link></li>
                 </ul>
                 <ul className="uk-switcher uk-margin">
                   <div>
