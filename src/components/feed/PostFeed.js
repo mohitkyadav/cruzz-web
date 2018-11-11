@@ -143,17 +143,17 @@ class PostFeed extends Component {
         <div className="uk-card uk-card-default uk-align-center uk-width-1-1@m uk-box-shadow-hover-medium uk-box-shadow-small">
 
           <div className="uk-card-header">
-            <div className="uk-grid-small uk-flex-inline" data-uk-grid="true">
+            <div className="uk-grid-small uk-width-auto uk-margin-remove-bottom uk-flex-inline uk-align-left" data-uk-grid="true">
               <div className="uk-width-auto">
-                <img className="uk-border-circle" width="50" height="50" alt="" src={this.state.post.author.image}/>
+                <img className="uk-border-circle ov-post-author-img" alt="" src={this.state.post.author.image}/>
               </div>
               <div className="uk-width-expand">
                 <h4 className="uk-margin-remove-bottom">
-                  <Link className="uk-link-heading" to={"/view/post/" + this.state.post.slug}>
+                  <Link className="uk-link-heading uk-text-top" to={"/view/post/" + this.state.post.slug}>
                     {this.state.post.title}
                   </Link>
                 </h4>
-                <p className="uk-margin-remove-top">
+                <p className="uk-margin-remove-top uk-text-small uk-text-top">
                   <Link className="uk-link-text uk-text-primary" to={
                     this.state.post.author.username !== this.props.auth.user.username ? ("/user/" + this.state.post.author.username)
                     : ("/profile/" + this.state.post.author.username)
@@ -165,11 +165,11 @@ class PostFeed extends Component {
                 </p>
               </div>
             </div>
-            <div className="uk-flex-inline uk-align-right">
+            <div className="uk-flex-inline uk-align-right@s uk-margin-remove-top">
               {this.state.post.tagList.map(
                 (tag, key) => {
                   return(
-                    <label className="uk-badge uk-label-success uk-padding-small uk-margin-small-left uk-margin-remove-top uk-animation-scale-up" key={key}>
+                    <label className="uk-badge uk-label-success ov-post-tag uk-padding-small ov-padding-remove uk-margin-small-left uk-margin-remove-top uk-animation-scale-up" key={key}>
                       {tag}
                     </label>
                   )
