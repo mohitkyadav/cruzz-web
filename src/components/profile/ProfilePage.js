@@ -267,11 +267,17 @@ class ProfilePage extends Component {
             </div>
           </div>
 
-           <div className="uk-width-auto uk-align-center">
-              <div className="uk-card uk-card-default uk-card-body">
+           <div className="uk-width-1-1 uk-flex-inline uk-align-center">
+              <div className="uk-card uk-width-1-2@m uk-padding-small uk-card-default uk-card-body">
                 <h4>
-                  Create a new post
+                  <Link className="uk-margin-small-left uk-button uk-button-text" to="/new/post"> Create a new post</Link>
                   <Link className="uk-margin-small-left" to="/new/post" data-uk-icon="icon: plus-circle; ratio: 2"></Link>
+                </h4>
+              </div>
+              <div className="uk-card uk-width-1-2@m uk-margin-small-left uk-padding-small uk-card-default uk-card-body">
+                <h4>
+                  <Link className="uk-margin-small-left uk-button uk-button-text" to={"/posts/favorite/"+ this.props.auth.user.username}>Show your favorite posts</Link>
+                  <Link className="uk-margin-small-left" to={"/posts/favorite/"+ this.props.auth.user.username} data-uk-icon="icon: heart; ratio: 2"></Link>
                 </h4>
               </div>
             </div>

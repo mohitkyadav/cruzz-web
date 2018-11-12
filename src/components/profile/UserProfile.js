@@ -243,7 +243,7 @@ class UserProfile extends Component {
                     }
                     {
                       this.state.following.length > 0 ?
-                      (<Link className="uk-button uk-margin-bottom-small" to={"/user/" + this.state.profile.username + "/following"}>Show more people you follow</Link>)
+                      (<Link className="uk-button uk-margin-bottom-small" to={"/user/" + this.state.profile.username + "/following"}>Show more</Link>)
                       : null
                     }
                   </div>
@@ -285,7 +285,7 @@ class UserProfile extends Component {
                     }
                     {
                       this.state.followers.length > 0 ?
-                      (<Link className="uk-button uk-margin-bottom-small" to={"/user/" + this.state.profile.username + "/followers"}>Show all your followers</Link>)
+                      (<Link className="uk-button uk-margin-bottom-small" to={"/user/" + this.state.profile.username + "/followers"}>Show more followers</Link>)
                       : null
                     }
                   </div>

@@ -91,10 +91,17 @@ class SignUp extends Component {
                   </div>
                   {
                     this.props.auth.errors ? (
-                      <div className="uk-text-danger uk-text-capitalize">
-                        {
-                          this.props.auth.errors.username
-                        }
+                      <div>
+                        <div className="uk-text-danger uk-text-capitalize">
+                          {
+                            this.props.auth.errors.email
+                          }
+                        </div>
+                        <div className="uk-text-danger uk-text-capitalize">
+                          {
+                            this.props.auth.errors.username
+                          }
+                        </div>
                       </div>
                     ): null
                   }

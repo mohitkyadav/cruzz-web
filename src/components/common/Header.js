@@ -49,7 +49,7 @@ class Header extends Component {
                 <div className="uk-grid-small uk-flex-middle" uk-grid="true">
                   <div className="uk-width-expand">
                     <form className="uk-search uk-search-navbar uk-width-1-1">
-                      <input className="uk-search-input" type="search" placeholder="Search...coming soon..." autoFocus/>
+                      <input className="uk-search-input" type="search" placeholder="Search tags..." autoFocus/>
                     </form>
                   </div>
                 </div>
@@ -73,12 +73,12 @@ class Header extends Component {
                 ):
                 null
               }
-              {
+              {/* {
                 this.props.auth.authenticated ? (
                   <li><Link className="ov-color-white ov-nav-link" to="/" uk-icon="icon: rss; ratio: 1.2" uk-tooltip="title: Feed; pos: bottom-center"></Link></li>
                 ):
                 null
-              }
+              } */}
               {
                 this.props.auth.authenticated ?
                 <li><Link className="ov-color-white ov-nav-link" onClick={this.signOut.bind(this)} to="#" uk-icon="icon: sign-out; ratio: 1.2" uk-tooltip="title: Sign out; pos: bottom-center"></Link></li> :
