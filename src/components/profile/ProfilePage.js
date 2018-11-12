@@ -183,7 +183,7 @@ class ProfilePage extends Component {
                         }
                       <div className="uk-position-center">
                         <form style={{ display: 'none' }} onSubmit={this.uploadProfilePic.bind(this)}>
-                          <input id="dp" name="dp" type="file" ref="dp" onChange={(e) => this.uploadProfilePic(e)}/>
+                          <input id="dp" name="dp" label="Profile Picture" type="file" ref="dp" onChange={(e) => this.uploadProfilePic(e)}/>
                         </form>
                         {
                           !this.props.auth.loading ?
@@ -216,22 +216,22 @@ class ProfilePage extends Component {
                                 <legend className="uk-legend">Update  Profile</legend>
                                 <div className="uk-margin">
                                   <p>First Name <span className="uk-margin-small-right uk-align-right" data-uk-icon="info" data-uk-tooltip="pos: top; title: Full name if page"></span></p>
-                                  <input className="uk-input" ref="new_first_name" defaultValue={this.props.auth.user.first_name !== '' ? this.props.auth.user.first_name: "First Name"} type="text"/>
+                                  <input className="uk-input" label="First Name" ref="new_first_name" defaultValue={this.props.auth.user.first_name !== '' ? this.props.auth.user.first_name: "First Name"} type="text"/>
                                 </div>
 
                                 <div className="uk-margin">
                                   <p>Last Name <span className="uk-margin-small-right uk-align-right" data-uk-icon="info" data-uk-tooltip="pos: top; title: Leave blank if page"></span></p>
-                                  <input className="uk-input" ref="new_last_name" defaultValue={this.props.auth.user.last_name !=='' ? this.props.auth.user.last_name: "Last Name"} type="text"/>
+                                  <input className="uk-input" label="Last Name" ref="new_last_name" defaultValue={this.props.auth.user.last_name !=='' ? this.props.auth.user.last_name: "Last Name"} type="text"/>
                                 </div>
 
                                 <div className="uk-margin">
                                   <p>E-mail <span className="uk-margin-small-right uk-align-right" data-uk-icon="info" data-uk-tooltip="pos: top; title: Email"></span></p>
-                                  <input className="uk-input uk-disabled" ref="new_email" defaultValue={this.props.auth.user.email !== '' ? this.props.auth.user.email: ""} type="E-mail"/>
+                                  <input className="uk-input uk-disabled" label="E-mail" ref="new_email" defaultValue={this.props.auth.user.email !== '' ? this.props.auth.user.email: ""} type="E-mail"/>
                                 </div>
 
                                 <div className="uk-margin">
                                   <p>Bio</p>
-                                  <textarea className="uk-textarea" ref="new_bio" placeholder="Bio" rows="5"></textarea>
+                                  <textarea className="uk-textarea" label="Bio" ref="new_bio" placeholder="Bio" rows="5"></textarea>
                                 </div>
 
                               </fieldset>
@@ -270,14 +270,14 @@ class ProfilePage extends Component {
            <div className="uk-width-1-1 uk-flex-inline uk-align-center">
               <div className="uk-card uk-width-1-2@m uk-padding-small uk-card-default uk-card-body">
                 <h4>
-                  <Link className="uk-margin-small-left uk-button uk-button-text" to="/new/post"> Create a new post</Link>
-                  <Link className="uk-margin-small-left" to="/new/post" data-uk-icon="icon: plus-circle; ratio: 2"></Link>
+                  <Link aria-label="Create new post" className="uk-margin-small-left uk-button uk-button-text" to="/new/post"> Create a new post</Link>
+                  <Link aria-label="Create new post" className="uk-margin-small-left" to="/new/post" data-uk-icon="icon: plus-circle; ratio: 2"></Link>
                 </h4>
               </div>
               <div className="uk-card uk-width-1-2@m uk-margin-small-left uk-padding-small uk-card-default uk-card-body">
                 <h4>
-                  <Link className="uk-margin-small-left uk-button uk-button-text" to={"/posts/favorite/"+ this.props.auth.user.username}>Show your favorite posts</Link>
-                  <Link className="uk-margin-small-left" to={"/posts/favorite/"+ this.props.auth.user.username} data-uk-icon="icon: heart; ratio: 2"></Link>
+                  <Link aria-label="View your favorite post" className="uk-margin-small-left uk-button uk-button-text" to={"/posts/favorite/"+ this.props.auth.user.username}>Show your favorite posts</Link>
+                  <Link aria-label="View your favorite post" className="uk-margin-small-left" to={"/posts/favorite/"+ this.props.auth.user.username} data-uk-icon="icon: heart; ratio: 2"></Link>
                 </h4>
               </div>
             </div>
@@ -297,7 +297,7 @@ class ProfilePage extends Component {
                             return (
                               <div key={key}>
                                 <li className="uk-padding-small">
-                                  <Link className="uk-link-heading" to={"/user/" + f.username}>
+                                  <Link aria-label={f.username + "'s profile"} className="uk-link-heading" to={"/user/" + f.username}>
                                     <div className="uk-grid-small uk-flex-inline uk-width-1-1 uk-margin-remove-top" uk-grid="true">
                                       <div className="uk-width-1-5">
                                         <img className="uk-border-circle" width="50" height="50" alt="me" src={f.image}/>
@@ -327,7 +327,7 @@ class ProfilePage extends Component {
                     }
                     {
                       this.state.following.length > 0 ?
-                      (<Link className="uk-button uk-margin-bottom-small" to={"/user/" + this.props.auth.user.username + "/following"}>Show more people you follow</Link>)
+                      (<Link aria-label={this.props.auth.user.username + "'s following"} className="uk-button uk-margin-bottom-small" to={"/user/" + this.props.auth.user.username + "/following"}>Show more people you follow</Link>)
                       : null
                     }
                   </div>
@@ -339,7 +339,7 @@ class ProfilePage extends Component {
                             return (
                               <div key={key}>
                                 <li className="uk-padding-small">
-                                  <Link className="uk-link-heading" to={"/user/" + f.username}>
+                                  <Link aria-label={f.username + "'s profile"}  className="uk-link-heading" to={"/user/" + f.username}>
                                     <div className="uk-grid-small uk-flex-inline uk-width-1-1 uk-margin-remove-top" uk-grid="true">
                                       <div className="uk-width-1-5">
                                         <img className="uk-border-circle" width="50" height="50" alt="me" src={f.image}/>
@@ -369,7 +369,7 @@ class ProfilePage extends Component {
                     }
                     {
                       this.state.followers.length > 0 ?
-                      (<Link className="uk-button uk-margin-bottom-small" to={"/user/" + this.props.auth.user.username + "/followers"}>Show all your followers</Link>)
+                      (<Link aria-label={this.props.auth.user.username + "'s followers"} className="uk-button uk-margin-bottom-small" to={"/user/" + this.props.auth.user.username + "/followers"}>Show all your followers</Link>)
                       : null
                     }
                   </div>

@@ -149,12 +149,12 @@ class PostFeed extends Component {
               </div>
               <div className="uk-width-expand">
                 <h4 className="uk-margin-remove-bottom">
-                  <Link className="uk-link-heading uk-text-top" to={"/view/post/" + this.state.post.slug}>
+                  <Link aria-label="View post" className="uk-link-heading uk-text-top" to={"/view/post/" + this.state.post.slug}>
                     {this.state.post.title}
                   </Link>
                 </h4>
                 <p className="uk-margin-remove-top uk-text-small uk-text-top">
-                  <Link className="uk-link-text uk-text-primary" to={
+                  <Link aria-label={this.state.post.author.username + "'s profile"} className="uk-link-text uk-text-primary" to={
                     this.state.post.author.username !== this.props.auth.user.username ? ("/user/" + this.state.post.author.username)
                     : ("/profile/" + this.state.post.author.username)
                   }>{this.state.post.author.first_name}</Link>
@@ -170,7 +170,7 @@ class PostFeed extends Component {
                 (tag, key) => {
                   return(
                     <label className="uk-badge uk-label-success ov-post-tag uk-padding-small ov-padding-remove uk-margin-small-left uk-margin-remove-top uk-animation-scale-up" key={key}>
-                      <Link className="uk-link uk-link-reset" to={"/posts/bytag/" + tag}>
+                      <Link aria-label={"Posts tagged with " + tag} className="uk-link uk-link-reset" to={"/posts/bytag/" + tag}>
                         {tag}
                       </Link>
                     </label>
@@ -189,17 +189,17 @@ class PostFeed extends Component {
             <div className="uk-flex-inline">
 
               <div>
-                <Link to="#"  className={this.state.post.upvoted ? ("uk-icon-button uk-button-primary uk-animation-scale-down"): ("uk-icon-button uk-button-default")} onClick={this.upVote} data-uk-icon="arrow-up" data-uk-tooltip="title: upvote; pos: bottom-center"></Link>
+                <Link to="#" aria-label="Upvote" className={this.state.post.upvoted ? ("uk-icon-button uk-button-primary uk-animation-scale-down"): ("uk-icon-button uk-button-default")} onClick={this.upVote} data-uk-icon="arrow-up" data-uk-tooltip="title: upvote; pos: bottom-center"></Link>
                 <span className="uk-badge uk-label-success">{this.state.post.upvotesCount}</span>
               </div>
 
               <div className="uk-margin-small-left">
-                <Link to="#" className={this.state.post.downvoted ? ("uk-icon-button uk-button-primary uk-animation-scale-down"): ("uk-icon-button uk-button-default")} onClick={this.downVote} data-uk-icon="arrow-down" data-uk-tooltip="title: downvote; pos: bottom-center"></Link>
+                <Link to="#" aria-label="Downvote" className={this.state.post.downvoted ? ("uk-icon-button uk-button-primary uk-animation-scale-down"): ("uk-icon-button uk-button-default")} onClick={this.downVote} data-uk-icon="arrow-down" data-uk-tooltip="title: downvote; pos: bottom-center"></Link>
                 <span className="uk-badge uk-label-danger">{this.state.post.downvotesCount}</span>
               </div>
 
               <div className="uk-margin-small-left">
-                <Link to="#"  className={this.state.post.favorited ? ("uk-icon-button uk-button-danger uk-animation-scale-down"): ("uk-icon-button uk-button-default")} onClick={this.favoritePost} data-uk-icon="heart" data-uk-tooltip="title: add to favorites; pos: bottom-center"></Link>
+                <Link to="#" aria-label="Add to favourites"  className={this.state.post.favorited ? ("uk-icon-button uk-button-danger uk-animation-scale-down"): ("uk-icon-button uk-button-default")} onClick={this.favoritePost} data-uk-icon="heart" data-uk-tooltip="title: add to favorites; pos: bottom-center"></Link>
                 <span className="uk-badge uk-label-danger">{this.state.post.favoritesCount}</span>
               </div>
 
@@ -207,9 +207,9 @@ class PostFeed extends Component {
                 {
                   this.props.full ?
                   (
-                    <Link to="#" className="uk-icon-button uk-button-default" data-uk-icon="comments" data-uk-tooltip="title: comments; pos: bottom-center"></Link>
+                    <Link to="#" aria-label="Comment" className="uk-icon-button uk-button-default" data-uk-icon="comments" data-uk-tooltip="title: comments; pos: bottom-center"></Link>
                   ): (
-                    <Link to={'/view/post/' + this.state.post.slug} className="uk-icon-button uk-button-default" data-uk-icon="comments" data-uk-tooltip="title: comment; pos: bottom-center"></Link>
+                    <Link to={'/view/post/' + this.state.post.slug} aria-label="Comment" className="uk-icon-button uk-button-default" data-uk-icon="comments" data-uk-tooltip="title: comment; pos: bottom-center"></Link>
                   )
                 }
                 <span className="uk-badge">{this.state.post.commentsCount}</span>
@@ -221,7 +221,7 @@ class PostFeed extends Component {
                 this.props.auth.user.username === this.state.post.author.username ?
                 (
                   <div className="uk-margin-small-left">
-                    <Link to={'/edit/post/' + this.state.post.slug} className="uk-icon-button uk-button-secondary uk-animation-scale-down" data-uk-icon="file-edit" data-uk-tooltip="title: edit; pos: bottom-center"></Link>
+                    <Link aria-label="Edit Post" to={'/edit/post/' + this.state.post.slug} className="uk-icon-button uk-button-secondary uk-animation-scale-down" data-uk-icon="file-edit" data-uk-tooltip="title: edit; pos: bottom-center"></Link>
                   </div>
                 ):null
               }
@@ -229,7 +229,7 @@ class PostFeed extends Component {
                 this.props.auth.user.username === this.state.post.author.username ?
                 (
                   <div className="uk-margin-small-left">
-                    <Link to="#" onClick={this.deletePost} className="uk-icon-button uk-button-secondary uk-text-danger  uk-animation-scale-down" data-uk-icon="trash" data-uk-tooltip="title: delete; pos: bottom-center"></Link>
+                    <Link aria-label="Delete Post" to="#" onClick={this.deletePost} className="uk-icon-button uk-button-secondary uk-text-danger  uk-animation-scale-down" data-uk-icon="trash" data-uk-tooltip="title: delete; pos: bottom-center"></Link>
                   </div>
                 ):null
               }

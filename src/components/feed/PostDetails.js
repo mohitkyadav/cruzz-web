@@ -157,7 +157,7 @@ class PostDetails extends Component {
                               <img className="uk-border-circle" width="40" alt="" height="40" src={comment.author.image}/>
                             </div>
                             <div className="uk-width-1-1">
-                              <Link className="uk-link-heading" to={
+                              <Link className="uk-link-heading" aria-label={comment.author.username + "'s profile"} to={
                                   comment.author.username === this.props.auth.user.username ? ("/profile/" + this.props.auth.user.username)
                                   : ("/profile/" + comment.author.username)
                                 }>{comment.author.first_name}
@@ -211,7 +211,7 @@ class PostDetails extends Component {
                           {
                             this.props.auth.user.username === comment.author.username ? (
                               <div className="uk-animation-scale-down">
-                                <Link to="#" className="uk-icon-button uk-text-danger uk-margin-small-left uk-button-secondary" onClick={ (e) => this.deleteComment(e, comment.id)} data-uk-icon="trash" data-uk-tooltip="title: delete; pos: bottom-center"></Link>
+                                <Link to="#" aria-label="Delete comment" className="uk-icon-button uk-text-danger uk-margin-small-left uk-button-secondary" onClick={ (e) => this.deleteComment(e, comment.id)} data-uk-icon="trash" data-uk-tooltip="title: delete; pos: bottom-center"></Link>
                               </div>
                             ): null
                           }
