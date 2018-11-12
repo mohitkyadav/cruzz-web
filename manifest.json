@@ -13,7 +13,7 @@
       "sizes": "192x192"
     },
     {
-    "src": "cruzz_launcher.png",
+    "src": "index.svg",
     "type": "image/png",
     "sizes": "512x512"
     }
