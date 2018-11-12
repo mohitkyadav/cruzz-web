@@ -1,9 +1,9 @@
 {
   "short_name": "VCONNECT",
-  "name": "Welcome aoard!",
+  "name": "Welcome aboard!",
   "icons": [
     {
-      "src": "./cruzz_launcher.ico",
+      "src": "cruzz_icon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     }
