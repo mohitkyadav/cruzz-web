@@ -6,6 +6,16 @@
       "src": "cruzz_icon.ico",
       "sizes": "64x64",
       "type": "image/x-icon"
+    },
+    {
+      "src": "cruzz_launcher.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+    "src": "cruzz_splash2.png",
+    "type": "image/png",
+    "sizes": "512x512"
     }
   ],
   "start_url": "./index.html",
