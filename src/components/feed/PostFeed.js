@@ -170,7 +170,9 @@ class PostFeed extends Component {
                 (tag, key) => {
                   return(
                     <label className="uk-badge uk-label-success ov-post-tag uk-padding-small ov-padding-remove uk-margin-small-left uk-margin-remove-top uk-animation-scale-up" key={key}>
-                      {tag}
+                      <Link className="uk-link uk-link-reset" to={"/posts/bytag/" + tag}>
+                        {tag}
+                      </Link>
                     </label>
                   )
                 }

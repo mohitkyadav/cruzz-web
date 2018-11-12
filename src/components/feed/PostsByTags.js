@@ -7,25 +7,31 @@ import spinner from '../../static/img/index.svg';
 import { loading, loaded } from './../../actions/authActions';
 import PostFeed from './../feed/PostFeed';
 
-class FavoritePosts extends Component {
+class PostsByTags extends Component {
 
   constructor(props) {
     super(props);
     this.state = ({
-      username: null,
+      tag: null,
       posts: {},
     });
-    this.fetchFavoritePosts = this.fetchFavoritePosts.bind(this);
+    this.fetchTaggedPosts = this.fetchTaggedPosts.bind(this);
+  }
+
+  componentDidUpdate(prevProps) {
+    if(prevProps.match.params.tag !== this.props.match.params.tag) {
+      window.location.reload();
+    }
   }
 
   componentDidMount() {
-    const { username } = this.props.match.params;
+    const { tag } = this.props.match.params;
     this.props.loading();
-    this.fetchFavoritePosts(this.props.match.params.username);
+    this.fetchTaggedPosts(this.props.match.params.tag);
   }
 
-  fetchFavoritePosts(username) {
-    axios.get('https://cruzz.herokuapp.com/api/post/view/?favorited=' + username + '&limit=100&offset=0/')
+  fetchTaggedPosts(tag) {
+    axios.get('https://cruzz.herokuapp.com/api/post/view/?tag=' + tag + '&limit=100&offset=0/')
     .then(res => {
       this.setState({
         posts: res.data.posts
@@ -43,7 +49,7 @@ class FavoritePosts extends Component {
     return (
       <div>
         <div className="uk-container uk-padding-small" data-uk-scrollspy="cls: uk-animation-slide-bottom-medium; target: > div; delay: 40;">
-      
+        <h3 className="uk-text-center">Posts tagged with "{this.props.match.params.tag}"</h3>
         <div data-uk-grid="true">
             <div className="uk-width-4-5@m uk-align-center">
             {
@@ -77,4 +83,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { loading, loaded })(withRouter(FavoritePosts));
+export default connect(mapStateToProps, { loading, loaded })(withRouter(PostsByTags));

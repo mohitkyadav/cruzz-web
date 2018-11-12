@@ -23,6 +23,7 @@ import PostOperations from './components/common/PostOperations';
 import PostDetails from './components/feed/PostDetails';
 import PageSuggestions from './components/common/PageSuggestions';
 import FavoritePosts from './components/profile/FavoritePosts';
+import PostsByTags from './components/feed/PostsByTags';
 
 if (localStorage.jwtToken) {
 	// Set auth token header auth
@@ -44,6 +45,7 @@ ReactDOM.render(
           <PrivateRoute exact path="/discover/pages" component={PageSuggestions}></PrivateRoute>
           <PrivateRoute exact path="/profile/:username" component={ProfilePage}></PrivateRoute>
           <PrivateRoute exact path="/posts/favorite/:username" component={FavoritePosts}></PrivateRoute>
+          <PrivateRoute exact path="/posts/bytag/:tag" component={PostsByTags}></PrivateRoute>
           <PrivateRoute exact path="/user/:username" component={UserProfile}></PrivateRoute>
           <PrivateRoute exact path="/user/:username/:follow" component={Followers}></PrivateRoute>
           <PrivateRoute exact path="/view/post/:slug" component={PostDetails}></PrivateRoute>
