@@ -3,13 +3,13 @@
   "name": "Welcome aoard!",
   "icons": [
     {
-      "src": "index.svg",
+      "src": "cruzz_launcher.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/svg"
     }
   ],
   "start_url": "./index.html",
   "display": "standalone",
-  "theme_color": "rgb(82, 201, 184)",
-  "background_color": "linear-gradient(to right, rgb(82, 201, 184) 0%, rgb(223, 109, 203) 100%)"
+  "theme_color": "#23aeaa",
+  "background_color": "#804fd7"
 }
