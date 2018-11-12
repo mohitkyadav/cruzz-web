@@ -3,9 +3,9 @@
   "name": "Welcome aoard!",
   "icons": [
     {
-      "src": "cruzz_launcher.png",
+      "src": "./cruzz_launcher.ico",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/png"
+      "type": "image/x-icon"
     }
   ],
   "start_url": "./index.html",
