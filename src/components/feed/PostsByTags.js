@@ -25,7 +25,6 @@ class PostsByTags extends Component {
   }
 
   componentDidMount() {
-    const { tag } = this.props.match.params;
     this.props.loading();
     this.fetchTaggedPosts(this.props.match.params.tag);
   }
@@ -41,7 +40,6 @@ class PostsByTags extends Component {
       console.log(err.response);
       this.props.loaded()
     });
-    this.props.loaded()
   }
 
   render() {
@@ -63,12 +61,22 @@ class PostsByTags extends Component {
                     )
                   })}
                 </div>
-              ):(
-                <div>
+              ):( 
+                  this.props.auth.loading ? (
+                    <div>
+                      <div>
+                        <img alt="#" width="130px" className="uk-align-center" src={spinner}></img>
+                      </div>
+                    </div>
+                  ):(
                   <div>
-                    <img alt="loading" width="130px" className="uk-align-center" src={spinner}></img>
+                    <div>
+                      <h3 className="uk-text-center">
+                        No posts
+                      </h3>
+                    </div>
                   </div>
-                </div>
+                )
               )
             }
             </div>  

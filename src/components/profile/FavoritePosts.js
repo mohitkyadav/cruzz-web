@@ -19,7 +19,6 @@ class FavoritePosts extends Component {
   }
 
   componentDidMount() {
-    const { username } = this.props.match.params;
     this.props.loading();
     this.fetchFavoritePosts(this.props.match.params.username);
   }

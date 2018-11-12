@@ -13,6 +13,11 @@ class Header extends Component {
     this.props.signOut(this.props.history);
   }
 
+  searchTag(event) {
+    this.props.history.push("/posts/bytag/" + this.refs.searchString.value);
+    event.preventDefault();
+  }
+
   render() {
     let spinner;
 
@@ -48,8 +53,8 @@ class Header extends Component {
 
                 <div className="uk-grid-small uk-flex-middle" uk-grid="true">
                   <div className="uk-width-expand">
-                    <form className="uk-search uk-search-navbar uk-width-1-1">
-                      <input className="uk-search-input" type="search" placeholder="Search tags..." autoFocus/>
+                    <form onSubmit={this.searchTag.bind(this)} className="uk-search uk-search-navbar uk-width-1-1">
+                      <input ref="searchString" className="uk-search-input" type="search" placeholder="Search tags..." autoFocus/>
                     </form>
                   </div>
                 </div>
