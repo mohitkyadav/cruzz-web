@@ -1,15 +1,15 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "VCONNECT",
+  "name": "Welcome aoard!",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "index.svg",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "type": "image/svg"
     }
   ],
   "start_url": "./index.html",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "rgb(82, 201, 184)",
+  "background_color": "linear-gradient(to right, rgb(82, 201, 184) 0%, rgb(223, 109, 203) 100%)"
 }
