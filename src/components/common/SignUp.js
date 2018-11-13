@@ -11,9 +11,12 @@ class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      mailError: ''
+      mailError: '',
+      passwordError: '',
     };
     this.handleMail = this.handleMail.bind(this);
+    this.signUp = this.signUp.bind(this);
+    this.handlePassword = this.handlePassword.bind(this);
   }
 
   handleMail(event) {
@@ -22,6 +25,14 @@ class SignUp extends Component {
       this.setState({ mailError: 'Please use a @iiitvadodara.ac.in email'});
     } else {
       this.setState({ mailError: ''});
+    }
+  }
+
+  handlePassword(event) {
+    if(event.target.value !== this.refs.password.value) {
+      this.setState({ passwordError: 'Password did not match!'});
+    } else {
+      this.setState({ passwordError: '' });
     }
   }
 
@@ -38,6 +49,10 @@ class SignUp extends Component {
         }
       }
       this.props.signUp(user, this.props.history);
+    } else {
+      this.setState({
+        passwordError: 'Passwords did not match!'
+      });
     }
   }
 
@@ -86,7 +101,7 @@ class SignUp extends Component {
                     </div>
                     <div className="uk-inline uk-width-1-1">
                       <span className="uk-form-icon" uk-icon="icon: lock"></span>
-                      <input className="uk-input" type="password" placeholder="Confirm Password" ref="confirmPassword" required={true}/>
+                      <input className="uk-input" type="password" placeholder="Confirm Password" ref="confirmPassword" onChange={ (e) => {this.handlePassword(e)}} required={true}/>
                     </div>
                   </div>
                   {
@@ -102,6 +117,16 @@ class SignUp extends Component {
                             this.props.auth.errors.username
                           }
                         </div>
+                        {
+                          this.props.auth.errors.password ? (
+                              <div className="uk-text-danger uk-text-capitalize">
+                                {
+                                  "Password : " + this.props.auth.errors.password
+                                }
+                              </div>
+                          ): null
+                        }
+                  
                       </div>
                     ): null
                   }
@@ -110,6 +135,15 @@ class SignUp extends Component {
                       <div className="uk-text-danger">
                         {
                           this.state.mailError
+                        }
+                      </div>
+                    ): null
+                  }
+                  {
+                    this.state.passwordError !== '' ? (
+                      <div className="uk-text-danger">
+                        {
+                          this.state.passwordError
                         }
                       </div>
                     ): null
