@@ -45,13 +45,13 @@ class SignIn extends Component {
                   <div className="uk-margin">
                     <div className="uk-inline uk-width-1-1">
                       <span className=" uk-form-icon" uk-icon="icon: user"></span>
-                        <input className="uk-input" type="text" placeholder="Username" ref="username" required={true}/>
+                        <input className="uk-input" label="Username" type="text" placeholder="Username" ref="username" required={true}/>
                     </div>
 
                   <div className="uk-margin uk-margin-auto">
                     <div className="uk-inline uk-width-1-1">
                       <span className="uk-form-icon" uk-icon="icon: lock"></span>
-                        <input className="uk-input" type="password" placeholder="Password" ref="password" required={true}/>
+                        <input className="uk-input" label="Password" type="password" placeholder="Password" ref="password" required={true}/>
                     </div>
                   </div>
                   </div>
