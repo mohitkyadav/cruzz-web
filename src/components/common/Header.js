@@ -46,20 +46,23 @@ class Header extends Component {
             <ul className="uk-navbar-nav">
               <li><Link className="ov-color-white ov-nav-link" to="/"><span uk-icon="icon: home; ratio: 1.15"></span></Link></li>
             </ul>
+            {
+              this.props.auth.authenticated ? (
+                <div>
+                  <Link to="#" className="uk-navbar-toggle ov-color-white ov-nav-link" uk-icon="icon: search"></Link>
+                  <div className="uk-navbar-dropdown uk-padding-small uk-width-large@m uk-width-medium" uk-drop="mode: click; cls-drop: uk-navbar-dropdown; boundary: !nav; animation: uk-animation-slide-left-small;">
 
-            <div>
-              <Link to="#" className="uk-navbar-toggle ov-color-white ov-nav-link" uk-icon="icon: search"></Link>
-              <div className="uk-navbar-dropdown uk-padding-small uk-width-large@m uk-width-medium" uk-drop="mode: click; cls-drop: uk-navbar-dropdown; boundary: !nav; animation: uk-animation-slide-left-small;">
-
-                <div className="uk-grid-small uk-flex-middle" uk-grid="true">
-                  <div className="uk-width-expand">
-                    <form onSubmit={this.searchTag.bind(this)} className="uk-search uk-search-navbar uk-width-1-1">
-                      <input ref="searchString" className="uk-search-input" type="search" placeholder="Search tags..." autoFocus/>
-                    </form>
+                    <div className="uk-grid-small uk-flex-middle" uk-grid="true">
+                      <div className="uk-width-expand">
+                        <form onSubmit={this.searchTag.bind(this)} className="uk-search uk-search-navbar uk-width-1-1">
+                          <input ref="searchString" className="uk-search-input" type="search" placeholder="Search tags..." autoFocus/>
+                        </form>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
+              ): null 
+            }
           </div>
           <div className="uk-navbar-center ov-nav-section">
             {spinner}

@@ -175,7 +175,7 @@ class ProfilePage extends Component {
 
                   <div className="uk-width-auto">
                     <div className="uk-inline-clip uk-transition-toggle" tabIndex="0">
-                      <img className="uk-transition-scale-down ov-curser-pointer uk-transition-opaque" style={{height:"150px"}} width="150px" src={this.props.auth.userProfile.image} onClick={(e) => this.updateProfilePic(e)} alt="" data-uk-tooltip="title: Upload new Profile Picture; pos: bottom-center"/>
+                      <img className="uk-transition-scale-down ov-profile-img ov-curser-pointer uk-transition-opaque" style={{height:"150px"}} width="150px" src={this.props.auth.userProfile.image} onClick={(e) => this.updateProfilePic(e)} alt="" data-uk-tooltip="title: Upload new Profile Picture; pos: bottom-center"/>
                         {
                           this.props.auth.userProfile.official_page ? (
                             <span className="uk-position-absolute uk-transform-center" style={{left: "10%", top: "10%"}} data-uk-icon="icon: check; ratio: 1.3" data-uk-tooltip="title: Official profile; pos: top"></span>
@@ -195,18 +195,18 @@ class ProfilePage extends Component {
                     </div>
                   </div>
 
-                  <div className="uk-width-expand uk-align-center">
+                  <div className="uk-width-expand uk-align-center uk-padding-remove-bottom">
                     <div className="uk-width-1-1" data-uk-grid="true">
                       <div className="uk-width-auto">
-                        <h3 className="uk-card-title uk-margin-remove-bottom">
+                        <h3 className="uk-card-title ov-profile-name uk-margin-remove-bottom">
                           {this.props.auth.user.first_name ? this.props.auth.user.first_name: "Name"}
                           &nbsp;
                           {this.props.auth.user.last_name ? this.props.auth.user.last_name: "Last"}
                         </h3>
-                        <h5 className="uk-margin-remove-top">{this.props.auth.user.bio ? this.props.auth.user.bio: "dattebayo! ✌"}</h5>
+                        <h5 className="uk-margin-remove-top ov-profile-bio">{this.props.auth.user.bio ? this.props.auth.user.bio: "dattebayo! ✌"}</h5>
                       </div>
-                      <div className="uk-width-expand">
-                        <button className="uk-icon-button uk-button-default uk-margin-small-bottom" data-uk-toggle="target: #ov-profile-modal" data-uk-icon="pencil" data-uk-tooltip="title: Edit profile; pos: right"></button>
+                      <div className="uk-width-expand uk-margin-remove-top">
+                        <button className="uk-icon-button uk-button-default" data-uk-toggle="target: #ov-profile-modal" data-uk-icon="pencil" data-uk-tooltip="title: Edit profile; pos: right"></button>
 
                         <div id="ov-profile-modal" data-uk-modal="true">
                           <div className="uk-modal-dialog uk-modal-body uk-overflow-auto">

@@ -140,7 +140,7 @@ class UserProfile extends Component {
 
                   <div className="uk-width-auto">
                     <div className="uk-inline-clip uk-transition-toggle" tabIndex="0">
-                      <img className="uk-transition-scale-down ov-curser-pointer uk-transition-opaque" style={{height:"150px"}} width="150px" src={this.state.profile.image} alt=""/>
+                      <img className="uk-transition-scale-down ov-curser-pointer ov-profile-img uk-transition-opaque" style={{height:"150px"}} width="150px" src={this.state.profile.image} alt=""/>
                       {
                         this.state.profile.official_page ? (
                           <span className="uk-position-absolute uk-transform-center" style={{left: "10%", top: "10%"}} data-uk-icon="icon: check; ratio: 1.3" data-uk-tooltip="title: Official profile; pos: top"></span>
@@ -150,7 +150,7 @@ class UserProfile extends Component {
                         {
                           !this.props.auth.loading ?
                           (
-                            <span className="uk-transition-slide-bottom-small ov-curser-pointer"  ></span>
+                            <span className="uk-transition-slide-bottom-small ov-curser-pointer"></span>
                           ): <div className="uk-text-right uk-animation-scale-up" data-uk-spinner="ratio: 1.5"></div>
                         }
                       </div>
@@ -160,12 +160,12 @@ class UserProfile extends Component {
                   <div className="uk-width-expand uk-padding-remove-top">
                     <div className="uk-width-1-1" >
                       <div className="uk-width-auto uk-margin-small-top">
-                        <h3 className="uk-card-title uk-margin-remove-bottom">
+                        <h3 className="uk-card-title ov-profile-name uk-margin-remove-bottom">
                           {this.state.profile.first_name ? this.state.profile.first_name: "Name"}
                           &nbsp;
                           {this.state.profile.last_name ? this.state.profile.last_name: "Last"}
                         </h3>
-                        <h5 className="uk-margin-remove-top">{this.state.profile.bio ? this.state.profile.bio: "dattebayo! ✌"}</h5>
+                        <h5 className="uk-margin-remove-top ov-profile-bio">{this.state.profile.bio ? this.state.profile.bio: "dattebayo! ✌"}</h5>
                       </div>
                       {
                         this.state.profile.username !== this.props.auth.user.username ? (
