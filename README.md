@@ -6,10 +6,26 @@
 
 
 
+| Features      | Status        |
+| ------------- |:-------------:|
+| Sign Up      | :white_check_mark: |
+| Login      | :white_check_mark: |
+| Profile | :white_check_mark: |
+
 ## Usage instructions
 * signup with a @iiitvadodara.ac.in email
 * Make sure https://cruzz.herokuapp.com is live and working
 
+
+
+## Demo
+### Feed Page
+
+<img src="demo/Feed.png" alt="feed page" align="center">
+
+### Profile Page
+
+<img src="demo/Profile.png" alt="feed page" align="center">
 
 ## Useful commands
 
@@ -23,12 +39,3 @@ yard build
 ```
 yard test
 ```
-
-## Demo
-### Feed Page
-
-<img src="demo/Feed.png" alt="feed page" align="center">
-
-### Profile Page
-
-<img src="demo/Profile.png" alt="feed page" align="center">
