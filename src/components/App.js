@@ -42,7 +42,7 @@ class App extends Component {
       spinner = null;
     } else {
       spinner = (
-        <img src={logo} width="100px" className="loading uk-align-center" alt="logo" />
+        <img src={logo} width="100px" className="loading uk-align-center" alt="#" />
       );
     }
     return (
@@ -66,13 +66,22 @@ class App extends Component {
             ):(
               <div>
                 <div>
-                  <img alt="" className="uk-align-center" src={spinner}></img>
+                  <img alt="#" className="uk-align-center" src={spinner}></img>
                 </div>
               </div>
             )
           }
           </div>
         </div>
+        {
+          !this.props.auth.loading && this.state.posts.length === 0? (
+            <div className="uk-align-center">
+              <h2 className="uk-text-center">
+                You don't have any posts in your feed, yet.
+              </h2>
+            </div>
+          ): null
+        }
       </div>
     );
   }
