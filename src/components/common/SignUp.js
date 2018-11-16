@@ -70,7 +70,7 @@ class SignUp extends Component {
                   <div className="uk-margin">
                     <div className="uk-inline uk-width-1-1">
                       <span className=" uk-form-icon" uk-icon="icon: mail"></span>
-                      <input className="uk-input" type="email" placeholder="Email" ref="email" onChange={ (e) => {this.handleMail(e)}} required={true}/>
+                      <input className="uk-input" type="email" placeholder="Email" ref="email" required={true}/>
                     </div>
                   </div>
                   <div className="uk-margin">
