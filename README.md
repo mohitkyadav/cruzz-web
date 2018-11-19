@@ -25,7 +25,7 @@
 
 
 ## Usage instructions
-* signup with a @iiitvadodara.ac.in email
+* signup with a valid email
 * Make sure https://cruzz.herokuapp.com is live and working
 
 
