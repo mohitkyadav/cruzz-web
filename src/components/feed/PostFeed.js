@@ -132,9 +132,24 @@ class PostFeed extends Component {
 
   handleDateTime(date) {
     const dateLocal = new Date(date);
+    let mnth = ("0" + (dateLocal.getMonth()+1)).slice(-2);
+    let day  = ("0" + dateLocal.getDate()).slice(-2);
+    const dateLocalFormatted = [dateLocal.getFullYear(), mnth, day ].join("-");
+    const todayDate = new Date();
+    mnth = ("0" + (todayDate.getMonth()+1)).slice(-2);
+    day  = ("0" + todayDate.getDate()).slice(-2);
+    const todayDateFormatted = [todayDate.getFullYear(), mnth, day ].join("-");
     const timeLocal = dateLocal.toLocaleTimeString();
-    return (String(dateLocal.toDateString()) + " " + timeLocal);
+    if(dateLocalFormatted=== todayDateFormatted)
+    {
+        return (timeLocal);
+    }
+    else{
+      return (String(dateLocal.toDateString().slice(3)));
+    }
   }
+
+
 
   render() {
     return (
@@ -246,5 +261,6 @@ class PostFeed extends Component {
 const mapStateToProps = state => ({
   auth: state.auth
 });
+
 
 export default connect(mapStateToProps, {loading, loaded})(withRouter(PostFeed));
