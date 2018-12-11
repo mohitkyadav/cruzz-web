@@ -71,7 +71,7 @@ class Header extends Component {
             <ul className="uk-navbar-nav">
               {
                 this.props.auth.authenticated ? (
-                  <li><Link className="ov-color-white ov-nav-link" to="/new/post" uk-icon="icon: plus; ratio: 1.2" uk-tooltip="title: Create a new post; pos: bottom-center"></Link></li>
+                  <li><Link className="ov-color-white ov-nav-link" to="/new/post" data-uk-icon="icon: plus; ratio: 1.2" data-uk-tooltip="title: Create a new post; pos: bottom-center"></Link></li>
                 ):
                 null
               }
