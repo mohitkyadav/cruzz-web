@@ -119,10 +119,9 @@ class PostOperations extends Component {
                       <input className="uk-input" ref="postTitle" type="text" maxlength="70" placeholder="Title" required={true}/>
                     )
                   }
-                </div>
-
-                <div>
-                  <p>Character limit is 70</p>
+                  <div>
+                    <p>Character limit is 70</p>
+                  </div>
                 </div>
 
                 <div className="uk-margin">
