@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { Link , withRouter } from 'react-router-dom';
 
 import '../static/css/style.css';
 import logo from '../static/img/index.svg';
 import { loading, loaded } from './../actions/authActions';
 import axios from 'axios';
 import PostFeed from './feed/PostFeed';
+import FeedImg from '../static/img/no-feeds.png';
 
 
 class App extends Component {
@@ -79,6 +80,11 @@ class App extends Component {
               <h2 className="uk-text-center">
                 You don't have any posts in your feed, yet.
               </h2>
+              <img src={FeedImg} alt="No Feed Img" width="200px" height="200px" />
+              <h2 className="uk-text-center">
+                Start Creating One
+              </h2>
+              <Link className="ov-color-black ov-nav-link" to="/new/post" data-uk-icon="icon: plus; ratio: 1.2" data-uk-tooltip="title: Create a new post; pos: bottom-center"></Link>
             </div>
           ): null
         }
