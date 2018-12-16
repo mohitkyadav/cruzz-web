@@ -120,7 +120,7 @@ class PostOperations extends Component {
                     )
                   }
                   <div>
-                    <p>Character limit is 70</p>
+                    <p>Title's character limit is 70</p>
                   </div>
                 </div>
 
