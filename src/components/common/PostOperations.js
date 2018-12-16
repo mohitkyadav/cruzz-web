@@ -121,6 +121,10 @@ class PostOperations extends Component {
                   }
                 </div>
 
+                <div>
+                  <p>Character limit is 70</p>
+                </div>
+
                 <div className="uk-margin">
                   {
                     this.state.operation === "edit" ?
