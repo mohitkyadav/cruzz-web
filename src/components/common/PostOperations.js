@@ -114,11 +114,14 @@ class PostOperations extends Component {
                   {
                     this.state.operation === "edit" ?
                     (
-                      <input className="uk-input" ref="postTitle" type="text" defaultValue={this.state.post.title} placeholder="Title"/>
+                      <input className="uk-input" ref="postTitle" type="text" maxlength="70" defaultValue={this.state.post.title} placeholder="Title"/>
                     ): (
-                      <input className="uk-input" ref="postTitle" type="text" placeholder="Title" required={true}/>
+                      <input className="uk-input" ref="postTitle" type="text" maxlength="70" placeholder="Title" required={true}/>
                     )
                   }
+                  <div>
+                    <p>Title's character limit is 70</p>
+                  </div>
                 </div>
 
                 <div className="uk-margin">
