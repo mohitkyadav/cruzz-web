@@ -57,7 +57,7 @@ class Followers extends Component {
                                 <Link className="uk-link-heading" to={"/user/" + f.username}>
                                   <div className="uk-grid-small uk-flex-inline uk-width-1-1 uk-margin-remove-top" uk-grid="true">
                                     <div className="uk-width-1-5">
-                                      <img className="uk-border-circle" width="50" height="50" alt="me" src={f.image}/>
+                                      <img className="uk-border-circle ov-post-author-img" alt="me" src={f.image}/>
                                     </div>
                                     <div className="uk-width-4-5 uk-text-left">
                                       <h6 className="uk-margin-remove-bottom">{f.first_name}</h6>
